@@ -72,10 +72,10 @@ class HomeViewModel: ObservableObject {
         }
     }
     //ToDoDetailの要素を削除するために使用する🟥エラーを握りつぶしている
-    func deleteTodoDetail(todo: ToDo, todoDetail: ToDoDetail)  {
+    func deleteTodoDetail(todo: ToDo, todoDetail: ToDoDetail, offset: IndexSet)  {
         guard let todoIndex = toDos.firstIndex(where: { $0.id == todo.id }) else { return }
-        guard let todoDetailIndex = toDos[todoIndex].toDoDetails.firstIndex(where: { $0.id == todoDetail.id }) else { return }
-        toDos[todoIndex].toDoDetails.remove(at: todoIndex)
+      //🟦  guard let todoDetailIndex = toDos[todoIndex].toDoDetails.firstIndex(where: { $0.id == todoDetail.id }) else { return }
+        toDos[todoIndex].toDoDetails.remove(atOffsets: offset)
         do {
             try userDefaultManager.save(toDo: toDos)
         } catch {
@@ -176,10 +176,10 @@ class HomeViewModel: ObservableObject {
         }
     }
     
-    func todoDetailSave(newToDoDetail: ToDoDetail, todo: ToDo){ //Pokemon
+    func todoDetailSave(newTodoDetail: ToDoDetail, todo: ToDo, newName: String){
         let index = todoIndex(todo: todo)
-        let todoDetailIndex = todoDetailIndex(todo: todo, todoDetail: newToDoDetail)
-        toDos[index].toDoDetails[todoIndex(todo: todo)] = newToDoDetail
+        let todoDetailIndex = todoDetailIndex(todo: todo, todoDetail: newTodoDetail)
+        toDos[index].toDoDetails[todoDetailIndex].name = newName
         do {
             try userDefaultManager.save(toDo: toDos)
         } catch {
@@ -198,10 +198,22 @@ class HomeViewModel: ObservableObject {
 //        }
 //    }
     
-    //渡されてきたトレーナーの名前や持っているポケモンを新しく保存するために使用
-    func updale(newTodo: ToDo) {
+    //渡されてきたTODOの名前や持っているTODODetailに新しく保存するために使用
+    func update(newTodo: ToDo) {
         guard let index = toDos.firstIndex(where: { $0.id == newTodo.id }) else { return }
         toDos[index] = newTodo
+        do {
+            try userDefaultManager.save(toDo: toDos)
+        } catch {
+            let error = error as? DataConvertError ?? DataConvertError.unknown
+            print(error.title)
+        }
+    }
+    
+    func todoDetailUpdate(newTodoDetail: ToDoDetail, todo: ToDo){
+        let todoIndex = todoIndex(todo: todo)
+        let todoDetailIndex = todoDetailIndex(todo: todo, todoDetail: newTodoDetail)
+        toDos[todoIndex].toDoDetails[todoDetailIndex] = newTodoDetail
         do {
             try userDefaultManager.save(toDo: toDos)
         } catch {

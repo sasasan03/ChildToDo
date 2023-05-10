@@ -21,20 +21,15 @@ struct ToDoDetailView: View {
             ForEach(todo.toDoDetails){ todoDetail in
                 DetailRowView(todo: todo,
                               todoDetail: todoDetail) { todoDetail in
-                    homeViewModel.todoDetailSave(newToDoDetail: todoDetail, todo: todo)
+                    homeViewModel.todoDetailUpdate(newTodoDetail: todoDetail, todo: todo)
                 }
             }
             .onMove { sourceIndices, destinationIndx in
                 homeViewModel.moveTodoDetail(indexSet: sourceIndices, index: destinationIndx, todo: todo)
             }
-            .swipeActions(edge: .trailing) {
-                Button {
-                    homeViewModel.deleteTodoDetail(todo: todo, todoDetail: todoDetail)
-                } label: {
-                    Image(systemName: "trash.fill")
-                }
-                .tint(.red)
-            }
+            .onDelete(perform: { indexSet in
+                homeViewModel.deleteTodoDetail(todo: todo, todoDetail: todoDetail, offset: indexSet)
+            })
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {

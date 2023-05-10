@@ -32,7 +32,8 @@ struct DetailRowView: View {
                 ToDoEditView(todoName: todoDetail.name) { todoDetailname in
                     let todoDetailIndex = homeViewModel.todoDetailIndex(todo: todo, todoDetail: todoDetail)
                     let todoIndex = homeViewModel.todoIndex(todo: todo)
-                    homeViewModel.toDos[todoIndex].toDoDetails[todoDetailIndex].name = todoDetailname
+//                    homeViewModel.toDos[todoIndex].toDoDetails[todoDetailIndex].name = todoDetailname
+                    homeViewModel.todoDetailSave(newTodoDetail: todoDetail, todo: todo, newName: todoDetailname)
                     update(homeViewModel.toDos[todoIndex].toDoDetails[todoDetailIndex])
                     isEddit = false
                 }

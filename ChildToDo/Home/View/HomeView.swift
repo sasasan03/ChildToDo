@@ -22,8 +22,9 @@ struct HomeView: View {
                         HomeRowView(
                             todo: todo,
                             update: { newTodo in
-                                homeViewModel.updale(newTodo: newTodo)
-                            })
+                                homeViewModel.update(newTodo: newTodo)
+                            }
+                        )
                     }
                     .onDelete(perform: homeViewModel.deleteTodo(offset:))
                     .onMove(perform: homeViewModel.moveTodo(indexSet:index:))
