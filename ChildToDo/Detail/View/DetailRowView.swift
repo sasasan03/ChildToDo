@@ -13,8 +13,6 @@ struct DetailRowView: View {
     @State private var isEddit = false
     let todo: ToDo
     let todoDetail: ToDoDetail
-    let update: (ToDoDetail) -> Void
-    
     
     var body: some View {
         NavigationStack{
@@ -29,14 +27,13 @@ struct DetailRowView: View {
                 Text(todoDetail.name)
             }
             .sheet(isPresented: $isEddit){
-                ToDoEditView(todoName: todoDetail.name) { todoDetailname in
-                    let todoDetailIndex = homeViewModel.todoDetailIndex(todo: todo, todoDetail: todoDetail)
-                    let todoIndex = homeViewModel.todoIndex(todo: todo)
-//                    homeViewModel.toDos[todoIndex].toDoDetails[todoDetailIndex].name = todoDetailname
-                    homeViewModel.todoDetailSave(newTodoDetail: todoDetail, todo: todo, newName: todoDetailname)
-                    update(homeViewModel.toDos[todoIndex].toDoDetails[todoDetailIndex])
-                    isEddit = false
-                }
+                ToDoEditView(
+                    todoName: todoDetail.name,
+                    edit: { todoDetailname in
+                        homeViewModel.todoDetailSave(newTodoDetail: todoDetail, todo: todo, newName: todoDetailname)
+                        isEddit = false
+                    }
+                )
             }
         }
     }
@@ -45,6 +42,7 @@ struct DetailRowView: View {
 
 struct DetailRowView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailRowView(todo: ToDo(name: "帰りの会", toDoDetails: [ToDoDetail(name: "荷物かくにん")]), todoDetail: ToDoDetail.init(name: "greeting"), update: { _ in })
+        DetailRowView(todo: ToDo(name: "帰りの会", toDoDetails: [ToDoDetail(name: "荷物かくにん")]), todoDetail: ToDoDetail.init(name: "greeting")
+        )
     }
 }

@@ -12,9 +12,7 @@ struct HomeRowView: View {
     @EnvironmentObject var homeViewModel: HomeViewModel
     @Environment(\.dismiss) var dismiss
     let todo: ToDo
-    let update: (ToDo) -> Void
     @State private var isEddit = false
-    
     
     var body: some View {
         NavigationStack{
@@ -42,6 +40,7 @@ struct HomeRowView: View {
 
 struct HomeRowView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeRowView(todo: ToDo.init(name: "朝の会", toDoDetails: [ToDoDetail(name: "うた")]), update: { _ in })
+        HomeRowView(todo: ToDo.init(name: "朝の会", toDoDetails: [ToDoDetail(name: "うた")])
+        )
     }
 }

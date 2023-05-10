@@ -20,10 +20,7 @@ struct HomeView: View {
                 List(selection: $selectionTodo) {
                     ForEach(homeViewModel.toDos){ todo in
                         HomeRowView(
-                            todo: todo,
-                            update: { newTodo in
-                                homeViewModel.update(newTodo: newTodo)
-                            }
+                            todo: todo
                         )
                     }
                     .onDelete(perform: homeViewModel.deleteTodo(offset:))
@@ -54,9 +51,9 @@ struct HomeView: View {
                 } else {
                     ToDoDetailView(todo: returnTodo, todoDetail: ToDoDetail(name: ""))
                 }
-//                NavigationLink("アニメーションプラス") {
-//                    PokemonCheckView(pokemons: pokemonTrainer.pokemons)
-//                }
+                NavigationLink("やってみよう") {
+                   // PokemonCheckView(pokemons: pokemonTrainer.pokemons)
+                }
             } else {
                 Text("やること")
             }

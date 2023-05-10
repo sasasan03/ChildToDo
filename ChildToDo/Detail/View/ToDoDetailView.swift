@@ -20,9 +20,7 @@ struct ToDoDetailView: View {
         List{
             ForEach(todo.toDoDetails){ todoDetail in
                 DetailRowView(todo: todo,
-                              todoDetail: todoDetail) { todoDetail in
-                    homeViewModel.todoDetailUpdate(newTodoDetail: todoDetail, todo: todo)
-                }
+                              todoDetail: todoDetail)
             }
             .onMove { sourceIndices, destinationIndx in
                 homeViewModel.moveTodoDetail(indexSet: sourceIndices, index: destinationIndx, todo: todo)

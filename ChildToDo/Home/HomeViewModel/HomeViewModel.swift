@@ -10,9 +10,7 @@ import Foundation
 class HomeViewModel: ObservableObject {
     
     @Published var isAddView = false
-//    @Published var isShowAddView = false
     @Published var isShowTodoDetailView = false
-    
     
     @Published var toDos = [
         ToDo(name: "朝の会",
@@ -43,7 +41,7 @@ class HomeViewModel: ObservableObject {
         }) else { return 0 }
         return toDoDetailIndex
     }
-//-----------------------------------------------------EditViewないでポケモンの場所を変更させるために使用
+
     //moveTodoDetailメソッドで内で、渡されてきたToDoのIntを検索するために使用
     func todoIndex(todo: ToDo) -> Int {
         guard let todoIndex = toDos.firstIndex(where: { $0.id == todo.id }) else { return 0 }
@@ -60,7 +58,7 @@ class HomeViewModel: ObservableObject {
             print(error.title)
         }
     }
-//------------------------------------------------------
+
     //toDosの場所を変更させるために使用する
     func moveTodo(indexSet: IndexSet, index: Int){
         self.toDos.move(fromOffsets: indexSet, toOffset: index)
@@ -74,7 +72,6 @@ class HomeViewModel: ObservableObject {
     //ToDoDetailの要素を削除するために使用する🟥エラーを握りつぶしている
     func deleteTodoDetail(todo: ToDo, todoDetail: ToDoDetail, offset: IndexSet)  {
         guard let todoIndex = toDos.firstIndex(where: { $0.id == todo.id }) else { return }
-      //🟦  guard let todoDetailIndex = toDos[todoIndex].toDoDetails.firstIndex(where: { $0.id == todoDetail.id }) else { return }
         toDos[todoIndex].toDoDetails.remove(atOffsets: offset)
         do {
             try userDefaultManager.save(toDo: toDos)
@@ -158,16 +155,11 @@ class HomeViewModel: ObservableObject {
         return toDos[index]
     }
     
-    //EditViewで入力された値を保存した後に非表示にする
-//    func saveEditView(trainer: PokemonTrainer){
-//        updale(newTrainer: trainer)
-//        isCloseEditView()
-//    }
-    
     func save(todoName: String, newToDo: ToDo){
         guard let index = toDos.firstIndex(where: { $0.id == newToDo.id }) else { return }
         toDos[index] = newToDo
         toDos[index].name = todoName
+        print("%%%%$index", index)
         do {
             try userDefaultManager.save(toDo: toDos)
         } catch {
@@ -177,43 +169,9 @@ class HomeViewModel: ObservableObject {
     }
     
     func todoDetailSave(newTodoDetail: ToDoDetail, todo: ToDo, newName: String){
-        let index = todoIndex(todo: todo)
-        let todoDetailIndex = todoDetailIndex(todo: todo, todoDetail: newTodoDetail)
-        toDos[index].toDoDetails[todoDetailIndex].name = newName
-        do {
-            try userDefaultManager.save(toDo: toDos)
-        } catch {
-            let error = error as? DataConvertError ?? DataConvertError.unknown
-            print(error.title)
-        }
-    }
-    
-//    func getName<T>(of t: T) -> String {
-//        if let person = t as? PokemonTrainer {
-//          return ""//  return person.firstName + " " + person.lastName
-//        } else if let book = t as? Pokemon {
-//           return "" //return book.title
-//        } else {
-//            return ""
-//        }
-//    }
-    
-    //渡されてきたTODOの名前や持っているTODODetailに新しく保存するために使用
-    func update(newTodo: ToDo) {
-        guard let index = toDos.firstIndex(where: { $0.id == newTodo.id }) else { return }
-        toDos[index] = newTodo
-        do {
-            try userDefaultManager.save(toDo: toDos)
-        } catch {
-            let error = error as? DataConvertError ?? DataConvertError.unknown
-            print(error.title)
-        }
-    }
-    
-    func todoDetailUpdate(newTodoDetail: ToDoDetail, todo: ToDo){
-        let todoIndex = todoIndex(todo: todo)
-        let todoDetailIndex = todoDetailIndex(todo: todo, todoDetail: newTodoDetail)
-        toDos[todoIndex].toDoDetails[todoDetailIndex] = newTodoDetail
+        guard let index = toDos.firstIndex(where: { $0.id == todo.id }) else { return }
+        guard  let dIndex = todo.toDoDetails.firstIndex(where: { $0.id == newTodoDetail.id }) else { return }
+        toDos[index].toDoDetails[dIndex].name = newName
         do {
             try userDefaultManager.save(toDo: toDos)
         } catch {
