@@ -26,6 +26,7 @@ struct HomeView: View {
                     .onDelete(perform: homeViewModel.deleteTodo(offset:))
                     .onMove(perform: homeViewModel.moveTodo(indexSet:index:))
                 }
+                .navigationTitle("やることリスト")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
@@ -48,22 +49,24 @@ struct HomeView: View {
                 let todoCount = returnTodo.toDoDetails.count
                 if todoCount != 0 {
                     ToDoDetailView(todo: returnTodo, todoDetail: returnTodo.toDoDetails[todoDetailIndex])
+                        .navigationTitle(selectionTodo?.name ?? "やること編集")
                 } else {
                     ToDoDetailView(todo: returnTodo, todoDetail: ToDoDetail(name: ""))
+                        .navigationTitle(selectionTodo?.name ?? "やること編集")
                 }
-                NavigationLink("やってみよう") {
+               // NavigationLink("やってみよう") {
                    // PokemonCheckView(pokemons: pokemonTrainer.pokemons)
-                }
+                //}
             } else {
-                Text("やること")
+                Text("やることを入力してください")
             }
         }
         )
     }
 }
 
-struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView( todoDetail: ToDoDetail(name: "挨拶"))
-    }
-}
+//struct HomeView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        HomeView(todoDetail: ToDoDetail(name: "挨拶"))
+//    }
+//}

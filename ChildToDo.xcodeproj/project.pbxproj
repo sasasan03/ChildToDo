@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6981DEAC2A0D145C0081D917 /* ImgaeActionRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6981DEAB2A0D145C0081D917 /* ImgaeActionRowView.swift */; };
 		69A5C4EE2A0A828800C8FE70 /* DetailRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A5C4ED2A0A828800C8FE70 /* DetailRowView.swift */; };
 		69A5C4F12A0A834300C8FE70 /* ToDoAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A5C4F02A0A834300C8FE70 /* ToDoAddView.swift */; };
 		69A5C4F32A0A850500C8FE70 /* ToDoEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A5C4F22A0A850500C8FE70 /* ToDoEditView.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6981DEAB2A0D145C0081D917 /* ImgaeActionRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgaeActionRowView.swift; sourceTree = "<group>"; };
 		69A5C4ED2A0A828800C8FE70 /* DetailRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRowView.swift; sourceTree = "<group>"; };
 		69A5C4F02A0A834300C8FE70 /* ToDoAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoAddView.swift; sourceTree = "<group>"; };
 		69A5C4F22A0A850500C8FE70 /* ToDoEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoEditView.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				69A882822A092DA3009D182A /* ImageActionView.swift */,
+				6981DEAB2A0D145C0081D917 /* ImgaeActionRowView.swift */,
 			);
 			path = ImageActionView;
 			sourceTree = "<group>";
@@ -365,6 +368,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6981DEAC2A0D145C0081D917 /* ImgaeActionRowView.swift in Sources */,
 				69A882812A092D24009D182A /* HomeRowView.swift in Sources */,
 				69A882892A092F56009D182A /* DataConvertError.swift in Sources */,
 				69A5C4F32A0A850500C8FE70 /* ToDoEditView.swift in Sources */,

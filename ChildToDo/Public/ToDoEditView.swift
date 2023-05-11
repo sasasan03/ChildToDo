@@ -17,37 +17,40 @@ struct ToDoEditView: View {
     
     var body: some View {
         NavigationStack{
-            HStack{
-                Text("名前変更")
-                TextField("", text: $todoName)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .frame(width: 150)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading){
-                    Button("cancel") {
-                        dismiss()
-                    }
+            GeometryReader { geometry in
+                HStack{
+                    Text("名前変更")
+                    TextField("", text: $todoName)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .frame(width: geometry.size.width * 0.8)
                 }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("save") {
-                        do {
-                           try edit(todoName)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading){
+                        Button("cancel") {
                             dismiss()
-                        } catch {
-                            alert = true
-                            let error = error as? NonTextError ?? NonTextError.unKnownError
-                            print(">>トレーナ空",error.nonTextFieldType)
                         }
                     }
-                    .alert("エラー", isPresented: $alert) {
-                    } message: {
-                        let error = NonTextError.nonTodoText.nonTextFieldType
-                        Text(error)
-                    }
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button("save") {
+                            do {
+                               try edit(todoName)
+                                dismiss()
+                            } catch {
+                                alert = true
+                                let error = error as? NonTextError ?? NonTextError.unKnownError
+                                print(">>トレーナ空",error.nonTextFieldType)
+                            }
+                        }
+                        .alert("エラー", isPresented: $alert) {
+                        } message: {
+                            let error = NonTextError.nonTodoText.nonTextFieldType
+                            Text(error)
+                        }
 
+                    }
                 }
             }
+            
         }
     }
 }

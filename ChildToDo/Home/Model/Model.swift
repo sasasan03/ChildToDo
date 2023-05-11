@@ -10,6 +10,7 @@ import Foundation
 struct ToDoDetail: Identifiable, Hashable, Codable  {
     var id = UUID()
     var name: String
+    var isCheck: Bool
 }
 
 struct ToDo: Identifiable, Hashable, Codable {

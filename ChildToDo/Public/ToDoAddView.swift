@@ -17,36 +17,38 @@ struct ToDoAddView: View {
     
     var body: some View {
         NavigationStack{
-            HStack{
-                Text("追加")
-                TextField("", text: $todo)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .frame(width: 150)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading){
-                    Button("cancel") {
-                        dismiss()
-                    }
+            GeometryReader { geometry in
+                HStack{
+                    Text("追加")
+                    TextField("", text: $todo)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .frame(width: geometry.size.width * 0.8)
                 }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("save") {
-                        do {
-                           try save(todo)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading){
+                        Button("cancel") {
                             dismiss()
-                        } catch {
-                            alert = true
-                            let error = error as? NonTextError ?? NonTextError.unKnownError
-                            print(">>空っす",error.nonTextFieldType)
                         }
                     }
-                    .alert("エラー", isPresented: $alert) {
-                    } message: {
-                        let error = NonTextError.nonTodoText.nonTextFieldType
-                        Text(error)
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button("save") {
+                            do {
+                               try save(todo)
+                                dismiss()
+                            } catch {
+                                alert = true
+                                let error = error as? NonTextError ?? NonTextError.unKnownError
+                                print(">>空っす",error.nonTextFieldType)
+                            }
+                        }
+                        .alert("エラー", isPresented: $alert) {
+                        } message: {
+                            let error = NonTextError.nonTodoText.nonTextFieldType
+                            Text(error)
+                        }
                     }
-
                 }
+                
             }
         }
     }
