@@ -38,7 +38,7 @@ struct ToDoDetailView: View {
                     ImageActionView(todo: todo, todoDetail: todoDetail)
                 } label: {
                     Text("やってみよう")
-                        .font(.title)
+                        .font(.largeTitle)
                         .frame(width: 800, height: 50)
                         .overlay(
                             RoundedRectangle(cornerRadius: 12)
@@ -46,7 +46,7 @@ struct ToDoDetailView: View {
                         )
                         .background(RoundedRectangle(cornerRadius: 10).fill(Color.green))
                         .padding()
-                        .foregroundColor(.black)
+                        .foregroundColor(.white)
                 }
                 .offset(CGSize(width: 0.0, height: geometry.size.height * 0.45)
                 )

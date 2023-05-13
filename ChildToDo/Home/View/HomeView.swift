@@ -30,6 +30,9 @@ struct HomeView: View {
                 .scrollContentBackground(.hidden)
                 .background(Color.purple)
                 .navigationTitle("やることリスト")
+                .toolbarBackground(Color.purple,for: .navigationBar)
+                .toolbarBackground(.visible, for: .navigationBar)
+                .toolbarColorScheme(.dark)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
@@ -53,9 +56,15 @@ struct HomeView: View {
                 if todoCount != 0 {
                     ToDoDetailView(todo: returnTodo, todoDetail: returnTodo.toDoDetails[todoDetailIndex])
                         .navigationTitle(selectionTodo?.name ?? "やること編集")
+                        .toolbarBackground(Color.cyan,for: .navigationBar)
+                        .toolbarBackground(.visible, for: .navigationBar)
+                        .toolbarColorScheme(.dark)
                 } else {
                     ToDoDetailView(todo: returnTodo, todoDetail: ToDoDetail(name: "", isCheck: false))
                         .navigationTitle(selectionTodo?.name ?? "やること編集")
+                        .toolbarBackground(Color.cyan,for: .navigationBar)
+                        .toolbarBackground(.visible, for: .navigationBar)
+                        .toolbarColorScheme(.dark)
                 }
             } else {
                 Text("やることを入力してください")

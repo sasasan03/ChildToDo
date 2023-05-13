@@ -22,6 +22,7 @@ struct ImageActionView: View {
                                 ? Color.cyan
                                 : Color.orange)
                     .frame(height: geometry.size.height * 0.1)
+                    .lineLimit(2)
                     //.offset(x: 1 ,y: geometry.size.height * 0.009)
             }
             .scrollContentBackground(.hidden)
@@ -32,6 +33,6 @@ struct ImageActionView: View {
 
 struct ImageActionView_Previews: PreviewProvider {
     static var previews: some View {
-        ImageActionView(todo: ToDo.init(name: "朝の会", toDoDetails: [ToDoDetail(name: "挨拶", isCheck: false)]), todoDetail: ToDoDetail.init(name: "予定", isCheck: false))
+        ImageActionView(todo: ToDo.init(name: "朝の会", toDoDetails: [ToDoDetail(name: "挨拶からの校長のめちゃくちゃ長い話", isCheck: false)]), todoDetail: ToDoDetail.init(name: "予定", isCheck: false))
     }
 }
