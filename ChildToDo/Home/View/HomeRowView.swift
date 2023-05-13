@@ -32,7 +32,8 @@ struct HomeRowView: View {
                     edit: { todoName in
                         homeViewModel.save(todoName: todoName, newToDo: todo)
                         dismiss()
-                })
+                }
+                )
             }
         }
     }

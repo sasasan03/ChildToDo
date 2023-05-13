@@ -12,8 +12,8 @@ struct HomeView: View {
     @EnvironmentObject var homeViewModel: HomeViewModel
     @Environment(\.dismiss) var dismiss
     @State private var selectionTodo: ToDo?
-    @State private var todo: ToDo? = nil
     let todoDetail: ToDoDetail
+    let todo: ToDo
     
     var body: some View {
         NavigationSplitView(sidebar: {
@@ -22,10 +22,13 @@ struct HomeView: View {
                         HomeRowView(
                             todo: todo
                         )
+                        .foregroundColor(.black)
                     }
                     .onDelete(perform: homeViewModel.deleteTodo(offset:))
                     .onMove(perform: homeViewModel.moveTodo(indexSet:index:))
                 }
+                .scrollContentBackground(.hidden)
+                .background(Color.purple)
                 .navigationTitle("やることリスト")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -43,7 +46,7 @@ struct HomeView: View {
                 })
             }
             .onAppear(perform: homeViewModel.onApper)
-        }, detail:{
+        } , detail:{
             if let returnTodo =  homeViewModel.returnAdress(todo: selectionTodo){
                 let todoDetailIndex = homeViewModel.todoDetailIndex(todo: returnTodo, todoDetail: todoDetail)
                 let todoCount = returnTodo.toDoDetails.count
@@ -51,19 +54,19 @@ struct HomeView: View {
                     ToDoDetailView(todo: returnTodo, todoDetail: returnTodo.toDoDetails[todoDetailIndex])
                         .navigationTitle(selectionTodo?.name ?? "やること編集")
                 } else {
-                    ToDoDetailView(todo: returnTodo, todoDetail: ToDoDetail(name: ""))
+                    ToDoDetailView(todo: returnTodo, todoDetail: ToDoDetail(name: "", isCheck: false))
                         .navigationTitle(selectionTodo?.name ?? "やること編集")
                 }
-               // NavigationLink("やってみよう") {
-                   // PokemonCheckView(pokemons: pokemonTrainer.pokemons)
-                //}
             } else {
                 Text("やることを入力してください")
             }
         }
         )
+        .accentColor(Color.white)
     }
 }
+
+
 
 //struct HomeView_Previews: PreviewProvider {
 //    static var previews: some View {

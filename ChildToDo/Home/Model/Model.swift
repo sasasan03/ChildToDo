@@ -18,3 +18,5 @@ struct ToDo: Identifiable, Hashable, Codable {
     var name: String
     var toDoDetails: [ToDoDetail]
 }
+
+

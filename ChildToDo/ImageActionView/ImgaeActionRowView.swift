@@ -10,23 +10,23 @@ import SwiftUI
 struct ImgaeActionRowView: View {
     
     @EnvironmentObject var homeViewModel: HomeViewModel
+    let todoDetail: ToDoDetail
+    let todo: ToDo
     
     var body: some View {
         GeometryReader { geometry in
             HStack{
                 Button {
-                  //  item.isChecked = true
+                    homeViewModel.dTrueChange(todo: todo, todoDetail: todoDetail)
                 } label: {
                     HStack{
-                        Image(systemName: homeViewModel.isChecked
+                        Image(systemName: todoDetail.isCheck
                               ? "hand.thumbsup.fill"
                               : ""
                         )
                         .resizable()
                         .scaledToFit()
-                        .foregroundColor(.green)
-                        .background(Color.red)
-                        Text(item.isChecked ?"😉good!!" : item.name)
+                        Text(todoDetail.isCheck ?"😉good!!" : todoDetail.name)
                             .font(.system(
                                 size: geometry.size.width * 0.09,
                                 weight: .ultraLight,
@@ -35,21 +35,20 @@ struct ImgaeActionRowView: View {
                             .foregroundColor(.black)
                             .background(Color.blue)
                             .rotationEffect(Angle(degrees
-                                                  : item.isChecked
+                                                  : todoDetail.isCheck
                                                   ? 360 : 0
                                                  ))
-                            .animation(.default,value:item.isChecked)
+                            .animation(.default,value:todoDetail.isCheck)
                     }
                     .buttonStyle(BorderlessButtonStyle())
                 }
             }
-            .background(Color.gray)
         }
     }
 }
 
 struct ImgaeActionRowView_Previews: PreviewProvider {
     static var previews: some View {
-        ImgaeActionRowView()
+        ImgaeActionRowView(todoDetail: ToDoDetail(name: "挨拶", isCheck: false), todo: ToDo(name: "帰りの会", toDoDetails: [ToDoDetail(name: "歩く", isCheck: false)]))
     }
 }

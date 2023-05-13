@@ -11,8 +11,9 @@ import SwiftUI
 struct ChildToDoApp: App {
     var body: some Scene {
         WindowGroup {
-            HomeView(todoDetail: ToDoDetail.init(name: "自立活動"))
+            HomeView(todoDetail: ToDoDetail(name: "挨拶", isCheck: false), todo: ToDo(name: "自立活動", toDoDetails: [ToDoDetail(name: "予定", isCheck: false)]))
                 .environmentObject(HomeViewModel())
+          //  ListBackgroundViewTest()
         }
     }
 }
