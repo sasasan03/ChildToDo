@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ImageActionView: View {
     
-   // @StateObject var homeViewModel = HomeViewModel()
     @EnvironmentObject var homeViewModel: HomeViewModel
     let todo: ToDo
     let todoDetail: ToDoDetail
@@ -18,9 +17,7 @@ struct ImageActionView: View {
         GeometryReader { geometry in
             List(todo.toDoDetails) { todoD in
                 ImgaeActionRowView(todoDetail: todoD, todo: todo)
-                    .background(todoD.isCheck
-                                ? Color.cyan
-                                : Color.orange)
+                    .background(todoD.isCheck ? Color.ligthOrange : Color.ligthBlue)
                     .frame(height: geometry.size.height * 0.1)
                     .lineLimit(2)
                     //.offset(x: 1 ,y: geometry.size.height * 0.009)
@@ -30,6 +27,7 @@ struct ImageActionView: View {
         }
     }
 }
+
 
 struct ImageActionView_Previews: PreviewProvider {
     static var previews: some View {

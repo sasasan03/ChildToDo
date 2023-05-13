@@ -13,7 +13,6 @@ struct ChildToDoApp: App {
         WindowGroup {
             HomeView(todoDetail: ToDoDetail(name: "挨拶", isCheck: false), todo: ToDo(name: "自立活動", toDoDetails: [ToDoDetail(name: "予定", isCheck: false)]))
                 .environmentObject(HomeViewModel())
-          //  ListBackgroundViewTest()
         }
     }
 }

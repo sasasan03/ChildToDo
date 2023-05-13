@@ -28,12 +28,11 @@ struct ImgaeActionRowView: View {
                         .scaledToFit()
                         Text(todoDetail.isCheck ?"😉good!!" : todoDetail.name)
                             .font(.system(
-                                size: geometry.size.width * 0.09,
+                                size: geometry.size.width * 0.07,
                                 weight: .ultraLight,
                                 design: .serif
                             ))
                             .foregroundColor(.black)
-                            .background(Color.blue)
                             .rotationEffect(Angle(degrees
                                                   : todoDetail.isCheck
                                                   ? 360 : 0
