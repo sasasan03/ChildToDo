@@ -1,5 +1,5 @@
 //
-//  LottieView.swift
+//  GoodView.swift
 //  ChildToDo
 //
 //  Created by sako0602 on 2023/05/13.
@@ -8,19 +8,13 @@
 import SwiftUI
 import Lottie
 
-enum LottieFileType: String {
-    case good = "good"
-    case loading = "elephant"
-}
-
-struct LottieView: UIViewRepresentable {
-    let resourceType: LottieFileType
+struct GoodView: UIViewRepresentable {
 
     func updateUIView(_ uiView: UIView, context: Context) {
     }
 
     func makeUIView(context: Context) -> UIView {
-        let view = LottieAnimationView(name:  resourceType.rawValue)
+        let view = LottieAnimationView(name: "good")
         view.translatesAutoresizingMaskIntoConstraints = false
 
         let parentView = UIView()
@@ -31,13 +25,7 @@ struct LottieView: UIViewRepresentable {
         ])
 
         view.play()
-//        switch LottieFileType {
-//        case .good:
-//            
-//        case .loading:
-//            view.loopMode = .loop
-//        }
-        view.loopMode = .loop
+        view.loopMode = .playOnce
 
         return parentView
     }

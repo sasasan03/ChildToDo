@@ -51,7 +51,6 @@ struct ToDoDetailView: View {
                 .offset(CGSize(width: 0.0, height: geometry.size.height * 0.45)
                 )
             }
-
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {

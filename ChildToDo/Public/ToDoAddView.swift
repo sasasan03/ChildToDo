@@ -38,7 +38,7 @@ struct ToDoAddView: View {
                             } catch {
                                 alert = true
                                 let error = error as? NonTextError ?? NonTextError.unKnownError
-                                print(">>空っす",error.nonTextFieldType)
+                                print("空っす",error.nonTextFieldType)
                             }
                         }
                         .alert("エラー", isPresented: $alert) {

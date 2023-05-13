@@ -7,8 +7,14 @@
 
 import Foundation
 
+enum LoadingState {
+    case loading
+    case answer
+}
+
 class HomeViewModel: ObservableObject {
     
+    @Published var state: LoadingState = .loading
     @Published var isAddView = false
     @Published var isShowTodoDetailView = false
     
@@ -34,11 +40,15 @@ class HomeViewModel: ObservableObject {
     //UserDefaultでデータをデバイスに保存する処理を追加していく。
     private let userDefaultManager = UserDefaultManager()
     
+    func toFalse(todo: ToDo, todoD: ToDoDetail){
+        guard let tIndex = toDos.firstIndex(where: { $0.id == todo.id }) else { return }
+        guard let dIndex = todo.toDoDetails.firstIndex(where: { $0.id == todoD.id }) else { return }
+        //toDos[todoIndex(todo: todo)].toDoDetails[...]
+    }
+    
     func dTrueChange(todo: ToDo, todoDetail: ToDoDetail){
         guard let tIndex = toDos.firstIndex(where: { $0.id == todo.id }) else { return }
-        print("<<<<index", tIndex)
         guard let dIndex = todo.toDoDetails.firstIndex(where: { $0.id == todoDetail.id }) else { return }
-        print(">>>>", dIndex)
         toDos[tIndex].toDoDetails[dIndex].isCheck.toggle()
         do {
             try userDefaultManager.save(toDo: toDos)
@@ -168,9 +178,12 @@ class HomeViewModel: ObservableObject {
         return toDos[index]
     }
     
-    func save(todoName: String, newToDo: ToDo){
+    func save(todoName: String, newToDo: ToDo) throws {
         guard let index = toDos.firstIndex(where: { $0.id == newToDo.id }) else { return }
         toDos[index] = newToDo
+        guard todoName != "" else {
+            throw NonTextError.nonTodoDetailText
+        }
         toDos[index].name = todoName
         do {
             try userDefaultManager.save(toDo: toDos)
@@ -180,9 +193,12 @@ class HomeViewModel: ObservableObject {
         }
     }
     
-    func todoDetailSave(newTodoDetail: ToDoDetail, todo: ToDo, newName: String){
+    func todoDetailSave(newTodoDetail: ToDoDetail, todo: ToDo, newName: String) throws {
         guard let index = toDos.firstIndex(where: { $0.id == todo.id }) else { return }
         guard  let dIndex = todo.toDoDetails.firstIndex(where: { $0.id == newTodoDetail.id }) else { return }
+        guard newName != "" else {
+            throw NonTextError.nonTodoDetailText
+        }
         toDos[index].toDoDetails[dIndex].name = newName
         do {
             try userDefaultManager.save(toDo: toDos)

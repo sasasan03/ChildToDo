@@ -20,13 +20,15 @@ struct ImgaeActionRowView: View {
                     homeViewModel.dTrueChange(todo: todo, todoDetail: todoDetail)
                 } label: {
                     HStack{
-                        Image(systemName: todoDetail.isCheck
-                              ? "hand.thumbsup.fill"
-                              : ""
-                        )
-                        .resizable()
-                        .scaledToFit()
-                        Text(todoDetail.isCheck ?"😉good!!" : todoDetail.name)
+                        if todoDetail.isCheck{
+                        GoodView()
+                                .frame(width: geometry.size.width * 0.2)
+                        } else {
+//                            EmptyView()
+                            Image("")
+                                .frame(width: geometry.size.width * 0.2)
+                        }
+                        Text(todoDetail.isCheck ?"よくできました" : todoDetail.name)
                             .font(.system(
                                 size: geometry.size.width * 0.07,
                                 weight: .ultraLight,

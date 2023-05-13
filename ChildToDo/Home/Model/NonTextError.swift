@@ -14,7 +14,7 @@ enum NonTextError: Error {
     
     var nonTextFieldType: String {
         switch self {
-        case .nonTodoText: return "ToDoを入力してください"
+        case .nonTodoText: return "入力してください"
         case .nonTodoDetailText: return "やることを入力してください"
         case .unKnownError: return "unKnowError"
         }

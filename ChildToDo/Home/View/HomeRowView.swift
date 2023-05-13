@@ -30,7 +30,7 @@ struct HomeRowView: View {
                 ToDoEditView(
                     todoName: todo.name,
                     edit: { todoName in
-                        homeViewModel.save(todoName: todoName, newToDo: todo)
+                       try homeViewModel.save(todoName: todoName, newToDo: todo)
                         dismiss()
                 }
                 )

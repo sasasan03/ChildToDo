@@ -30,7 +30,7 @@ struct DetailRowView: View {
                 ToDoEditView(
                     todoName: todoDetail.name,
                     edit: { todoDetailname in
-                        homeViewModel.todoDetailSave(newTodoDetail: todoDetail, todo: todo, newName: todoDetailname)
+                        try homeViewModel.todoDetailSave(newTodoDetail: todoDetail, todo: todo, newName: todoDetailname)
                         isEddit = false
                     }
                 )

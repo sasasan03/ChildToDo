@@ -12,6 +12,7 @@ struct HomeView: View {
     @EnvironmentObject var homeViewModel: HomeViewModel
     @Environment(\.dismiss) var dismiss
     @State private var selectionTodo: ToDo?
+    @State private var isEdit = false
     let todoDetail: ToDoDetail
     let todo: ToDo
     
@@ -50,6 +51,7 @@ struct HomeView: View {
             }
             .onAppear(perform: homeViewModel.onApper)
         } , detail:{
+            //Todoに入っている配列の要素を表示
             if let returnTodo =  homeViewModel.returnAdress(todo: selectionTodo){
                 let todoDetailIndex = homeViewModel.todoDetailIndex(todo: returnTodo, todoDetail: todoDetail)
                 let todoCount = returnTodo.toDoDetails.count
@@ -61,13 +63,23 @@ struct HomeView: View {
                         .toolbarColorScheme(.dark)
                 } else {
                     ToDoDetailView(todo: returnTodo, todoDetail: ToDoDetail(name: "", isCheck: false))
-                        .navigationTitle(selectionTodo?.name ?? "やること編集")
-                        .toolbarBackground(Color.cyan,for: .navigationBar)
-                        .toolbarBackground(.visible, for: .navigationBar)
-                        .toolbarColorScheme(.dark)
+                            .navigationTitle(selectionTodo?.name ?? "やること編集")
+                            .toolbarBackground(Color.cyan,for: .navigationBar)
+                            .toolbarBackground(.visible, for: .navigationBar)
+                            .toolbarColorScheme(.dark)
                 }
             } else {
-                Text("やることを入力してください")
+                //Todoを選択していないときに表示
+                ZStack{
+                    Color.orange
+                        .ignoresSafeArea()
+                    VStack{
+                        Text("選択されるのを待ってます.....")
+                            .foregroundColor(.white)
+                            .font(.largeTitle)
+                        LottieView(resourceType: .loading)
+                    }
+                }
             }
         }
         )
