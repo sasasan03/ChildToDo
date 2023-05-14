@@ -26,9 +26,13 @@ struct ImageActionView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        print("aaaa")
+                        //todo.toDoDetails.unchecked()
+                       // homeViewModel.toDos.unchecked()
+                      // let changeFalse =  homeViewModel.toDos.unchecked()
+                      //  homeViewModel.toDos = changeFalse
+                        //print(">>>>", changeFalse)
                     } label: {
-                        Image(systemName: "plus")
+                        Image(systemName: "arrow.clockwise")
                     }
                 }
             }

@@ -22,11 +22,23 @@ struct ImgaeActionRowView: View {
                     HStack{
                         if todoDetail.isCheck{
                         GoodView()
-                                .frame(width: geometry.size.width * 0.2)
+                                .frame(
+                                    width: geometry.size.width * 0.2,
+                                    height: geometry.size.height
+                                )
                         } else {
-//                            EmptyView()
+                          //  GoodView()
                             Image("")
-                                .frame(width: geometry.size.width * 0.2)
+                                    .frame(
+                                        width: geometry.size.width * 0.2,
+                                        height: geometry.size.height
+                                    )
+//                            EmptyView()
+//                            Image("")
+//                                .frame(
+//                                    width: geometry.size.width * 0.2
+//
+//                                )
                         }
                         Text(todoDetail.isCheck ?"よくできました" : todoDetail.name)
                             .font(.system(
