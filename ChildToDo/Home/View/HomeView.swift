@@ -62,11 +62,15 @@ struct HomeView: View {
                         .toolbarBackground(.visible, for: .navigationBar)
                         .toolbarColorScheme(.dark)
                 } else {
-                    ToDoDetailView(todo: returnTodo, todoDetail: ToDoDetail(name: "", isCheck: false))
-                            .navigationTitle(selectionTodo?.name ?? "やること編集")
-                            .toolbarBackground(Color.cyan,for: .navigationBar)
-                            .toolbarBackground(.visible, for: .navigationBar)
-                            .toolbarColorScheme(.dark)
+                    ZStack{
+                        ToDoDetailView(todo: returnTodo, todoDetail: ToDoDetail(name: "", isCheck: false))
+                                .navigationTitle(selectionTodo?.name ?? "やること編集")
+                                .toolbarBackground(Color.cyan,for: .navigationBar)
+                                .toolbarBackground(.visible, for: .navigationBar)
+                                .toolbarColorScheme(.dark)
+                        Color.cyan
+                    }
+                    
                 }
             } else {
                 //Todoを選択していないときに表示

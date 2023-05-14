@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ImageActionView: View {
     
-    @EnvironmentObject var homeViewModel: HomeViewModel
+  //  @EnvironmentObject var homeViewModel: HomeViewModel
+    @ObservedObject private var homeViewModel = HomeViewModel()
     let todo: ToDo
     let todoDetail: ToDoDetail
     
@@ -19,14 +20,11 @@ struct ImageActionView: View {
                 ImgaeActionRowView(todoDetail: todoD, todo: todo)
                     .background(todoD.isCheck ? Color.ligthOrange : Color.ligthBlue)
                     .frame(height: geometry.size.height * 0.1)
-                   // .frame(height: 0.1)
-                   // .offset(x: 0 ,y: geometry.size.height * 0.02)
-//                    .padding()
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        //todo.toDoDetails.unchecked()
+                        
                        // homeViewModel.toDos.unchecked()
                       // let changeFalse =  homeViewModel.toDos.unchecked()
                       //  homeViewModel.toDos = changeFalse
@@ -45,6 +43,9 @@ struct ImageActionView: View {
 
 struct ImageActionView_Previews: PreviewProvider {
     static var previews: some View {
-        ImageActionView(todo: ToDo.init(name: "朝の会", toDoDetails: [ToDoDetail(name: "校長のめちゃくちゃ長い話", isCheck: false)]), todoDetail: ToDoDetail.init(name: "予定", isCheck: false))
+        ImageActionView(todo: ToDo.init(name: "朝の会", toDoDetails: [ToDoDetail(name: "校長のとてもとても長い話", isCheck: false)]), todoDetail: ToDoDetail.init(name: "予定", isCheck: false))
     }
 }
+//"校長のめちゃくちゃ長い話"１０文字
+// "校長のとてもとても長い話"10文字ともに１０文字以上は表示できない
+
