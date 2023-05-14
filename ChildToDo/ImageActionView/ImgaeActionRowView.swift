@@ -16,39 +16,36 @@ struct ImgaeActionRowView: View {
     var body: some View {
         GeometryReader { geometry in
             HStack{
-                Button {
-                    homeViewModel.dTrueChange(todo: todo, todoDetail: todoDetail)
-                } label: {
-                    HStack{
-                        if todoDetail.isCheck{
-                            GoodView()
-                                    .frame(
-                                        width: geometry.size.width * 0.2,
-                                        height: geometry.size.height
-                                    )
-                        } else {
-                            Image("")
-                                    .frame(
-                                        width: geometry.size.width * 0.2,
-                                        height: geometry.size.height
-                                    )
-                        }
-                        Text(todoDetail.isCheck ?"よくできました" : todoDetail.name)
-                            .font(.system(
-                                size: geometry.size.width * 0.07,
-                                weight: .ultraLight,
-                                design: .serif
-                            ))
-                            .foregroundColor(.black)
-                            .rotationEffect(Angle(degrees
-                                                  : todoDetail.isCheck
-                                                  ? 360 : 0
-                                                 ))
-                            .animation(.default,value:todoDetail.isCheck)
-                    }
-                    .buttonStyle(BorderlessButtonStyle())
+                if todoDetail.isCheck{
+                    GoodView()
+                        .frame(
+                            width: geometry.size.width * 0.2,
+                            height: geometry.size.height
+                        )
+                } else {
+                    Image("")
+                        .frame(
+                            width: geometry.size.width * 0.2,
+                            height: geometry.size.height
+                        )
                 }
+                Text(todoDetail.isCheck ?"よくできました" : todoDetail.name)
+                    .font(.system(
+                        size: geometry.size.width * 0.07,
+                        weight: .ultraLight,
+                        design: .serif
+                    ))
+                    .foregroundColor(.black)
+                    .rotationEffect(Angle(degrees
+                                          : todoDetail.isCheck
+                                          ? 360 : 0
+                                         ))
+                    .animation(.default,value:todoDetail.isCheck)
             }
+            .onTapGesture(count: 2) {
+                homeViewModel.dTrueChange(todo: todo, todoDetail: todoDetail)
+            }
+            .buttonStyle(BorderlessButtonStyle())
         }
     }
 }

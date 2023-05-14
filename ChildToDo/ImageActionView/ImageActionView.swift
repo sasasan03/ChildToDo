@@ -9,8 +9,7 @@ import SwiftUI
 
 struct ImageActionView: View {
     
-  //  @EnvironmentObject var homeViewModel: HomeViewModel
-    @ObservedObject private var homeViewModel = HomeViewModel()
+    @EnvironmentObject var homeViewModel: HomeViewModel
     let todo: ToDo
     let todoDetail: ToDoDetail
     
@@ -24,8 +23,7 @@ struct ImageActionView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        
-                       // homeViewModel.toDos.unchecked()
+                       let aaa =  homeViewModel.toDos.unchecked()
                       // let changeFalse =  homeViewModel.toDos.unchecked()
                       //  homeViewModel.toDos = changeFalse
                         //print(">>>>", changeFalse)
