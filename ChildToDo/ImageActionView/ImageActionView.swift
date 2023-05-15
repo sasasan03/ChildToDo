@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct ImageActionView: View {
-    
+    //Viewの生成時のみ
     @EnvironmentObject var homeViewModel: HomeViewModel
     let todo: ToDo
     let todoDetail: ToDoDetail
     
     var body: some View {
         GeometryReader { geometry in
-            List(todo.toDoDetails) { todoD in
+            List(homeViewModel.toDos.first(where: { $0.name == todo.name })?.toDoDetails ?? [] ) { todoD in
                 ImgaeActionRowView(todoDetail: todoD, todo: todo)
                     .background(todoD.isCheck ? Color.ligthOrange : Color.ligthBlue)
                     .frame(height: geometry.size.height * 0.1)
@@ -23,8 +23,21 @@ struct ImageActionView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                       let aaa =  homeViewModel.toDos.unchecked()
-                      // let changeFalse =  homeViewModel.toDos.unchecked()
+                        print("確認①",homeViewModel.toDos[2])
+                        homeViewModel.toDos = homeViewModel.toDos.map{ toDo -> ToDo in
+                            var details: [ToDoDetail] = []
+                            toDo.toDoDetails.forEach{ d in
+                                var detail = ToDoDetail(name: d.name, isCheck: false)
+                                detail.id = d.id
+                                details.append(detail)
+                            }
+                            var newToDo = ToDo(name: toDo.name, toDoDetails: details)
+                            newToDo.id = toDo.id
+                            return newToDo
+                           // return ToDo(name: toDo.name, toDoDetails: details)
+                        }
+                        print("確認②",homeViewModel.toDos[2])
+                       // homeViewModel.toDos =  homeViewModel.toDos.unchecked()
                       //  homeViewModel.toDos = changeFalse
                         //print(">>>>", changeFalse)
                     } label: {

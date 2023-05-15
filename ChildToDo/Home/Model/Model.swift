@@ -13,7 +13,9 @@ struct ToDoDetail: Identifiable, Hashable, Codable  {
     var isCheck: Bool
     
     func unchecked() -> ToDoDetail {
-        ToDoDetail(name: name, isCheck: false)
+       let bbb =  ToDoDetail(name: name, isCheck: false)
+        print("llll",bbb)
+        return bbb
     }
 }
 
@@ -23,12 +25,16 @@ struct ToDo: Identifiable, Hashable, Codable {
     var toDoDetails: [ToDoDetail]
     
     func unchecked() -> ToDo {
-        ToDo(name: name, toDoDetails: toDoDetails.map{ $0.unchecked() })
+         let aaa =  ToDo(name: name, toDoDetails: toDoDetails.map{ $0.unchecked() })
+        print("FFF",aaa)
+        return aaa
     }
 }
 
 extension Array where Element == ToDo {
     func unchecked() -> [ToDo]{
-        self.map{ todo in todo }
+      let aa =  self.map{ todo in todo }
+      print(">>>",aa)
+        return aa
     }
 }

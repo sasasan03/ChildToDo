@@ -34,7 +34,7 @@ class HomeViewModel: ObservableObject {
                 ToDoDetail(name: "わすれもののかくにん", isCheck: false),
                 ToDoDetail(name: "かえりのかくにん", isCheck: false),
                 ToDoDetail(name: "かけごえ", isCheck: false)
-             ]),
+             ])
         
     ]
     //UserDefaultでデータをデバイスに保存する処理を追加していく。
@@ -44,7 +44,9 @@ class HomeViewModel: ObservableObject {
     func dTrueChange(todo: ToDo, todoDetail: ToDoDetail){
         guard let tIndex = toDos.firstIndex(where: { $0.id == todo.id }) else { return }
         guard let dIndex = todo.toDoDetails.firstIndex(where: { $0.id == todoDetail.id }) else { return }
+        print("確認３・①",toDos[2])
         toDos[tIndex].toDoDetails[dIndex].isCheck.toggle()
+        print("確認３・②",toDos[2])
         do {
             try userDefaultManager.save(toDo: toDos)
         } catch {
