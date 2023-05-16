@@ -16,37 +16,48 @@ struct ToDoAddView: View {
     
     
     var body: some View {
-        NavigationStack{
-                HStack{
-                    Text("追加")
-                    TextField("", text: $todo)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .frame(width: 500 )
-                }
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading){
-                        Button("cancel") {
-                            dismiss()
-                        }
+        GeometryReader { geometry in
+            NavigationStack{
+                ZStack{
+                    Color.gray
+                    HStack{
+                        Text("追加")
+                            .frame(width: geometry.size.width * 0.2)
+                            .foregroundColor(Color.white)
+                        TextField("", text: $todo)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .frame(width: geometry.size.width * 0.7 )
                     }
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button("save") {
-                            do {
-                               try save(todo)
+                    .padding()
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarLeading){
+                            Button("cancel") {
                                 dismiss()
-                            } catch {
-                                alert = true
-                                let error = error as? NonTextError ?? NonTextError.unKnownError
-                                print("空っす",error.nonTextFieldType)
                             }
                         }
-                        .alert("エラー", isPresented: $alert) {
-                        } message: {
-                            let error = NonTextError.nonTodoText.nonTextFieldType
-                            Text(error)
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button("save") {
+                                do {
+                                    try save(todo)
+                                    dismiss()
+                                } catch {
+                                    alert = true
+                                    let error = error as? NonTextError ?? NonTextError.unKnownError
+                                    print("空っす",error.nonTextFieldType)
+                                }
+                            }
+                            .alert("エラー", isPresented: $alert) {
+                            } message: {
+                                let error = NonTextError.nonTodoText.nonTextFieldType
+                                Text(error)
+                            }
                         }
                     }
+                    .toolbarBackground(Color.gray,for: .navigationBar)
+                    .toolbarBackground(.visible, for: .navigationBar)
+                    .toolbarColorScheme(.dark)
                 }
+            }
         }
     }
 }
