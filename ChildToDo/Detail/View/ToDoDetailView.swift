@@ -23,6 +23,7 @@ struct ToDoDetailView: View {
                     ForEach(todo.toDoDetails){ todoDetail in
                         DetailRowView(todo: todo,
                                       todoDetail: todoDetail)
+                        let _ = print("ディテイル",todoDetail.isCheck)
                     }
                     .onMove { sourceIndices, destinationIndx in
                         homeViewModel.moveTodoDetail(indexSet: sourceIndices, index: destinationIndx, todo: todo)
@@ -38,8 +39,12 @@ struct ToDoDetailView: View {
                     ImageActionView(todo: todo, todoDetail: todoDetail)
                 } label: {
                     Text("やってみよう")
-                        .font(.largeTitle)
-                        .frame(width: 800, height: 50)
+                        .font(.system(
+                            size: geometry.size.width * 0.07,
+                            weight: .regular,
+                            design: .rounded
+                        ))
+                        .frame(width: geometry.size.width * 0.8, height: geometry.size.height * 0.1)
                         .overlay(
                             RoundedRectangle(cornerRadius: 12)
                                 .stroke(Color.blue, lineWidth: 2)
@@ -48,8 +53,7 @@ struct ToDoDetailView: View {
                         .padding()
                         .foregroundColor(.white)
                 }
-                .offset(CGSize(width: 0.0, height: geometry.size.height * 0.45)
-                )
+                .offset(CGSize(width: 0.0, height: geometry.size.height * 0.45))
             }
         }
         .toolbar {

@@ -43,9 +43,9 @@ struct ImgaeActionRowView: View {
                     .animation(.default,value:todoDetail.isCheck)
             }
             .onTapGesture(count: 2) {
-                print("確認２・①",homeViewModel.toDos[2])
+             // print("確認２・①",homeViewModel.toDos[2])
                 homeViewModel.dTrueChange(todo: todo, todoDetail: todoDetail)
-                print("確認２・②",homeViewModel.toDos[2])
+             // print("確認２・②",homeViewModel.toDos[2])
             }
             .buttonStyle(BorderlessButtonStyle())
         }

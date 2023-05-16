@@ -73,7 +73,6 @@ struct HomeView: View {
                     
                 }
             } else {
-                //Todoを選択していないときに表示
                 ZStack{
                     Color.orange
                         .ignoresSafeArea()

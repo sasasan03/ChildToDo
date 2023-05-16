@@ -34,6 +34,7 @@ struct HomeRowView: View {
                         dismiss()
                 }
                 )
+                .presentationDetents([.medium, .large])
             }
         }
     }

@@ -17,12 +17,11 @@ struct ToDoEditView: View {
     
     var body: some View {
         NavigationStack{
-            GeometryReader { geometry in
                 HStack{
                     Text("名前変更")
                     TextField("", text: $todoName)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .frame(width: geometry.size.width * 0.8)
+                        .frame(width: 500)
                 }
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading){
@@ -49,7 +48,7 @@ struct ToDoEditView: View {
 
                     }
                 }
-            }
+            
             
         }
     }

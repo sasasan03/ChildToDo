@@ -10,6 +10,7 @@ import SwiftUI
 struct ImageActionView: View {
     //Viewの生成時のみ
     @EnvironmentObject var homeViewModel: HomeViewModel
+    let imageActionViewModel = ImageActionViewModel()
     let todo: ToDo
     let todoDetail: ToDoDetail
     
@@ -23,23 +24,22 @@ struct ImageActionView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        print("確認①",homeViewModel.toDos[2])
-                        homeViewModel.toDos = homeViewModel.toDos.map{ toDo -> ToDo in
-                            var details: [ToDoDetail] = []
-                            toDo.toDoDetails.forEach{ d in
-                                var detail = ToDoDetail(name: d.name, isCheck: false)
-                                detail.id = d.id
-                                details.append(detail)
-                            }
-                            var newToDo = ToDo(name: toDo.name, toDoDetails: details)
-                            newToDo.id = toDo.id
-                            return newToDo
-                           // return ToDo(name: toDo.name, toDoDetails: details)
-                        }
-                        print("確認②",homeViewModel.toDos[2])
-                       // homeViewModel.toDos =  homeViewModel.toDos.unchecked()
-                      //  homeViewModel.toDos = changeFalse
-                        //print(">>>>", changeFalse)
+//-----------------------🟥boolを全て切り替える。
+//                        homeViewModel.toDos = homeViewModel.toDos.map{ toDo -> ToDo in
+//                            var details: [ToDoDetail] = []
+//                            print("detailsだと",details)
+//                            toDo.toDoDetails.forEach{ d in
+//                                var detail = ToDoDetail(name: d.name, isCheck: false)
+//                                detail.id = d.id
+//                                details.append(detail)
+//                            }
+//                            var newToDo = ToDo(name: toDo.name, toDoDetails: details)
+//                            newToDo.id = toDo.id
+//                            print("確認②",newToDo)
+//                            print("detailsだと",details)
+//                            return newToDo
+//                        }
+////----------------------------------🟥
                     } label: {
                         Image(systemName: "arrow.clockwise")
                     }
