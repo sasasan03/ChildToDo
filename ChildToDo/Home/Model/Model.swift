@@ -6,6 +6,17 @@
 //
 
 import Foundation
+import AVFoundation
+import SwiftUI
+//------------------------Model??ViewModel??
+private let crappingHands = try! AVAudioPlayer(data: NSDataAsset(name: "clappingHands")!.data)
+
+public func playSoundCorrect(){
+    crappingHands.stop()
+    crappingHands.currentTime = 0.0
+    crappingHands.play()
+}
+//------------------------
 
 struct ToDoDetail: Identifiable, Hashable, Codable  {
     var id = UUID()
@@ -13,9 +24,8 @@ struct ToDoDetail: Identifiable, Hashable, Codable  {
     var isCheck: Bool
     
     func unchecked() -> ToDoDetail {
-       let bbb =  ToDoDetail(name: name, isCheck: false)
-        print("llll",bbb)
-        return bbb
+       let todoDetail =  ToDoDetail(name: name, isCheck: false)
+        return todoDetail
     }
 }
 
@@ -25,16 +35,14 @@ struct ToDo: Identifiable, Hashable, Codable {
     var toDoDetails: [ToDoDetail]
     
     func unchecked() -> ToDo {
-         let aaa =  ToDo(name: name, toDoDetails: toDoDetails.map{ $0.unchecked() })
-        print("FFF",aaa)
-        return aaa
+         let toDo =  ToDo(name: name, toDoDetails: toDoDetails.map{ $0.unchecked() })
+        return toDo
     }
 }
 
 extension Array where Element == ToDo {
     func unchecked() -> [ToDo]{
-      let aa =  self.map{ todo in todo }
-      print(">>>",aa)
-        return aa
+      let arrayMap =  self.map{ todo in todo }
+        return arrayMap
     }
 }

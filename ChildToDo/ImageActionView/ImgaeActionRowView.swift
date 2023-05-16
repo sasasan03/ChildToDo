@@ -22,6 +22,7 @@ struct ImgaeActionRowView: View {
                             width: geometry.size.width * 0.2,
                             height: geometry.size.height
                         )
+                    
                 } else {
                     Image("")
                         .frame(
@@ -43,9 +44,11 @@ struct ImgaeActionRowView: View {
                     .animation(.default,value:todoDetail.isCheck)
             }
             .onTapGesture(count: 2) {
-             // print("確認２・①",homeViewModel.toDos[2])
+                if !todoDetail.isCheck {
+                    playSoundCorrect()
+                }
                 homeViewModel.dTrueChange(todo: todo, todoDetail: todoDetail)
-             // print("確認２・②",homeViewModel.toDos[2])
+                
             }
             .buttonStyle(BorderlessButtonStyle())
         }
