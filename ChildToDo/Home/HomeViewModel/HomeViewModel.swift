@@ -40,7 +40,40 @@ class HomeViewModel: ObservableObject {
     //UserDefaultでデータをデバイスに保存する処理を追加していく。
     private let userDefaultManager = UserDefaultManager()
     
-    func dTrueChange(todo: ToDo, todoDetail: ToDoDetail){
+    func detailBoolFalse(){
+        toDos = toDos.map{ toDo -> ToDo in
+            var details: [ToDoDetail] = []
+            toDo.toDoDetails.forEach{ d in
+                var detail = ToDoDetail(name: d.name, isCheck: false)
+                detail.id = d.id
+                details.append(detail)
+            }
+            var newToDo = ToDo(name: toDo.name, toDoDetails: details)
+            newToDo.id = toDo.id
+            return toDo
+        }
+        do {
+            try userDefaultManager.save(toDo: toDos)
+        } catch {
+            let error = error as? DataConvertError ?? DataConvertError.unknown
+            print("10101",error.title)
+        }
+    }
+    
+    //🟥使用していない
+    func detailBoolisFalse(todo: ToDo, todoDetail: ToDoDetail){
+        guard let tIndex = toDos.firstIndex(where: { $0.id == todo.id }) else { return }
+        guard let dIndex = todo.toDoDetails.firstIndex(where: { $0.id == todoDetail.id }) else { return }
+        toDos[tIndex].toDoDetails[dIndex].isCheck = false
+        do {
+            try userDefaultManager.save(toDo: toDos)
+        } catch {
+            let error = error as? DataConvertError ?? DataConvertError.unknown
+            print("0000",error.title)
+        }
+    }
+    
+    func dChange(todo: ToDo, todoDetail: ToDoDetail){
         guard let tIndex = toDos.firstIndex(where: { $0.id == todo.id }) else { return }
         guard let dIndex = todo.toDoDetails.firstIndex(where: { $0.id == todoDetail.id }) else { return }
         toDos[tIndex].toDoDetails[dIndex].isCheck.toggle()

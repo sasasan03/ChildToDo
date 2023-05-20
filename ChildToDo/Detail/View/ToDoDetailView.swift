@@ -23,7 +23,6 @@ struct ToDoDetailView: View {
                     ForEach(todo.toDoDetails){ todoDetail in
                         DetailRowView(todo: todo,
                                       todoDetail: todoDetail)
-                        let _ = print("ディテイル",todoDetail.isCheck)
                     }
                     .onMove { sourceIndices, destinationIndx in
                         homeViewModel.moveTodoDetail(indexSet: sourceIndices, index: destinationIndx, todo: todo)

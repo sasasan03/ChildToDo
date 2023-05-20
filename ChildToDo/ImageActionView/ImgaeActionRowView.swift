@@ -4,7 +4,7 @@
 //
 //  Created by sako0602 on 2023/05/11.
 //
-
+import Foundation
 import SwiftUI
 
 struct ImgaeActionRowView: View {
@@ -12,7 +12,7 @@ struct ImgaeActionRowView: View {
     @EnvironmentObject var homeViewModel: HomeViewModel
     let todoDetail: ToDoDetail
     let todo: ToDo
-    
+
     var body: some View {
         GeometryReader { geometry in
             HStack{
@@ -22,9 +22,8 @@ struct ImgaeActionRowView: View {
                             width: geometry.size.width * 0.2,
                             height: geometry.size.height
                         )
-                    
                 } else {
-                    Image("")
+                    Color.clear
                         .frame(
                             width: geometry.size.width * 0.2,
                             height: geometry.size.height
@@ -40,18 +39,19 @@ struct ImgaeActionRowView: View {
                     .rotationEffect(Angle(degrees
                                           : todoDetail.isCheck
                                           ? 360 : 0
-                                         ))
+                                         )
+                    )
                     .animation(.default,value:todoDetail.isCheck)
             }
             .onTapGesture(count: 2) {
                 if !todoDetail.isCheck {
                     playSoundCorrect()
                 }
-                homeViewModel.dTrueChange(todo: todo, todoDetail: todoDetail)
-                
+                homeViewModel.dChange(todo: todo, todoDetail: todoDetail)
             }
-            .buttonStyle(BorderlessButtonStyle())
+            
         }
+        .buttonStyle(BorderlessButtonStyle())
     }
 }
 

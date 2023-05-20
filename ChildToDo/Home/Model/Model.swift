@@ -6,8 +6,9 @@
 //
 
 import Foundation
-import AVFoundation
 import SwiftUI
+import AVFoundation
+
 //------------------------Model??ViewModel??
 private let crappingHands = try! AVAudioPlayer(data: NSDataAsset(name: "clappingHands")!.data)
 

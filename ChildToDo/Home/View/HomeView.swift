@@ -33,7 +33,7 @@ struct HomeView: View {
                 .navigationTitle("やることリスト")
                 .toolbarBackground(Color.purple,for: .navigationBar)
                 .toolbarBackground(.visible, for: .navigationBar)
-                .toolbarColorScheme(.dark)
+                .toolbarColorScheme(.light)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
@@ -70,7 +70,7 @@ struct HomeView: View {
                                 .toolbarColorScheme(.dark)
                         Color.cyan
                     }
-                    
+                
                 }
             } else {
                 ZStack{
