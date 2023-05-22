@@ -36,20 +36,6 @@ struct ImgaeActionRowView: View {
                         design: .serif
                     ))
                     .foregroundColor(.black)
-                    .rotationEffect(Angle(degrees
-                                          : todoDetail.isCheck
-                                          ? 360 : 0
-                                         )
-                    )
-                    .animation(.default,value:todoDetail.isCheck)
-            }
-            .onTapGesture(count: 2) {
-                if !todoDetail.isCheck {
-                    playSoundCorrect()
-                }
-                homeViewModel.dChange(todo: todo, todoDetail: todoDetail)
-            }
-            
         }
         .buttonStyle(BorderlessButtonStyle())
     }

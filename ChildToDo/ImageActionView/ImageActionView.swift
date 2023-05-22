@@ -20,6 +20,18 @@ struct ImageActionView: View {
                 ImgaeActionRowView(todoDetail: todoD, todo: todo)
                     .background(todoD.isCheck ? Color.ligthOrange : Color.ligthBlue)
                     .frame(height: geometry.size.height * 0.1)
+                    .rotationEffect(Angle(degrees
+                                          : todoD.isCheck
+                                          ? 360 : 0
+                                         )
+                    )
+                    .animation(.default,value:todoD.isCheck)
+                    .onTapGesture(count: 2) {
+                        if !todoD.isCheck {
+                            playSoundCorrect()
+                        }
+                        homeViewModel.dChange(todo: todo, todoDetail: todoD)
+                    }
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
