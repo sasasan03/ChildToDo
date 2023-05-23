@@ -10,7 +10,7 @@ import SwiftUI
 import AVFoundation
 
 //------------------------Model??ViewModel??
-private let crappingHands = try! AVAudioPlayer(data: NSDataAsset(name: "clappingHands")!.data)
+let crappingHands = try! AVAudioPlayer(data: NSDataAsset(name: "clappingHands")!.data)
 
 public func playSoundCorrect(){
     crappingHands.stop()

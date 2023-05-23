@@ -36,19 +36,22 @@ struct ImageActionView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-//                        homeViewModel.detailBoolFalse()
+//                        guard let tIndex = homeViewModel.toDos.firstIndex(where: { $0.id == todo.id }) else { return }
+//                        homeViewModel.toDos[tIndex].toDoDetails.forEach{ item in
+//                            item.unchecked()
+//                        }
                         //-----------------------🟥boolを全て切り替える。
-                        homeViewModel.toDos = homeViewModel.toDos.map{ toDo -> ToDo in
-                            var details: [ToDoDetail] = []
-                            toDo.toDoDetails.forEach{ d in
-                                var detail = ToDoDetail(name: d.name, isCheck: false)
-                                detail.id = d.id
-                                details.append(detail)
-                            }
-                            var newToDo = ToDo(name: toDo.name, toDoDetails: details)
-                            newToDo.id = toDo.id
-                            return newToDo
-                        }
+//                        homeViewModel.toDos = homeViewModel.toDos.map{ toDo -> ToDo in
+//                            var details: [ToDoDetail] = []
+//                            toDo.toDoDetails.forEach{ d in
+//                                var detail = ToDoDetail(name: d.name, isCheck: false)
+//                                detail.id = d.id
+//                                details.append(detail)
+//                            }
+//                            var newToDo = ToDo(name: toDo.name, toDoDetails: details)
+//                            newToDo.id = toDo.id
+//                            return newToDo
+//                        }
     ////----------------------------------🟥
                         
 
