@@ -12,7 +12,7 @@ struct ImgaeActionRowView: View {
     @EnvironmentObject var homeViewModel: HomeViewModel
     let todoDetail: ToDoDetail
     let todo: ToDo
-
+    
     var body: some View {
         GeometryReader { geometry in
             HStack{
@@ -36,8 +36,9 @@ struct ImgaeActionRowView: View {
                         design: .serif
                     ))
                     .foregroundColor(.black)
+            }
+            .buttonStyle(BorderlessButtonStyle())
         }
-        .buttonStyle(BorderlessButtonStyle())
     }
 }
 

@@ -18,8 +18,8 @@ struct HomeView: View {
     
     var body: some View {
         NavigationSplitView(sidebar: {
-                List(selection: $selectionTodo) {
-                    ForEach(homeViewModel.toDos){ todo in
+            List(selection: $selectionTodo) {
+                ForEach(homeViewModel.toDos){ todo in
                         HomeRowView(
                             todo: todo
                         )
@@ -31,9 +31,10 @@ struct HomeView: View {
                 .scrollContentBackground(.hidden)
                 .background(Color.purple)
                 .navigationTitle("やることリスト")
+                .toolbarBackground(Color.purple, for: .navigationBar)
                 .toolbarBackground(Color.purple,for: .navigationBar)
                 .toolbarBackground(.visible, for: .navigationBar)
-                .toolbarColorScheme(.light)
+                .toolbarColorScheme(.dark)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
@@ -92,8 +93,9 @@ struct HomeView: View {
 
 
 
-//struct HomeView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        HomeView(todoDetail: ToDoDetail(name: "挨拶"))
-//    }
-//}
+struct HomeView_Previews: PreviewProvider {
+    static var previews: some View {
+        HomeView(todoDetail: ToDoDetail(name: "挨拶", isCheck: false), todo: ToDo(name: "朝の会", toDoDetails: [ToDoDetail(name: "予定", isCheck: false)]))
+            .environmentObject(HomeViewModel())
+    }
+}
