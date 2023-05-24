@@ -17,6 +17,7 @@ struct ImageActionView: View {
     var body: some View {
         GeometryReader { geometry in
             List(homeViewModel.toDos.first(where: { $0.name == todo.name })?.toDoDetails ?? [] ) { todoD in
+                let _ = print(">>>TodoDetail", todoD)
                 ImgaeActionRowView(todoDetail: todoD, todo: todo)
                     .background(todoD.isCheck ? Color.ligthOrange : Color.ligthBlue)
                     .frame(height: geometry.size.height * 0.1)
@@ -36,16 +37,20 @@ struct ImageActionView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-//                        guard let tIndex = homeViewModel.toDos.firstIndex(where: { $0.id == todo.id }) else { return }
-//                        homeViewModel.toDos[tIndex].toDoDetails.forEach{ item in
-//                            item.unchecked()
-//                        }
-                        //-----------------------🟥boolを全て切り替える。
+                        guard let tIndex = homeViewModel.toDos.firstIndex(where: { $0.id == todo.id }) else { return }
+                        homeViewModel.toDos[tIndex].toDoDetails.forEach { todoDetail in
+                            var newTodoDetails:[ToDoDetail] = []
+                            newTodoDetails.append(todoDetail.unchecked())
+                            
+                        }
+                        //-----------------------🟥
 //                        homeViewModel.toDos = homeViewModel.toDos.map{ toDo -> ToDo in
 //                            var details: [ToDoDetail] = []
 //                            toDo.toDoDetails.forEach{ d in
 //                                var detail = ToDoDetail(name: d.name, isCheck: false)
+//                                //print(">>>beforeDetailID",detail.id)
 //                                detail.id = d.id
+//                               // print("<<<afterDetailID",detail.id)
 //                                details.append(detail)
 //                            }
 //                            var newToDo = ToDo(name: toDo.name, toDoDetails: details)
