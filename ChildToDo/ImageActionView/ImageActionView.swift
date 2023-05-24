@@ -38,10 +38,10 @@ struct ImageActionView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
                         guard let tIndex = homeViewModel.toDos.firstIndex(where: { $0.id == todo.id }) else { return }
-                        homeViewModel.toDos[tIndex].toDoDetails.forEach { todoDetail in
+                        homeViewModel.toDos[tIndex].toDoDetails.forEach { todoDetail -> [ToDoDetail] in
                             var newTodoDetails:[ToDoDetail] = []
                             newTodoDetails.append(todoDetail.unchecked())
-                            
+                            return newTodoDetails
                         }
                         //-----------------------🟥
 //                        homeViewModel.toDos = homeViewModel.toDos.map{ toDo -> ToDo in
