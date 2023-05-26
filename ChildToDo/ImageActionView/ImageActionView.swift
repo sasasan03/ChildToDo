@@ -17,7 +17,7 @@ struct ImageActionView: View {
     var body: some View {
         GeometryReader { geometry in
             List(homeViewModel.toDos.first(where: { $0.name == todo.name })?.toDoDetails ?? [] ) { todoD in
-                let _ = print(">>>TodoDetail", todoD)
+//                let _ = print(">>>TodoDetail", todoD)
                 ImgaeActionRowView(todoDetail: todoD, todo: todo)
                     .background(todoD.isCheck ? Color.ligthOrange : Color.ligthBlue)
                     .frame(height: geometry.size.height * 0.1)
@@ -38,11 +38,17 @@ struct ImageActionView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
                         guard let tIndex = homeViewModel.toDos.firstIndex(where: { $0.id == todo.id }) else { return }
-                        homeViewModel.toDos[tIndex].toDoDetails.forEach { todoDetail -> [ToDoDetail] in
-                            var newTodoDetails:[ToDoDetail] = []
-                            newTodoDetails.append(todoDetail.unchecked())
-                            return newTodoDetails
+                        homeViewModel.toDos[tIndex].toDoDetails.indices.forEach{
+                            homeViewModel.toDos[tIndex].toDoDetails[$0].isCheck = false
                         }
+                        
+                        //-----------------------🔸
+//                        homeViewModel.toDos[tIndex].toDoDetails.forEach{ _ in
+//                            (0..<homeViewModel.toDos[tIndex].toDoDetails.count).forEach{
+//                                homeViewModel.toDos[tIndex].toDoDetails[$0].isCheck = false
+//                            }
+//                        }
+                        
                         //-----------------------🟥
 //                        homeViewModel.toDos = homeViewModel.toDos.map{ toDo -> ToDo in
 //                            var details: [ToDoDetail] = []
@@ -50,7 +56,7 @@ struct ImageActionView: View {
 //                                var detail = ToDoDetail(name: d.name, isCheck: false)
 //                                //print(">>>beforeDetailID",detail.id)
 //                                detail.id = d.id
-//                               // print("<<<afterDetailID",detail.id)
+//                                //print("<<<afterDetailID",detail.id)
 //                                details.append(detail)
 //                            }
 //                            var newToDo = ToDo(name: toDo.name, toDoDetails: details)

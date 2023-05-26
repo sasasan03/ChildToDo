@@ -41,9 +41,9 @@ struct ToDo: Identifiable, Hashable, Codable {
     }
 }
 
-extension Array where Element == ToDo {
-    func unchecked() -> [ToDo]{
-      let arrayMap =  self.map{ todo in todo }
-        return arrayMap
-    }
-}
+//extension Array where Element == ToDo {
+//    func unchecked() -> [ToDo]{
+//      let arrayMap =  self.map{ todo in todo }
+//        return arrayMap
+//    }
+//}
