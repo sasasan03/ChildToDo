@@ -60,19 +60,6 @@ class HomeViewModel: ObservableObject {
         }
     }
     
-    //🟥使用していない
-//    func detailBoolisFalse(todo: ToDo, todoDetail: ToDoDetail){
-//        guard let tIndex = toDos.firstIndex(where: { $0.id == todo.id }) else { return }
-//        guard let dIndex = todo.toDoDetails.firstIndex(where: { $0.id == todoDetail.id }) else { return }
-//        toDos[tIndex].toDoDetails[dIndex].isCheck = false
-//        do {
-//            try userDefaultManager.save(toDo: toDos)
-//        } catch {
-//            let error = error as? DataConvertError ?? DataConvertError.unknown
-//            print("0000",error.title)
-//        }
-//    }
-    
     func dChange(todo: ToDo, todoDetail: ToDoDetail){
         guard let tIndex = toDos.firstIndex(where: { $0.id == todo.id }) else { return }
         guard let dIndex = todo.toDoDetails.firstIndex(where: { $0.id == todoDetail.id }) else { return }

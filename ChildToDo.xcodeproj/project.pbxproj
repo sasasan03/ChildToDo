@@ -144,6 +144,15 @@
 			path = Public;
 			sourceTree = "<group>";
 		};
+		69A81BB92A20D26100975056 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				69A882822A092DA3009D182A /* ImageActionView.swift */,
+				6981DEAB2A0D145C0081D917 /* ImgaeActionRowView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		69A882432A092B79009D182A = {
 			isa = PBXGroup;
 			children = (
@@ -171,8 +180,8 @@
 				6981DEB42A0F77410081D917 /* LottieView */,
 				69A5C4EF2A0A832800C8FE70 /* Public */,
 				69A882842A092E09009D182A /* ImageActionView */,
-				69A8827B2A092CA9009D182A /* Detail */,
-				69A882792A092C2B009D182A /* Home */,
+				69A8827B2A092CA9009D182A /* DetailVIew */,
+				69A882792A092C2B009D182A /* HomeView */,
 				69A882532A092B7A009D182A /* Assets.xcassets */,
 				6981DEB52A0F7D860081D917 /* Json */,
 				69A882552A092B7A009D182A /* Preview Content */,
@@ -205,31 +214,30 @@
 			path = ChildToDoUITests;
 			sourceTree = "<group>";
 		};
-		69A882792A092C2B009D182A /* Home */ = {
+		69A882792A092C2B009D182A /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
 				69A8828E2A0935C3009D182A /* HomeViewModel */,
 				69A882912A0935FA009D182A /* View */,
 				69A882852A092EB6009D182A /* Model */,
 			);
-			path = Home;
+			path = HomeView;
 			sourceTree = "<group>";
 		};
-		69A8827B2A092CA9009D182A /* Detail */ = {
+		69A8827B2A092CA9009D182A /* DetailVIew */ = {
 			isa = PBXGroup;
 			children = (
 				69A882942A09362A009D182A /* DetailViewModel */,
 				69A882922A093609009D182A /* View */,
 			);
-			path = Detail;
+			path = DetailVIew;
 			sourceTree = "<group>";
 		};
 		69A882842A092E09009D182A /* ImageActionView */ = {
 			isa = PBXGroup;
 			children = (
+				69A81BB92A20D26100975056 /* View */,
 				6981DEC32A0FB17A0081D917 /* ViewModel */,
-				69A882822A092DA3009D182A /* ImageActionView.swift */,
-				6981DEAB2A0D145C0081D917 /* ImgaeActionRowView.swift */,
 			);
 			path = ImageActionView;
 			sourceTree = "<group>";

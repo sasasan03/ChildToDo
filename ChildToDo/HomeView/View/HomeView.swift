@@ -19,7 +19,6 @@ struct HomeView: View {
     var body: some View {
         NavigationSplitView(sidebar: {
             List(selection: $selectionTodo) {
-                let _ = print("🟥HomeView",homeViewModel.toDos[0].toDoDetails[0].isCheck)
                 ForEach(homeViewModel.toDos){ todo in
                         HomeRowView(
                             todo: todo

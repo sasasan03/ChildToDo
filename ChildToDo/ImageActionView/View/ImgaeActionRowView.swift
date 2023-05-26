@@ -32,8 +32,8 @@ struct ImgaeActionRowView: View {
                 Text(todoDetail.isCheck ?"よくできました" : todoDetail.name)
                     .font(.system(
                         size: geometry.size.width * 0.07,
-                        weight: .ultraLight,
-                        design: .serif
+                        weight: .medium,
+                        design: .rounded
                     ))
                     .foregroundColor(.black)
             }
