@@ -37,10 +37,12 @@ struct ImageActionView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        guard let tIndex = homeViewModel.toDos.firstIndex(where: { $0.id == todo.id }) else { return }
-                        homeViewModel.toDos[tIndex].toDoDetails.indices.forEach{
-                            homeViewModel.toDos[tIndex].toDoDetails[$0].isCheck = false
-                        }
+//                        guard let tIndex = homeViewModel.toDos.firstIndex(where: { $0.id == todo.id }) else { return }
+                        homeViewModel.todoDetailFalse(todo: todo)
+//                        guard let tIndex = homeViewModel.toDos.firstIndex(where: { $0.id == todo.id }) else { return }
+//                        homeViewModel.toDos[tIndex].toDoDetails.indices.forEach{
+//                            homeViewModel.toDos[tIndex].toDoDetails[$0].isCheck = false
+//                        }
                         
                         //-----------------------🔸
 //                        homeViewModel.toDos[tIndex].toDoDetails.forEach{ _ in
