@@ -1,4 +1,3 @@
-//
 //  ImageActionView.swift
 //  ChildToDo
 //
@@ -10,7 +9,6 @@ import SwiftUI
 struct ImageActionView: View {
     //Viewの生成時のみ
     @EnvironmentObject var homeViewModel: HomeViewModel
-    let imageActionViewModel = ImageActionViewModel()
     let todo: ToDo
     let todoDetail: ToDoDetail
     
@@ -36,6 +34,7 @@ struct ImageActionView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
+                    //リセットボタン
                     Button {
                         guard let tIndex = homeViewModel.toDos.firstIndex(where: { $0.id == todo.id }) else { return }
                         homeViewModel.toDos[tIndex].toDoDetails.forEach{ _ in
