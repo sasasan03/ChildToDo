@@ -64,7 +64,7 @@ struct HomeView: View {
                         .toolbarColorScheme(.dark)
                 } else {
                     ZStack{
-                        ToDoDetailView(todo: returnTodo, todoDetail: ToDoDetail(name: "", isCheck: false))
+                        ToDoDetailView(todo: returnTodo, todoDetail: ToDoDetail(name: "", isChecked: false))
                                 .navigationTitle(selectionTodo?.name ?? "やること編集")
                                 .toolbarBackground(Color.cyan,for: .navigationBar)
                                 .toolbarBackground(.visible, for: .navigationBar)
@@ -95,7 +95,7 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(todoDetail: ToDoDetail(name: "挨拶", isCheck: false), todo: ToDo(name: "朝の会", toDoDetails: [ToDoDetail(name: "予定", isCheck: false)]))
+        HomeView(todoDetail: ToDoDetail(name: "挨拶", isChecked: false), todo: ToDo(name: "朝の会", toDoDetails: [ToDoDetail(name: "予定", isChecked: false)]))
             .environmentObject(HomeViewModel())
     }
 }

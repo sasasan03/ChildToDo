@@ -14,7 +14,8 @@ struct ImageActionView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            List(homeViewModel.toDos.first(where: { $0.name == todo.name })?.toDoDetails ?? [] ) { todoD in
+           // List(homeViewModel.toDos.first(where: { $0.name == todo.name })?.toDoDetails ?? [] ) { todoD in
+            List(todo.toDoDetails){ todoD in
                 ImgaeActionRowView(todoDetail: todoD, todo: todo)
                     .background(todoD.isCheck ? Color.ligthOrange : Color.ligthBlue)
                     .cornerRadius(15)
@@ -34,12 +35,12 @@ struct ImageActionView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    //リセットボタン
+                    //MARK: - アニメーションのBoolをfalseにする。
                     Button {
                         guard let tIndex = homeViewModel.toDos.firstIndex(where: { $0.id == todo.id }) else { return }
                         homeViewModel.toDos[tIndex].toDoDetails.forEach{ _ in
                             (0..<homeViewModel.toDos[tIndex].toDoDetails.count).forEach{
-                                homeViewModel.toDos[tIndex].toDoDetails[$0].isCheck = false
+                                homeViewModel.toDos[tIndex].toDoDetails[$0].isChecked = false
                             }
                         }
                     } label: {

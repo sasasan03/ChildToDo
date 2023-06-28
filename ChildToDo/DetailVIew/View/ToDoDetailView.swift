@@ -81,6 +81,6 @@ extension Color {
 }
 struct ToDoDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        ToDoDetailView(todo: ToDo.init(name: "朝の会", toDoDetails: [ToDoDetail(name: "予定のかくにん", isCheck: false)]), todoDetail: ToDoDetail.init(name: "きゅうしょく", isCheck: false))
+        ToDoDetailView(todo: ToDo.init(name: "朝の会", toDoDetails: [ToDoDetail(name: "予定のかくにん", isChecked: false)]), todoDetail: ToDoDetail.init(name: "きゅうしょく", isChecked: false))
     }
 }

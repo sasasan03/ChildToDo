@@ -42,7 +42,7 @@ struct DetailRowView: View {
 
 struct DetailRowView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailRowView(todo: ToDo(name: "帰りの会", toDoDetails: [ToDoDetail(name: "荷物かくにん", isCheck: false)]), todoDetail: ToDoDetail.init(name: "greeting", isCheck: false)
+        DetailRowView(todo: ToDo(name: "帰りの会", toDoDetails: [ToDoDetail(name: "荷物かくにん", isChecked: false)]), todoDetail: ToDoDetail.init(name: "greeting", isChecked: false)
         )
     }
 }

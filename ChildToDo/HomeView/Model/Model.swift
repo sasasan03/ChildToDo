@@ -22,10 +22,10 @@ public func playSoundCorrect(){
 struct ToDoDetail: Identifiable, Hashable, Codable  {
     var id = UUID()
     var name: String
-    var isCheck: Bool
+    var isChecked: Bool
     
     func unchecked() -> ToDoDetail {
-        let todoDetail =  ToDoDetail(id: id, name: name, isCheck: false)
+        let todoDetail =  ToDoDetail(id: id, name: name, isChecked: false)
         return todoDetail
     }
 }

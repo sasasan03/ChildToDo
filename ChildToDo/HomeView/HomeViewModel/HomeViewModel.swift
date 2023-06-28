@@ -21,29 +21,45 @@ class HomeViewModel: ObservableObject {
     @Published var toDos = [
         ToDo(name: "朝の会",
              toDoDetails: [
-                ToDoDetail(name: "うた", isCheck: false),
-                ToDoDetail(name: "なまえよび", isCheck: false),
-                ToDoDetail(name: "きょうのよてい", isCheck: false),
-                ToDoDetail(name: "きょうのきゅうしょく", isCheck: false),
-                ToDoDetail(name: "かけごえ", isCheck: false)
+                ToDoDetail(name: "うた", isChecked: false),
+                ToDoDetail(name: "なまえよび", isChecked: false),
+                ToDoDetail(name: "きょうのよてい", isChecked: false),
+                ToDoDetail(name: "きょうのきゅうしょく", isChecked: false),
+                ToDoDetail(name: "かけごえ", isChecked: false)
              ]),
                         
         ToDo(name: "帰りの会",
              toDoDetails: [
-                ToDoDetail(name: "がんばったこと", isCheck: false),
-                ToDoDetail(name: "わすれもののかくにん", isCheck: false),
-                ToDoDetail(name: "かえりのかくにん", isCheck: false),
-                ToDoDetail(name: "かけごえ", isCheck: false)
+                ToDoDetail(name: "がんばったこと", isChecked: false),
+                ToDoDetail(name: "わすれもののかくにん", isChecked: false),
+                ToDoDetail(name: "かえりのかくにん", isChecked: false),
+                ToDoDetail(name: "かけごえ", isChecked: false)
              ])
-        
     ]
+    {
+        didSet {
+            print("🍔: HomeViewModelが持つ、toDos配列(todoDetailsが持つ、isCheckのtrueの数)")
+            //変更前の値を調べる。
+            oldValue.forEach{ todoItem in
+                //toDoDetailsの中身から、trueのものを検出して、格納する。
+                let count = todoItem.toDoDetails.filter({$0.isChecked}).count
+                print("\(todoItem.name)の変更前....", count)
+            }
+            //変更後の値を調べる。
+            toDos.forEach{ todoItem  in
+                let count = todoItem.toDoDetails.filter({$0.isChecked}).count
+                print("\(todoItem.name)の変更後....", count)
+            }
+            print("ーーーーーーーーーーーーーーーーーーーーーーーーーーーーー")
+        }
+    }
     //UserDefaultでデータをデバイスに保存する処理を追加していく。
     private let userDefaultManager = UserDefaultManager()
     
     func todoDetailFalse(todo: ToDo){
         guard let tIndex = toDos.firstIndex(where: { $0.id == todo.id }) else { return }
         for index in toDos[tIndex].toDoDetails.indices {
-            toDos[tIndex].toDoDetails[index].isCheck = false
+            toDos[tIndex].toDoDetails[index].isChecked = false
         }
 //        toDos[tIndex].toDoDetails.indices.forEach{
 //            toDos[tIndex].toDoDetails[$0].isCheck = false
@@ -54,7 +70,7 @@ class HomeViewModel: ObservableObject {
         toDos = toDos.map{ toDo -> ToDo in
             var details: [ToDoDetail] = []
             toDo.toDoDetails.forEach{ d in
-                var detail = ToDoDetail(name: d.name, isCheck: false)
+                var detail = ToDoDetail(name: d.name, isChecked: false)
                 detail.id = d.id
                 details.append(detail)
             }
@@ -66,19 +82,19 @@ class HomeViewModel: ObservableObject {
             try userDefaultManager.save(toDo: toDos)
         } catch {
             let error = error as? DataConvertError ?? DataConvertError.unknown
-            print("10101",error.title)
+            print(error.title)
         }
     }
     
     func dChange(todo: ToDo, todoDetail: ToDoDetail){
         guard let tIndex = toDos.firstIndex(where: { $0.id == todo.id }) else { return }
         guard let dIndex = todo.toDoDetails.firstIndex(where: { $0.id == todoDetail.id }) else { return }
-        toDos[tIndex].toDoDetails[dIndex].isCheck.toggle()
+        toDos[tIndex].toDoDetails[dIndex].isChecked.toggle()
         do {
             try userDefaultManager.save(toDo: toDos)
         } catch {
             let error = error as? DataConvertError ?? DataConvertError.unknown
-            print("1111",error.title)
+            print(error.title)
         }
     }
     
@@ -102,7 +118,7 @@ class HomeViewModel: ObservableObject {
             try userDefaultManager.save(toDo: toDos)
         } catch {
             let error = error as? DataConvertError ?? DataConvertError.unknown
-            print("2222",error.title)
+            print(error.title)
         }
     }
 
@@ -113,7 +129,7 @@ class HomeViewModel: ObservableObject {
             try userDefaultManager.save(toDo: toDos)
         } catch {
             let error = error as? DataConvertError ?? DataConvertError.unknown
-            print("3333",error.title)
+            print(error.title)
         }
     }
     //ToDoDetailの要素を削除するために使用する🟥エラーを握りつぶしている
@@ -124,7 +140,7 @@ class HomeViewModel: ObservableObject {
             try userDefaultManager.save(toDo: toDos)
         } catch {
             let error = error as? DataConvertError ?? DataConvertError.unknown
-            print("44444",error.title)
+            print(error.title)
         }
     }
     
@@ -135,7 +151,7 @@ class HomeViewModel: ObservableObject {
             try userDefaultManager.save(toDo: toDos)
         } catch {
             let error = error as? DataConvertError ?? DataConvertError.unknown
-            print("55555",error.title)
+            print(error.title)
         }
     }
     
@@ -143,10 +159,15 @@ class HomeViewModel: ObservableObject {
     func onApper(){
         do {
             let savedTodos = try userDefaultManager.load()
+            savedTodos.forEach{ todoItem in
+                let count = todoItem.toDoDetails.filter({$0.isChecked}).count
+                print("🥪: HomeViewModelのonApperメソッドで書き換えられたtoDos配列(todoDetailsが持つ、isCheckのtrueの数)", count)
+                print("〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜")
+            }
             toDos = savedTodos
         } catch {
             let  error = error as? DataConvertError ?? DataConvertError.unknown
-            print("66666",error.title)
+            print(error.title)
         }
     }
     
@@ -160,7 +181,7 @@ class HomeViewModel: ObservableObject {
             try userDefaultManager.save(toDo: toDos )
         } catch {
             let error = error as? DataConvertError ?? DataConvertError.unknown
-            print("77777",error.title)
+            print(error.title)
         }
         isAddView = false
     }
@@ -181,14 +202,14 @@ class HomeViewModel: ObservableObject {
             guard text != "" else {
                 throw NonTextError.nonTodoDetailText
             }
-            updatedToDo.toDoDetails.append(ToDoDetail(name: text, isCheck: false))
+            updatedToDo.toDoDetails.append(ToDoDetail(name: text, isChecked: false))
             toDos[index] = updatedToDo
         }
         do {
             try userDefaultManager.save(toDo: toDos)
         } catch {
             let error = error as? DataConvertError ?? DataConvertError.unknown
-            print("88888",error.title)
+            print(error.title)
         }
     }
     
@@ -213,7 +234,7 @@ class HomeViewModel: ObservableObject {
             try userDefaultManager.save(toDo: toDos)
         } catch {
             let error = error as? DataConvertError ?? DataConvertError.unknown
-            print("99999",error.title)
+            print(error.title)
         }
     }
     
@@ -228,7 +249,7 @@ class HomeViewModel: ObservableObject {
             try userDefaultManager.save(toDo: toDos)
         } catch {
             let error = error as? DataConvertError ?? DataConvertError.unknown
-            print("$$$$$$$",error.title)
+            print(error.title)
         }
     }
 }
