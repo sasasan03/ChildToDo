@@ -7,14 +7,8 @@
 
 import Foundation
 
-enum LoadingState {
-    case loading
-    case answer
-}
-
 class HomeViewModel: ObservableObject {
-    
-    @Published var state: LoadingState = .loading
+
     @Published var isAddView = false
     @Published var isShowTodoDetailView = false
     
@@ -161,7 +155,7 @@ class HomeViewModel: ObservableObject {
             let savedTodos = try userDefaultManager.load()
             savedTodos.forEach{ todoItem in
                 let count = todoItem.toDoDetails.filter({$0.isChecked}).count
-                print("🥪: HomeViewModelのonApperメソッドで書き換えられたtoDos配列(todoDetailsが持つ、isCheckのtrueの数)", count)
+                print("🥪: HomeViewModelのonApperメソッドで書き換えられたtoDos配列(todoDetailsが持つ、isCheckのtrueの数、)", count)
                 print("〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜")
             }
             toDos = savedTodos

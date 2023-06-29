@@ -10,12 +10,12 @@ struct ImageActionView: View {
     //Viewの生成時のみ
     @EnvironmentObject var homeViewModel: HomeViewModel
     let todo: ToDo
-    let todoDetail: ToDoDetail
+    let todoDe: ToDoDetail
     
     var body: some View {
         GeometryReader { geometry in
-           // List(homeViewModel.toDos.first(where: { $0.name == todo.name })?.toDoDetails ?? [] ) { todoD in
-            List(todo.toDoDetails){ todoD in
+            List(homeViewModel.toDos.first(where: { $0.name == todo.name })?.toDoDetails ?? [] ) { todoD in
+           // List(todo.toDoDetails){ todoD in
                 ImgaeActionRowView(todoDetail: todoD, todo: todo)
                     .background(todoD.isCheck ? Color.ligthOrange : Color.ligthBlue)
                     .cornerRadius(15)
