@@ -44,30 +44,25 @@ class HomeViewModel: ObservableObject {
                 let count = todoItem.toDoDetails.filter({$0.isChecked}).count
                 print("\(todoItem.name)の変更後....", count)
             }
-//            toDos.forEach{ todoItem in
-//                let newValue = todoItem.toDoDetails
-//            }
-            
+            do {
+                try userDefaultManager.save(toDo: toDos)
+            } catch {
+                let error = error as? DataConvertError ?? DataConvertError.unknown
+                print(error.title)
+            }
             print("ーーーーーーーーーーーーーーーーーーーーーーーーーーーーー")
         }
     }
     //UserDefaultでデータをデバイスに保存する処理を追加していく。
     private let userDefaultManager = UserDefaultManager()
-    
+    //ImageViewアニメーションを全てoffにするメソッド。
     func todoDetailFalse(todo: ToDo){
         guard let tIndex = toDos.firstIndex(where: { $0.id == todo.id }) else { return }
         toDos[tIndex].toDoDetails.forEach{ _ in
             (0..<toDos[tIndex].toDoDetails.count).forEach{
                 toDos[tIndex].toDoDetails[$0].isChecked = false
             }
-        }
-        do {
-            try userDefaultManager.save(toDo: toDos)
-        } catch {
-            let error = error as? DataConvertError ?? DataConvertError.unknown
-            print(error.title)
-        }
-        
+        } 
     }
     
     func detailBoolFalse(){
@@ -82,24 +77,12 @@ class HomeViewModel: ObservableObject {
             newToDo.id = toDo.id
             return toDo
         }
-        do {
-            try userDefaultManager.save(toDo: toDos)
-        } catch {
-            let error = error as? DataConvertError ?? DataConvertError.unknown
-            print(error.title)
-        }
     }
     
     func dChange(todo: ToDo, todoDetail: ToDoDetail){
         guard let tIndex = toDos.firstIndex(where: { $0.id == todo.id }) else { return }
         guard let dIndex = todo.toDoDetails.firstIndex(where: { $0.id == todoDetail.id }) else { return }
         toDos[tIndex].toDoDetails[dIndex].isChecked.toggle()
-        do {
-            try userDefaultManager.save(toDo: toDos)
-        } catch {
-            let error = error as? DataConvertError ?? DataConvertError.unknown
-            print(error.title)
-        }
     }
     
     //HomeViewでSidebarから渡されてきたTodoが持っているTodoDetailのIndexを取得するために使用
@@ -118,45 +101,22 @@ class HomeViewModel: ObservableObject {
     func moveTodoDetail(indexSet: IndexSet, index: Int, todo: ToDo){
         let todoIndex = todoIndex(todo: todo)
         self.toDos[todoIndex].toDoDetails.move(fromOffsets: indexSet, toOffset: index)
-        do {
-            try userDefaultManager.save(toDo: toDos)
-        } catch {
-            let error = error as? DataConvertError ?? DataConvertError.unknown
-            print(error.title)
-        }
+
     }
 
     //toDosの場所を変更させるために使用する
     func moveTodo(indexSet: IndexSet, index: Int){
         self.toDos.move(fromOffsets: indexSet, toOffset: index)
-        do {
-            try userDefaultManager.save(toDo: toDos)
-        } catch {
-            let error = error as? DataConvertError ?? DataConvertError.unknown
-            print(error.title)
-        }
     }
     //ToDoDetailの要素を削除するために使用する🟥エラーを握りつぶしている
     func deleteTodoDetail(todo: ToDo, todoDetail: ToDoDetail, offset: IndexSet)  {
         guard let todoIndex = toDos.firstIndex(where: { $0.id == todo.id }) else { return }
         toDos[todoIndex].toDoDetails.remove(atOffsets: offset)
-        do {
-            try userDefaultManager.save(toDo: toDos)
-        } catch {
-            let error = error as? DataConvertError ?? DataConvertError.unknown
-            print(error.title)
-        }
     }
     
     //toDosの要素を削除するために使用する
     func deleteTodo(offset: IndexSet){
         self.toDos.remove(atOffsets: offset)
-        do {
-            try userDefaultManager.save(toDo: toDos)
-        } catch {
-            let error = error as? DataConvertError ?? DataConvertError.unknown
-            print(error.title)
-        }
     }
     
     //アプリ起動時に保存されていた配列のデータを呼ぶ
@@ -181,12 +141,6 @@ class HomeViewModel: ObservableObject {
             throw NonTextError.nonTodoText
         }
         self.toDos.append(ToDo(name: text, toDoDetails: []))
-        do {
-            try userDefaultManager.save(toDo: toDos )
-        } catch {
-            let error = error as? DataConvertError ?? DataConvertError.unknown
-            print(error.title)
-        }
         isAddView = false
     }
     
@@ -209,12 +163,6 @@ class HomeViewModel: ObservableObject {
             updatedToDo.toDoDetails.append(ToDoDetail(name: text, isChecked: false))
             toDos[index] = updatedToDo
         }
-        do {
-            try userDefaultManager.save(toDo: toDos)
-        } catch {
-            let error = error as? DataConvertError ?? DataConvertError.unknown
-            print(error.title)
-        }
     }
     
     //detailViewへ渡させたTODO情報を配列の中から検索し、一致したTODOの情報を返すために使用
@@ -234,12 +182,6 @@ class HomeViewModel: ObservableObject {
             throw NonTextError.nonTodoDetailText
         }
         toDos[index].name = todoName
-        do {
-            try userDefaultManager.save(toDo: toDos)
-        } catch {
-            let error = error as? DataConvertError ?? DataConvertError.unknown
-            print(error.title)
-        }
     }
     
     func todoDetailSave(newTodoDetail: ToDoDetail, todo: ToDo, newName: String) throws {
@@ -249,11 +191,5 @@ class HomeViewModel: ObservableObject {
             throw NonTextError.nonTodoDetailText
         }
         toDos[index].toDoDetails[dIndex].name = newName
-        do {
-            try userDefaultManager.save(toDo: toDos)
-        } catch {
-            let error = error as? DataConvertError ?? DataConvertError.unknown
-            print(error.title)
-        }
     }
 }
