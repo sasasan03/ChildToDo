@@ -11,7 +11,6 @@ struct ImgaeActionRowView: View {
     
     @EnvironmentObject var homeViewModel: HomeViewModel
     let todoDetail: ToDoDetail
-    let todo: ToDo
     
     var body: some View {
         GeometryReader { geometry in
@@ -44,6 +43,6 @@ struct ImgaeActionRowView: View {
 
 struct ImgaeActionRowView_Previews: PreviewProvider {
     static var previews: some View {
-        ImgaeActionRowView(todoDetail: ToDoDetail(name: "挨拶", isChecked: false), todo: ToDo(name: "帰りの会", toDoDetails: [ToDoDetail(name: "歩く", isChecked: false)]))
+        ImgaeActionRowView(todoDetail: ToDoDetail(name: "挨拶", isChecked: false))
     }
 }
