@@ -44,22 +44,30 @@ class HomeViewModel: ObservableObject {
                 let count = todoItem.toDoDetails.filter({$0.isChecked}).count
                 print("\(todoItem.name)の変更後....", count)
             }
+//            toDos.forEach{ todoItem in
+//                let newValue = todoItem.toDoDetails
+//            }
+            
             print("ーーーーーーーーーーーーーーーーーーーーーーーーーーーーー")
         }
     }
     //UserDefaultでデータをデバイスに保存する処理を追加していく。
     private let userDefaultManager = UserDefaultManager()
     
-    
-    
     func todoDetailFalse(todo: ToDo){
         guard let tIndex = toDos.firstIndex(where: { $0.id == todo.id }) else { return }
-        for index in toDos[tIndex].toDoDetails.indices {
-            toDos[tIndex].toDoDetails[index].isChecked = false
+        toDos[tIndex].toDoDetails.forEach{ _ in
+            (0..<toDos[tIndex].toDoDetails.count).forEach{
+                toDos[tIndex].toDoDetails[$0].isChecked = false
+            }
         }
-//        toDos[tIndex].toDoDetails.indices.forEach{
-//            toDos[tIndex].toDoDetails[$0].isCheck = false
-//        }
+        do {
+            try userDefaultManager.save(toDo: toDos)
+        } catch {
+            let error = error as? DataConvertError ?? DataConvertError.unknown
+            print(error.title)
+        }
+        
     }
     
     func detailBoolFalse(){

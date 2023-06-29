@@ -31,16 +31,11 @@ struct ImageActionView: View {
                         homeViewModel.dChange(todo: todo, todoDetail: todoD)
                     }
             }
+            //MARK: - 画面右上リセットボタン
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    //MARK: - アニメーションのBoolをfalseにする。
                     Button {
-                        guard let tIndex = homeViewModel.toDos.firstIndex(where: { $0.id == todo.id }) else { return }
-                        homeViewModel.toDos[tIndex].toDoDetails.forEach{ _ in
-                            (0..<homeViewModel.toDos[tIndex].toDoDetails.count).forEach{
-                                homeViewModel.toDos[tIndex].toDoDetails[$0].isChecked = false
-                            }
-                        }
+                        homeViewModel.todoDetailFalse(todo: todo)
                     } label: {
                         Image(systemName: "arrow.clockwise")
                     }

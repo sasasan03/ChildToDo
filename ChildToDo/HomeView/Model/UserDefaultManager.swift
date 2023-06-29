@@ -9,7 +9,7 @@ import Foundation
 
 class UserDefaultManager {
     private let userDefault = UserDefaults.standard
-    private var key = "Trainer_key"
+    private var key = "key"
     
     func save(toDo: [ToDo]) throws {
         do {
@@ -32,8 +32,8 @@ class UserDefaultManager {
             throw DataConvertError.dataGetError
         }
         do {
-            let trainers = try decode(json: json)
-            return trainers
+            let todos = try decode(json: json)
+            return todos
         } catch {
             switch error as? DataConvertError ?? DataConvertError.unknown {
             case .decodingError:
@@ -51,8 +51,8 @@ class UserDefaultManager {
             guard let data = json.data(using: .utf8) else {
                 throw DataConvertError.decodingError
             }
-            let trainers = try JSONDecoder().decode([ToDo].self, from: data)
-            return trainers
+            let todos = try JSONDecoder().decode([ToDo].self, from: data)
+            return todos
         } catch {
             throw DataConvertError.decodingError
         }
