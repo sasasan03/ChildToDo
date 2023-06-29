@@ -50,6 +50,8 @@ class HomeViewModel: ObservableObject {
     //UserDefaultでデータをデバイスに保存する処理を追加していく。
     private let userDefaultManager = UserDefaultManager()
     
+    
+    
     func todoDetailFalse(todo: ToDo){
         guard let tIndex = toDos.firstIndex(where: { $0.id == todo.id }) else { return }
         for index in toDos[tIndex].toDoDetails.indices {

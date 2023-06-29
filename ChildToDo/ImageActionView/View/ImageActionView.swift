@@ -10,24 +10,23 @@ struct ImageActionView: View {
     //Viewの生成時のみ
     @EnvironmentObject var homeViewModel: HomeViewModel
     let todo: ToDo
-    let todoDe: ToDoDetail
+//    let todoDetail: ToDoDetail
     
     var body: some View {
         GeometryReader { geometry in
-            List(homeViewModel.toDos.first(where: { $0.name == todo.name })?.toDoDetails ?? [] ) { todoD in
-           // List(todo.toDoDetails){ todoD in
+            List(todo.toDoDetails) { todoD in
                 ImgaeActionRowView(todoDetail: todoD, todo: todo)
-                    .background(todoD.isCheck ? Color.ligthOrange : Color.ligthBlue)
+                    .background(todoD.isChecked ? Color.ligthOrange : Color.ligthBlue)
                     .cornerRadius(15)
                     .frame(height: geometry.size.height * 0.1)
                     .rotationEffect(Angle(degrees
-                                          : todoD.isCheck
+                                          : todoD.isChecked
                                           ? 360 : 0
                                          )
                     )
-                    .animation(.default,value:todoD.isCheck)
+                    .animation(.default,value:todoD.isChecked)
                     .onTapGesture(count: 2) {
-                        if !todoD.isCheck {
+                        if !todoD.isChecked {
                             playSoundCorrect()
                         }
                         homeViewModel.dChange(todo: todo, todoDetail: todoD)

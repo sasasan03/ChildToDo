@@ -35,7 +35,7 @@ struct ToDoDetailView: View {
                 .scrollContentBackground(.hidden)
                 .background(Color.cyan)
                 NavigationLink {
-                    ImageActionView(todo: todo, todoDetail: todoDetail)
+                    ImageActionView(todo: todo)
                 } label: {
                     Text("やってみよう")
                         .font(.system(
