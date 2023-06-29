@@ -12,9 +12,7 @@ struct HomeView: View {
     @EnvironmentObject var homeViewModel: HomeViewModel
     @Environment(\.dismiss) var dismiss
     @State private var selectionTodo: ToDo?
-    @State private var isEdit = false
     let todoDetail: ToDoDetail
-    let todo: ToDo
     
     var body: some View {
         NavigationSplitView(sidebar: {
@@ -95,7 +93,7 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(todoDetail: ToDoDetail(name: "挨拶", isChecked: false), todo: ToDo(name: "朝の会", toDoDetails: [ToDoDetail(name: "予定", isChecked: false)]))
+        HomeView(todoDetail: ToDoDetail(name: "挨拶", isChecked: false))
             .environmentObject(HomeViewModel())
     }
 }

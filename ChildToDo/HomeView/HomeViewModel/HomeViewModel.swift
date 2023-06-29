@@ -9,6 +9,7 @@ import Foundation
 
 class HomeViewModel: ObservableObject {
 
+    @Published var isEddit = false
     @Published var isAddView = false
     @Published var isShowTodoDetailView = false
     
@@ -32,17 +33,17 @@ class HomeViewModel: ObservableObject {
     ]
     {
         didSet {
-            print("🍔: HomeViewModelが持つ、toDos配列(todoDetailsが持つ、isCheckのtrueの数)")
+           // print("🍔: HomeViewModelが持つ、toDos配列(todoDetailsが持つ、isCheckのtrueの数)")
             //変更前の値を調べる。
             oldValue.forEach{ todoItem in
                 //toDoDetailsの中身から、trueのものを検出して、格納する。
                 let count = todoItem.toDoDetails.filter({$0.isChecked}).count
-                print("\(todoItem.name)の変更前....", count)
+               // print("\(todoItem.name)の変更前....", count)
             }
             //変更後の値を調べる。
             toDos.forEach{ todoItem  in
                 let count = todoItem.toDoDetails.filter({$0.isChecked}).count
-                print("\(todoItem.name)の変更後....", count)
+               // print("\(todoItem.name)の変更後....", count)
             }
             do {
                 try userDefaultManager.save(toDo: toDos)
@@ -50,7 +51,7 @@ class HomeViewModel: ObservableObject {
                 let error = error as? DataConvertError ?? DataConvertError.unknown
                 print(error.title)
             }
-            print("ーーーーーーーーーーーーーーーーーーーーーーーーーーーーー")
+           // print("ーーーーーーーーーーーーーーーーーーーーーーーーーーーーー")
         }
     }
     //UserDefaultでデータをデバイスに保存する処理を追加していく。
@@ -62,7 +63,11 @@ class HomeViewModel: ObservableObject {
             (0..<toDos[tIndex].toDoDetails.count).forEach{
                 toDos[tIndex].toDoDetails[$0].isChecked = false
             }
-        } 
+        }
+    }
+    
+    func isEdditTrue(){
+        isEddit = true
     }
     
     func detailBoolFalse(){
@@ -125,8 +130,8 @@ class HomeViewModel: ObservableObject {
             let savedTodos = try userDefaultManager.load()
             savedTodos.forEach{ todoItem in
                 let count = todoItem.toDoDetails.filter({$0.isChecked}).count
-                print("🥪: HomeViewModelのonApperメソッドで書き換えられたtoDos配列(todoDetailsが持つ、isCheckのtrueの数、)", count)
-                print("〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜")
+              //  print("🥪: HomeViewModelのonApperメソッドで書き換えられたtoDos配列(todoDetailsが持つ、isCheckのtrueの数、)", count)
+              //  print("〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜")
             }
             toDos = savedTodos
         } catch {

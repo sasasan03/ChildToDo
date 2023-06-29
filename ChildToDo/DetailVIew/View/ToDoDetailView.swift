@@ -59,12 +59,13 @@ struct ToDoDetailView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
                     isEdit = true
+                    //homeViewModel.isEdditTrue()
                 } label: {
                     Image(systemName: "plus")
                 }
             }
         }
-        .sheet(isPresented: $isEdit) {
+        .sheet(isPresented: $isEdit){//$homeViewModel.isEddit) {
             ToDoAddView(
                 save: { text in
                    try homeViewModel.addTodoDetail(text: text, todo: todo)

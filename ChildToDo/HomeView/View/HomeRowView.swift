@@ -12,13 +12,12 @@ struct HomeRowView: View {
     @EnvironmentObject var homeViewModel: HomeViewModel
     @Environment(\.dismiss) var dismiss
     let todo: ToDo
-    @State private var isEddit = false
     
     var body: some View {
         NavigationStack{
             HStack{
                 Button {
-                    isEddit = true
+                    homeViewModel.isEdditTrue()
                 } label: {
                     Image(systemName: "info.circle.fill")
                         .foregroundColor(.blue)
@@ -26,7 +25,8 @@ struct HomeRowView: View {
                 .buttonStyle(BorderlessButtonStyle())
                 NavigationLink(todo.name,value: todo)
             }
-            .sheet(isPresented: $isEddit){
+            .sheet(isPresented: $homeViewModel.isEddit){
+                
                 ToDoEditView(
                     todoName: todo.name,
                     edit: { todoName in

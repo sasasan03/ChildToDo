@@ -6,18 +6,6 @@
 //
 
 import Foundation
-import SwiftUI
-import AVFoundation
-
-//------------------------Model??ViewModel??
-let crappingHands = try! AVAudioPlayer(data: NSDataAsset(name: "clappingHands")!.data)
-
-public func playSoundCorrect(){
-    crappingHands.stop()
-    crappingHands.currentTime = 0.0
-    crappingHands.play()
-}
-//------------------------
 
 struct ToDoDetail: Identifiable, Hashable, Codable  {
     var id = UUID()
