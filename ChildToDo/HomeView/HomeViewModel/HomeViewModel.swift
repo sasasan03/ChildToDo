@@ -9,7 +9,7 @@ import Foundation
 
 class HomeViewModel: ObservableObject {
 
-    @Published var isEddit = false
+    @Published var isEdditHomeRowView = false
     @Published var isAddView = false
     @Published var isShowTodoDetailView = false
     
@@ -67,7 +67,7 @@ class HomeViewModel: ObservableObject {
     }
     
     func isEdditTrue(){
-        isEddit = true
+        isEdditHomeRowView = true
     }
     
     func detailBoolFalse(){
