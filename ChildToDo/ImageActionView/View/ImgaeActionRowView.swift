@@ -16,7 +16,7 @@ struct ImgaeActionRowView: View {
         GeometryReader { geometry in
             HStack{
                 if todoDetail.isChecked{
-                    GoodView()
+                    LottieView(resourceType: .good)
                         .frame(
                             width: geometry.size.width * 0.2,
                             height: geometry.size.height
