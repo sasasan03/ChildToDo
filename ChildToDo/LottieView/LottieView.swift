@@ -8,6 +8,7 @@
 import SwiftUI
 import Lottie
 
+//MARK: - HomeViewのGIFとTodoDetailで使われているGoodのGIF
 enum LottieFileType: String {
     case good = "good"
     case loading = "elephant"

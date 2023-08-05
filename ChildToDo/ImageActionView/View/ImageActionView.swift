@@ -11,6 +11,7 @@ struct ImageActionView: View {
     @EnvironmentObject var homeViewModel: HomeViewModel
     let todo: ToDo
     
+    //
     var body: some View {
         GeometryReader { geometry in
             List(todo.toDoDetails) { todoD in

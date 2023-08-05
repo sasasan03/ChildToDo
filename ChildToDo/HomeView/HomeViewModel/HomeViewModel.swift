@@ -95,19 +95,20 @@ class HomeViewModel: ObservableObject {
         guard  let toDoDetailIndex = todo.toDoDetails.firstIndex(where: { $0.id == todo.id }) else { return 0 }
         return toDoDetailIndex
     }
-
-    //moveTodoDetailメソッドで内で、渡されてきたToDoのIntを検索するために使用
-    func todoIndex(todo: ToDo) -> Int {
-        guard let todoIndex = toDos.firstIndex(where: { $0.id == todo.id }) else { return 0 }
-        //guard let index = toDos.firstIndex(where: { $0.id == todo.id }) else { return }
-        return todoIndex
-    }
+//🍔DetailViewModelへ
+//    //moveTodoDetailメソッドで内で、渡されてきたToDoのIntを検索するために使用
+//    func todoIndex(todo: ToDo) -> Int {
+//        guard let todoIndex = toDos.firstIndex(where: { $0.id == todo.id }) else { return 0 }
+//        //guard let index = toDos.firstIndex(where: { $0.id == todo.id }) else { return }
+//        return todoIndex
+//    }
     //todoDetailの場所を変更させるために使用する
-    func moveTodoDetail(indexSet: IndexSet, index: Int, todo: ToDo){
-        let todoIndex = todoIndex(todo: todo)
-        self.toDos[todoIndex].toDoDetails.move(fromOffsets: indexSet, toOffset: index)
-
-    }
+//    func moveTodoDetail(indexSet: IndexSet, index: Int, todo: ToDo){
+//        let todoIndex = todoIndex(todo: todo)
+//        self.toDos[todoIndex].toDoDetails.move(fromOffsets: indexSet, toOffset: index)
+//
+//    }
+//🍔
 
     //toDosの場所を変更させるために使用する
     func moveTodo(indexSet: IndexSet, index: Int){
