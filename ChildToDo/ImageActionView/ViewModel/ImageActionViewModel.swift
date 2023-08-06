@@ -10,7 +10,20 @@ import SwiftUI
 import AVFoundation
 
 
-class ImageActionViewModel {
+class ImageActionViewModel: ObservableObject {
+    
+    @Published var todo: ToDo
+    @Published var todoDetail: ToDoDetail
+    init(todo: ToDo, todoDetail: ToDoDetail) {
+        self.todo = todo
+        self.todoDetail = todoDetail
+    }
+    
+    func dChange(todo: ToDo, todoDetail: ToDoDetail){
+        guard let tIndex = toDos.firstIndex(where: { $0.id == todo.id }) else { return }
+        guard let dIndex = todo.toDoDetails.firstIndex(where: { $0.id == todoDetail.id }) else { return }
+        toDos[tIndex].toDoDetails[dIndex].isChecked.toggle()
+    }
     
     private let crappingHands = try! AVAudioPlayer(data: NSDataAsset(name: "clappingHands")!.data)
     

@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct ToDoDetailView: View {
-    
-    @Environment(\.dismiss) var dismiss
+    //MARK: できたら使いたくない
     @EnvironmentObject var homeViewModel: HomeViewModel
-    @EnvironmentObject var detailViewModel: DetailViewModel
-    @State var isEdit = false
     let todo: ToDo
     let todoDetail: ToDoDetail
+    
+    @EnvironmentObject var detailViewModel: DetailViewModel
+    
+    @State var isEdit = false
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         GeometryReader { geometry in
@@ -24,8 +26,8 @@ struct ToDoDetailView: View {
                         DetailRowView(todo: todo,
                                       todoDetail: todoDetail)
                     }
-                    .onMove { sourceIndices, destinationIndx in
-                        homeViewModel.moveTodoDetail(indexSet: sourceIndices, index: destinationIndx, todo: todo)
+                    .onMove { sourceIndices, destinationIndex in
+                        homeViewModel.moveTodoDetail(indexSet: sourceIndices, index: destinationIndex, todo: todo)
                     }
                     .onDelete(perform: { indexSet in
                         homeViewModel.deleteTodoDetail(todo: todo, todoDetail: todoDetail, offset: indexSet)
@@ -76,10 +78,6 @@ struct ToDoDetailView: View {
     }
 }
 
-//extension Color {
-//    static let ligthBlue = Color(red: 0.8, green: 1.0, blue: 1.0)
-//    static let ligthOrange = Color(red: 1.0, green: 0.6, blue: 0.4)
-//}
 
 struct ToDoDetailView_Previews: PreviewProvider {
     static var previews: some View {
