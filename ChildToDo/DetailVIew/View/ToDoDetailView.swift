@@ -76,10 +76,11 @@ struct ToDoDetailView: View {
     }
 }
 
-extension Color {
-    static let ligthBlue = Color(red: 0.8, green: 1.0, blue: 1.0)
-    static let ligthOrange = Color(red: 1.0, green: 0.6, blue: 0.4)
-}
+//extension Color {
+//    static let ligthBlue = Color(red: 0.8, green: 1.0, blue: 1.0)
+//    static let ligthOrange = Color(red: 1.0, green: 0.6, blue: 0.4)
+//}
+
 struct ToDoDetailView_Previews: PreviewProvider {
     static var previews: some View {
         ToDoDetailView(todo: ToDo.init(name: "朝の会", toDoDetails: [ToDoDetail(name: "予定のかくにん", isChecked: false)]), todoDetail: ToDoDetail.init(name: "きゅうしょく", isChecked: false))

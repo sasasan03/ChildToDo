@@ -16,7 +16,7 @@ struct ImageActionView: View {
         GeometryReader { geometry in
             List(todo.toDoDetails) { todoD in
                 ImgaeActionRowView(todoDetail: todoD)
-                    .background(todoD.isChecked ? Color.ligthOrange : Color.ligthBlue)
+                    .background(todoD.isChecked ? Color.lightOrange : Color.lightBlue)
                     .cornerRadius(15)
                     .frame(height: geometry.size.height * 0.1)
                     .rotationEffect(Angle(degrees

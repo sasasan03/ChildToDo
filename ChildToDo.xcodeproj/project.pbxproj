@@ -33,6 +33,7 @@
 		69A882902A0935E1009D182A /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A8828F2A0935E1009D182A /* HomeViewModel.swift */; };
 		69A882962A093643009D182A /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A882952A093643009D182A /* DetailViewModel.swift */; };
 		69BD0AE52A4D9B6A00DD7041 /* AVFoundationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BD0AE42A4D9B6A00DD7041 /* AVFoundationData.swift */; };
+		69D8A2A52A7F74D5007C884C /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D8A2A42A7F74D5007C884C /* Color+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		69A8828F2A0935E1009D182A /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		69A882952A093643009D182A /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		69BD0AE42A4D9B6A00DD7041 /* AVFoundationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVFoundationData.swift; sourceTree = "<group>"; };
+		69D8A2A42A7F74D5007C884C /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				69A8824F2A092B79009D182A /* ChildToDoApp.swift */,
+				69D8A2A32A7F74B7007C884C /* Extention */,
 				6981DEB42A0F77410081D917 /* LottieView */,
 				69A5C4EF2A0A832800C8FE70 /* Public */,
 				69A882842A092E09009D182A /* ImageActionView */,
@@ -285,6 +288,14 @@
 				69A882952A093643009D182A /* DetailViewModel.swift */,
 			);
 			path = DetailViewModel;
+			sourceTree = "<group>";
+		};
+		69D8A2A32A7F74B7007C884C /* Extention */ = {
+			isa = PBXGroup;
+			children = (
+				69D8A2A42A7F74D5007C884C /* Color+.swift */,
+			);
+			path = Extention;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -437,6 +448,7 @@
 				69BD0AE52A4D9B6A00DD7041 /* AVFoundationData.swift in Sources */,
 				6981DEC52A0FB1A40081D917 /* ImageActionViewModel.swift in Sources */,
 				69A8827D2A092CCC009D182A /* ToDoDetailView.swift in Sources */,
+				69D8A2A52A7F74D5007C884C /* Color+.swift in Sources */,
 				6981DEC02A0F88A10081D917 /* LottieView.swift in Sources */,
 				69A8828D2A092F8A009D182A /* UserDefaultManager.swift in Sources */,
 				69A5C4EE2A0A828800C8FE70 /* DetailRowView.swift in Sources */,
