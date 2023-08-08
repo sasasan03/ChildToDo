@@ -9,24 +9,31 @@ import Foundation
 
 class DetailViewModel: ObservableObject {
     
+    @Published var sharedHomeViewModel: HomeViewModel
     @Published var todo: ToDo
     @Published var todoDetail: ToDoDetail
     @Published var isShowAddView = false
-  //🤢  @Published var isEdditHomeRowView = false
-    init(todo: ToDo, todoDetail: ToDoDetail, isShowAddView: Bool = false) {
+    
+    var toDos: [ToDo]{
+        sharedHomeViewModel.toDos
+    }
+    
+    init(sharedHomeViewModel: HomeViewModel, todo: ToDo, todoDetail: ToDoDetail, isShowAddView: Bool = false) {
+        self.sharedHomeViewModel = sharedHomeViewModel
         self.todo = todo
         self.todoDetail = todoDetail
         self.isShowAddView = isShowAddView
     }
     
+  //🤢  @Published var isEdditHomeRowView = false
     
     func deleteTodoDetail(todo: ToDo, todoDetail: ToDoDetail, offset: IndexSet)  {
-        guard let todoIndex = toDos.firstIndex(where: { $0.id == todo.id }) else { return }
-        toDos[todoIndex].toDoDetails.remove(atOffsets: offset)
+        guard let todoIndex = sharedHomeViewModel.toDos.firstIndex(where: { $0.id == todo.id }) else { return }
+        sharedHomeViewModel.toDos[todoIndex].toDoDetails.remove(atOffsets: offset)
     }
     
     func detailBoolFalse(){
-        toDos = toDos.map{ toDo -> ToDo in
+        sharedHomeViewModel.toDos = sharedHomeViewModel.toDos.map{ toDo -> ToDo in
             var details: [ToDoDetail] = []
             toDo.toDoDetails.forEach{ d in
                 var detail = ToDoDetail(name: d.name, isChecked: false)
@@ -74,7 +81,7 @@ class DetailViewModel: ObservableObject {
                 throw NonTextError.nonTodoDetailText
             }
             updatedToDo.toDoDetails.append(ToDoDetail(name: text, isChecked: false))
-            toDos[index] = updatedToDo
+            sharedHomeViewModel.toDos[index] = updatedToDo
         }
     }
     
@@ -84,6 +91,6 @@ class DetailViewModel: ObservableObject {
         guard newName != "" else {
             throw NonTextError.nonTodoDetailText
         }
-        toDos[index].toDoDetails[dIndex].name = newName
+        sharedHomeViewModel.toDos[index].toDoDetails[dIndex].name = newName
     }
 }

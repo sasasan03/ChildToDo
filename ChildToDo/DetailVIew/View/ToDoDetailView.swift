@@ -30,7 +30,7 @@ struct ToDoDetailView: View {
                         homeViewModel.moveTodoDetail(indexSet: sourceIndices, index: destinationIndex, todo: todo)
                     }
                     .onDelete(perform: { indexSet in
-                        homeViewModel.deleteTodoDetail(todo: todo, todoDetail: todoDetail, offset: indexSet)
+                        detailViewModel.deleteTodoDetail(todo: todo, todoDetail: todoDetail, offset: indexSet)
                     }
                     )
                 }
