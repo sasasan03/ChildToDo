@@ -238,8 +238,8 @@
 		69A882842A092E09009D182A /* ImageActionView */ = {
 			isa = PBXGroup;
 			children = (
-				69A81BB92A20D26100975056 /* View */,
 				6981DEC32A0FB17A0081D917 /* ViewModel */,
+				69A81BB92A20D26100975056 /* View */,
 			);
 			path = ImageActionView;
 			sourceTree = "<group>";

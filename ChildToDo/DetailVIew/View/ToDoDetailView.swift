@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct ToDoDetailView: View {
-    //MARK: できたら使いたくない
-    @EnvironmentObject var homeViewModel: HomeViewModel
+    
     let todo: ToDo
     let todoDetail: ToDoDetail
     
@@ -27,7 +26,7 @@ struct ToDoDetailView: View {
                                       todoDetail: todoDetail)
                     }
                     .onMove { sourceIndices, destinationIndex in
-                        homeViewModel.moveTodoDetail(indexSet: sourceIndices, index: destinationIndex, todo: todo)
+                        detailViewModel.moveTodoDetail(indexSet: sourceIndices, index: destinationIndex, todo: [todo])
                     }
                     .onDelete(perform: { indexSet in
                         detailViewModel.deleteTodoDetail(todo: todo, todoDetail: todoDetail, offset: indexSet)
@@ -70,7 +69,7 @@ struct ToDoDetailView: View {
         .sheet(isPresented: $isEdit){//$homeViewModel.isEddit) {
             ToDoAddView(
                 save: { text in
-                   try homeViewModel.addTodoDetail(text: text, todo: todo)
+                   try detailViewModel.addTodoDetail(text: text, todo: todo)
                     dismiss()
                 }
             )

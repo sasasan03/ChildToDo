@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DetailRowView: View {
     
-    @EnvironmentObject var homeViewModel: HomeViewModel
+    @EnvironmentObject var detailViewModel: DetailViewModel
     @State private var isEddit = false
     let todo: ToDo
     let todoDetail: ToDoDetail
@@ -30,7 +30,7 @@ struct DetailRowView: View {
                 ToDoEditView(
                     todoName: todoDetail.name,
                     edit: { todoDetailname in
-                        try homeViewModel.todoDetailSave(newTodoDetail: todoDetail, todo: todo, newName: todoDetailname)
+                        try detailViewModel.todoDetailSave(newTodoDetail: todoDetail, todo: todo, newName: todoDetailname)
                         isEddit = false
                     }
                 )

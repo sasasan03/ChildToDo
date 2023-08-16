@@ -13,6 +13,10 @@ struct HomeView: View {
     @Environment(\.dismiss) var dismiss
     @State private var selectionTodo: ToDo?
     let todoDetail: ToDoDetail
+    let todo2: ToDo
+    var detailViewModel: DetailViewModel {
+        return DetailViewModel(sharedHomeViewModel: homeViewModel, todo: todo2, todoDetail: todoDetail)
+    }
     
     var body: some View {
         NavigationSplitView(sidebar: {
@@ -62,10 +66,11 @@ struct HomeView: View {
                 } else {
                     ZStack{
                         ToDoDetailView(todo: returnTodo, todoDetail: ToDoDetail(name: "", isChecked: false))
-                                .navigationTitle(selectionTodo?.name ?? "やること編集")
-                                .toolbarBackground(Color.cyan,for: .navigationBar)
-                                .toolbarBackground(.visible, for: .navigationBar)
-                                .toolbarColorScheme(.dark)
+                            .environmentObject(detailViewModel)
+                            .navigationTitle(selectionTodo?.name ?? "やること編集")
+                            .toolbarBackground(Color.cyan,for: .navigationBar)
+                            .toolbarBackground(.visible, for: .navigationBar)
+                            .toolbarColorScheme(.dark)
                         Color.cyan
                     }
                 
@@ -92,7 +97,7 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(todoDetail: ToDoDetail(name: "挨拶", isChecked: false))
+        HomeView(todoDetail: ToDoDetail(name: "挨拶", isChecked: false), todo2: ToDo(name: "a", toDoDetails: [ToDoDetail(name: "a", isChecked: false)]))
             .environmentObject(HomeViewModel())
     }
 }

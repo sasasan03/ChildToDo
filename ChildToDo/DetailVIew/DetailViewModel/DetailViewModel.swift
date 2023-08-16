@@ -58,9 +58,9 @@ class DetailViewModel: ObservableObject {
         isShowAddView = false
     }
     //.moveメソッドを使用して項目を入れ替えれる際に使用
-//    func moveTodoDetail(indexSet: IndexSet, index: Int, todo: [ToDo]){
-//        homeViewModel?.toDos.move(fromOffsets: indexSet, toOffset: index)
-//    }
+    func moveTodoDetail(indexSet: IndexSet, index: Int, todo: [ToDo]){
+        sharedHomeViewModel.toDos.move(fromOffsets: indexSet, toOffset: index)
+    }
     //MARK: inout引数はだめ。理由　→
 //    func moveTodoDetail(indexSet: IndexSet, index: Int, todo: inout [ToDo]){
 //        todo.move(fromOffsets: indexSet, toOffset: index)
