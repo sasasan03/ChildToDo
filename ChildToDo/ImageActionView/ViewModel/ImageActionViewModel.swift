@@ -35,7 +35,7 @@ class ImageActionViewModel: ObservableObject {
     }
     
     //MARK: 画面右上の『サークル』ボタンを押すと、isCheckedのBoolを全て『false』に切り替える。
-    func isCheckedToFalse(todo: ToDo){
+    func isCheckedToAllFalse(todo: ToDo){
         guard let tIndex = sharedDetailViewModel.toDos.firstIndex(where: { $0.id == todo.id }) else { return }
         sharedDetailViewModel.toDos[tIndex].toDoDetails.forEach{ _ in
             (0..<sharedDetailViewModel.toDos[tIndex].toDoDetails.count).forEach{
