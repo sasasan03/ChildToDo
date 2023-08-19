@@ -26,6 +26,7 @@ struct DetailRowView: View {
                 .buttonStyle(BorderlessButtonStyle())
                 Text(todoDetail.name)
             }
+            //MARK: - 選択された項目編集のシート
             .sheet(isPresented: $isEddit){
                 ToDoEditView(
                     todoName: todoDetail.name,

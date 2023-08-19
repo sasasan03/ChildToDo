@@ -67,13 +67,13 @@ struct ToDoDetailView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
                     isEdit = true
-                    //homeViewModel.isEdditTrue()
                 } label: {
                     Image(systemName: "plus")
                 }
             }
         }
-        .sheet(isPresented: $isEdit){//$homeViewModel.isEddit) {
+        //MARK: - 新しい項目を追加するためのシート
+        .sheet(isPresented: $isEdit){
             ToDoAddView(
                 save: { text in
                    try detailViewModel.addTodoDetail(text: text, todo: todo)

@@ -14,7 +14,7 @@ class DetailViewModel: ObservableObject {
     @Published var todoDetail: ToDoDetail
     @Published var isShowAddView = false
     
-    //
+    //MARK: HomeViewModelから最新のtoDos情報を取得
     var toDos: [ToDo]{
         sharedHomeViewModel.toDos
     }
@@ -26,56 +26,19 @@ class DetailViewModel: ObservableObject {
         self.isShowAddView = isShowAddView
     }
     
+    //MARK: todoDetailの項目を削除
     func deleteTodoDetail(todo: ToDo, todoDetail: ToDoDetail, offset: IndexSet)  {
         guard let todoIndex = sharedHomeViewModel.toDos.firstIndex(where: { $0.id == todo.id }) else { return }
         sharedHomeViewModel.toDos[todoIndex].toDoDetails.remove(atOffsets: offset)
     }
     
-    //.moveメソッドを使用して項目を入れ替えれる際に使用
+    //MARK: todoDetailの項目を移動
     func moveTodoDetail(indexSet: IndexSet, index: Int, todo: ToDo){
         guard let todoIndex = sharedHomeViewModel.toDos.firstIndex(where: { $0.id == todo.id }) else { return }
         sharedHomeViewModel.toDos[todoIndex].toDoDetails.move(fromOffsets: indexSet, toOffset: index)
     }
-    
-    func detailBoolFalse(){
-        sharedHomeViewModel.toDos = sharedHomeViewModel.toDos.map{ toDo -> ToDo in
-            var details: [ToDoDetail] = []
-            toDo.toDoDetails.forEach{ d in
-                var detail = ToDoDetail(name: d.name, isChecked: false)
-                detail.id = d.id
-                details.append(detail)
-            }
-            var newToDo = ToDo(name: toDo.name, toDoDetails: details)
-            newToDo.id = toDo.id
-            return toDo
-        }
-    }
-    //🤢
-//    func isEdditTrue(){
-//        isEdditHomeRowView = true
-//    }
-    
-    func isShowDetailAddView(){
-        isShowAddView = true
-    }
-    
-    func isCloseDetailAddView(){
-        isShowAddView = false
-    }
-   
-    //MARK: inout引数はだめ。理由　→
-//    func moveTodoDetail(indexSet: IndexSet, index: Int, todo: inout [ToDo]){
-//        todo.move(fromOffsets: indexSet, toOffset: index)
-//    }
-    
-    
-    //moveTodoDetailメソッドで内で、渡されてきたToDoのIntを検索するために使用
-    func todoIndex(todo: ToDo) -> Int {
-        guard let todoIndex = todo.toDoDetails.firstIndex(where: { $0.id == todo.id }) else { return 0 }
-        //guard let index = toDos.firstIndex(where: { $0.id == todo.id }) else { return }
-        return todoIndex
-    }
-    
+
+    //MARK: toDosに有力された値を追加する
     func addTodoDetail(text: String, todo: ToDo) throws {
         if let index = toDos.firstIndex(of: todo){
             var updatedToDo = todo
@@ -87,6 +50,7 @@ class DetailViewModel: ObservableObject {
         }
     }
     
+    //MARK: toDosのセルを選択し、新しく入力された値を上書きする
     func todoDetailSave(newTodoDetail: ToDoDetail, todo: ToDo, newName: String) throws {
         guard let index = toDos.firstIndex(where: { $0.id == todo.id }) else { return }
         guard  let dIndex = todo.toDoDetails.firstIndex(where: { $0.id == newTodoDetail.id }) else { return }
