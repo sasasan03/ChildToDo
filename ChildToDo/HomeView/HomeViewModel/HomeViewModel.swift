@@ -39,6 +39,7 @@ class HomeViewModel: ObservableObject {
             oldValue.forEach{ todoItem in
                 //toDoDetailsの中身から、trueのものを検出して、格納する。
                 let count = todoItem.toDoDetails.filter({$0.isChecked}).count
+                print("カウント🍹",toDos[0].name)
                // print("\(todoItem.name)の変更前....", count)
             }
             //変更後の値を調べる。
@@ -58,14 +59,14 @@ class HomeViewModel: ObservableObject {
     //UserDefaultでデータをデバイスに保存する処理を追加していく。
     //private let userDefaultManager = UserDefaultManager()
     //ImageViewアニメーションを全てoffにするメソッド。
-    func todoDetailFalse(todo: ToDo){
-        guard let tIndex = toDos.firstIndex(where: { $0.id == todo.id }) else { return }
-        toDos[tIndex].toDoDetails.forEach{ _ in
-            (0..<toDos[tIndex].toDoDetails.count).forEach{
-                toDos[tIndex].toDoDetails[$0].isChecked = false
-            }
-        }
-    }
+//    func todoDetailFalse(todo: ToDo){
+//        guard let tIndex = toDos.firstIndex(where: { $0.id == todo.id }) else { return }
+//        toDos[tIndex].toDoDetails.forEach{ _ in
+//            (0..<toDos[tIndex].toDoDetails.count).forEach{
+//                toDos[tIndex].toDoDetails[$0].isChecked = false
+//            }
+//        }
+//    }
     //🍔: Detail
 //    func isEdditTrue(){
 //        isEdditHomeRowView = true

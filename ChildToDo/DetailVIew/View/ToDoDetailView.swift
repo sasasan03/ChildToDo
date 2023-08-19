@@ -17,6 +17,10 @@ struct ToDoDetailView: View {
     @State var isEdit = false
     @Environment(\.dismiss) var dismiss
     
+    var imageActionViewModel: ImageActionViewModel{
+        return ImageActionViewModel(sharedDetailViewModel: detailViewModel, todo: todo, todoDetail: todoDetail)
+    }
+    
     var body: some View {
         GeometryReader { geometry in
             ZStack{
@@ -26,7 +30,9 @@ struct ToDoDetailView: View {
                                       todoDetail: todoDetail)
                     }
                     .onMove { sourceIndices, destinationIndex in
-                        detailViewModel.moveTodoDetail(indexSet: sourceIndices, index: destinationIndex, todo: [todo])
+                        print("🍔",sourceIndices,"🍟", destinationIndex)
+                        detailViewModel.moveTodoDetail(indexSet: sourceIndices, index: destinationIndex, todo: todo)
+                        print("🍹",sourceIndices,"🍟", destinationIndex)
                     }
                     .onDelete(perform: { indexSet in
                         detailViewModel.deleteTodoDetail(todo: todo, todoDetail: todoDetail, offset: indexSet)
@@ -37,6 +43,7 @@ struct ToDoDetailView: View {
                 .background(Color.cyan)
                 NavigationLink {
                     ImageActionView(todo: todo)
+                        .environmentObject(imageActionViewModel)
                 } label: {
                     Text("やってみよう")
                         .font(.system(

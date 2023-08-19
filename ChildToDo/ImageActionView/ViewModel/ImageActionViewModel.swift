@@ -22,10 +22,23 @@ class ImageActionViewModel: ObservableObject {
         self.todoDetail = todoDetail
     }
     
+    var toDos: [ToDo]{
+        sharedDetailViewModel.toDos
+    }
+    
     func dChange(todo: ToDo, todoDetail: ToDoDetail){
         guard let tIndex = sharedDetailViewModel.toDos.firstIndex(where: { $0.id == todo.id }) else { return }
         guard let dIndex = todo.toDoDetails.firstIndex(where: { $0.id == todoDetail.id }) else { return }
-        sharedDetailViewModel.toDos[tIndex].toDoDetails[dIndex].isChecked.toggle()
+        sharedDetailViewModel.sharedHomeViewModel.toDos[tIndex].toDoDetails[dIndex].isChecked.toggle()
+    }
+    
+    func todoDetailFalse(todo: ToDo){
+        guard let tIndex = sharedDetailViewModel.toDos.firstIndex(where: { $0.id == todo.id }) else { return }
+        sharedDetailViewModel.toDos[tIndex].toDoDetails.forEach{ _ in
+            (0..<sharedDetailViewModel.toDos[tIndex].toDoDetails.count).forEach{
+                sharedDetailViewModel.sharedHomeViewModel.toDos[tIndex].toDoDetails[$0].isChecked = false
+            }
+        }
     }
     
     private let crappingHands = try! AVAudioPlayer(data: NSDataAsset(name: "clappingHands")!.data)

@@ -15,7 +15,7 @@ struct HomeView: View {
     let todoDetail: ToDoDetail
     let todo2: ToDo
     var detailViewModel: DetailViewModel {
-        return DetailViewModel(sharedHomeViewModel: homeViewModel, todo: todo2, todoDetail: todoDetail)
+        return DetailViewModel(sharedHomeViewModel: homeViewModel, todo: selectionTodo!, todoDetail: todoDetail)
     }
     
     var body: some View {
@@ -59,6 +59,7 @@ struct HomeView: View {
                 let todoCount = returnTodo.toDoDetails.count
                 if todoCount != 0 {
                     ToDoDetailView(todo: returnTodo, todoDetail: returnTodo.toDoDetails[todoDetailIndex])
+                        .environmentObject(detailViewModel)
                         .navigationTitle(selectionTodo?.name ?? "やること編集")
                         .toolbarBackground(Color.cyan,for: .navigationBar)
                         .toolbarBackground(.visible, for: .navigationBar)

@@ -14,6 +14,7 @@ class DetailViewModel: ObservableObject {
     @Published var todoDetail: ToDoDetail
     @Published var isShowAddView = false
     
+    //
     var toDos: [ToDo]{
         sharedHomeViewModel.toDos
     }
@@ -25,11 +26,15 @@ class DetailViewModel: ObservableObject {
         self.isShowAddView = isShowAddView
     }
     
-  //🤢  @Published var isEdditHomeRowView = false
-    
     func deleteTodoDetail(todo: ToDo, todoDetail: ToDoDetail, offset: IndexSet)  {
         guard let todoIndex = sharedHomeViewModel.toDos.firstIndex(where: { $0.id == todo.id }) else { return }
         sharedHomeViewModel.toDos[todoIndex].toDoDetails.remove(atOffsets: offset)
+    }
+    
+    //.moveメソッドを使用して項目を入れ替えれる際に使用
+    func moveTodoDetail(indexSet: IndexSet, index: Int, todo: ToDo){
+        guard let todoIndex = sharedHomeViewModel.toDos.firstIndex(where: { $0.id == todo.id }) else { return }
+        sharedHomeViewModel.toDos[todoIndex].toDoDetails.move(fromOffsets: indexSet, toOffset: index)
     }
     
     func detailBoolFalse(){
@@ -57,10 +62,7 @@ class DetailViewModel: ObservableObject {
     func isCloseDetailAddView(){
         isShowAddView = false
     }
-    //.moveメソッドを使用して項目を入れ替えれる際に使用
-    func moveTodoDetail(indexSet: IndexSet, index: Int, todo: [ToDo]){
-        sharedHomeViewModel.toDos.move(fromOffsets: indexSet, toOffset: index)
-    }
+   
     //MARK: inout引数はだめ。理由　→
 //    func moveTodoDetail(indexSet: IndexSet, index: Int, todo: inout [ToDo]){
 //        todo.move(fromOffsets: indexSet, toOffset: index)

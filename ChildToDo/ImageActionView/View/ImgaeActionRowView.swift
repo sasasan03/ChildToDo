@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ImgaeActionRowView: View {
     
-    @EnvironmentObject var homeViewModel: HomeViewModel
+    @EnvironmentObject var detailViewModel: DetailViewModel
     let todoDetail: ToDoDetail
     
     var body: some View {

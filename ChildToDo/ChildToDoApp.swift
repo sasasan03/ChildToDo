@@ -11,7 +11,7 @@ import SwiftUI
 struct ChildToDoApp: App {
     var body: some Scene {
         WindowGroup {
-            HomeView(todoDetail: ToDoDetail(name: "挨拶", isChecked: false))
+            HomeView(todoDetail: ToDoDetail(name: "挨拶", isChecked: false), todo2: ToDo(name: "a", toDoDetails: [ToDoDetail(name: "b", isChecked: false)]))
                 .environmentObject(HomeViewModel())
         }
     }

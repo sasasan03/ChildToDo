@@ -7,11 +7,10 @@
 import SwiftUI
 
 struct ImageActionView: View {
-    //Viewの生成時のみ
-    @EnvironmentObject var homeViewModel: HomeViewModel
+    
+    @EnvironmentObject var imageActoionViewModel: ImageActionViewModel
     let todo: ToDo
     
-    //
     var body: some View {
         GeometryReader { geometry in
             List(todo.toDoDetails) { todoD in
@@ -29,14 +28,14 @@ struct ImageActionView: View {
                         if !todoD.isChecked {
                             playSoundCorrect()
                         }
-                        homeViewModel.dChange(todo: todo, todoDetail: todoD)
+                        imageActoionViewModel.dChange(todo: todo, todoDetail: todoD)
                     }
             }
             //MARK: - 画面右上リセットボタン
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        homeViewModel.todoDetailFalse(todo: todo)
+                        imageActoionViewModel.todoDetailFalse(todo: todo)
                     } label: {
                         Image(systemName: "arrow.clockwise")
                     }
