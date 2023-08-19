@@ -136,13 +136,13 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		69A5C4EF2A0A832800C8FE70 /* Public */ = {
+		69A5C4EF2A0A832800C8FE70 /* AddEditView */ = {
 			isa = PBXGroup;
 			children = (
 				69A5C4F02A0A834300C8FE70 /* ToDoAddView.swift */,
 				69A5C4F22A0A850500C8FE70 /* ToDoEditView.swift */,
 			);
-			path = Public;
+			path = AddEditView;
 			sourceTree = "<group>";
 		};
 		69A81BB92A20D26100975056 /* View */ = {
@@ -180,7 +180,7 @@
 				69A8824F2A092B79009D182A /* ChildToDoApp.swift */,
 				69D8A2A32A7F74B7007C884C /* Extention */,
 				6981DEB42A0F77410081D917 /* LottieView */,
-				69A5C4EF2A0A832800C8FE70 /* Public */,
+				69A5C4EF2A0A832800C8FE70 /* AddEditView */,
 				69A882842A092E09009D182A /* ImageActionView */,
 				69A8827B2A092CA9009D182A /* DetailVIew */,
 				69A882792A092C2B009D182A /* HomeView */,

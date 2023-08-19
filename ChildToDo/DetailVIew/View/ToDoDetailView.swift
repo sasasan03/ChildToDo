@@ -54,7 +54,7 @@ struct ToDoDetailView: View {
                         .frame(width: geometry.size.width * 0.8, height: geometry.size.height * 0.1)
                         .overlay(
                             RoundedRectangle(cornerRadius: 12)
-                                .stroke(Color.blue, lineWidth: 2)
+                                .stroke(Color.green, lineWidth: 2)
                         )
                         .background(RoundedRectangle(cornerRadius: 10).fill(Color.green))
                         .padding()
