@@ -26,16 +26,16 @@ struct ImageActionView: View {
                     .animation(.default,value:todoD.isChecked)
                     .onTapGesture(count: 2) {
                         if !todoD.isChecked {
-                            playSoundCorrect()
+                            crappingHandsSound()
                         }
-                        imageActoionViewModel.dChange(todo: todo, todoDetail: todoD)
+                        imageActoionViewModel.isCheckedToChange(todo: todo, todoDetail: todoD)
                     }
             }
             //MARK: - 画面右上リセットボタン
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        imageActoionViewModel.todoDetailFalse(todo: todo)
+                        imageActoionViewModel.isCheckedToFalse(todo: todo)
                     } label: {
                         Image(systemName: "arrow.clockwise")
                     }

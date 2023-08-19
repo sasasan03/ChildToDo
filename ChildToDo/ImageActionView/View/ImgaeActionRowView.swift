@@ -15,6 +15,7 @@ struct ImgaeActionRowView: View {
     var body: some View {
         GeometryReader { geometry in
             HStack{
+                //MARK: -『👍』のLottieのGIF
                 if todoDetail.isChecked{
                     LottieView(resourceType: .good)
                         .frame(
@@ -28,6 +29,7 @@ struct ImgaeActionRowView: View {
                             height: geometry.size.height
                         )
                 }
+                //MARK: -『よくできました』と『入力された項目』
                 Text(todoDetail.isChecked ?"よくできました" : todoDetail.name)
                     .font(.system(
                         size: geometry.size.width * 0.07,

@@ -11,7 +11,7 @@ import AVFoundation
 
 let crappingHands = try! AVAudioPlayer(data: NSDataAsset(name: "clappingHands")!.data)
 
-public func playSoundCorrect(){
+public func crappingHandsSound(){
     crappingHands.stop()
     crappingHands.currentTime = 0.0
     crappingHands.play()

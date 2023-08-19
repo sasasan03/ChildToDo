@@ -22,30 +22,25 @@ class ImageActionViewModel: ObservableObject {
         self.todoDetail = todoDetail
     }
     
+    //MARK: DetailViewModelの最新の情報を取得する。
     var toDos: [ToDo]{
         sharedDetailViewModel.toDos
     }
     
-    func dChange(todo: ToDo, todoDetail: ToDoDetail){
+    //MARK: セルの『👍』アニメーションと背景の管理を行なっている。
+    func isCheckedToChange(todo: ToDo, todoDetail: ToDoDetail){
         guard let tIndex = sharedDetailViewModel.toDos.firstIndex(where: { $0.id == todo.id }) else { return }
         guard let dIndex = todo.toDoDetails.firstIndex(where: { $0.id == todoDetail.id }) else { return }
         sharedDetailViewModel.sharedHomeViewModel.toDos[tIndex].toDoDetails[dIndex].isChecked.toggle()
     }
     
-    func todoDetailFalse(todo: ToDo){
+    //MARK: 画面右上の『サークル』ボタンを押すと、isCheckedのBoolを全て『false』に切り替える。
+    func isCheckedToFalse(todo: ToDo){
         guard let tIndex = sharedDetailViewModel.toDos.firstIndex(where: { $0.id == todo.id }) else { return }
         sharedDetailViewModel.toDos[tIndex].toDoDetails.forEach{ _ in
             (0..<sharedDetailViewModel.toDos[tIndex].toDoDetails.count).forEach{
                 sharedDetailViewModel.sharedHomeViewModel.toDos[tIndex].toDoDetails[$0].isChecked = false
             }
         }
-    }
-    
-    private let crappingHands = try! AVAudioPlayer(data: NSDataAsset(name: "clappingHands")!.data)
-    
-    public func playSoundCorrect(){
-        crappingHands.stop()
-        crappingHands.currentTime = 0.0
-        crappingHands.play()
     }
 }
