@@ -19,6 +19,7 @@ struct HomeView: View {
     }
     
     var body: some View {
+        //MARK: - おおもとのリスト（細かな項目の上位階層）
         NavigationSplitView(sidebar: {
             List(selection: $selectionTodo) {
                 ForEach(homeViewModel.toDos){ todo in
@@ -46,6 +47,7 @@ struct HomeView: View {
                     }
                 }
             }
+            //MARK: - 新しい項目を追加するためのシート
             .sheet(isPresented: $homeViewModel.isAddView) {
                 ToDoAddView(save: { text in
                     try homeViewModel.addTodo(text: text)
@@ -54,9 +56,12 @@ struct HomeView: View {
             }
             .onAppear(perform: homeViewModel.onApper)
         } , detail:{
+            //MARK: - おおもとのリスト内の細かな項目（細かなリスト）
+            //MARK: おおもとのリストが選択されている場合
             if let returnTodo =  homeViewModel.returnAdress(todo: selectionTodo){
                 let todoDetailIndex = homeViewModel.todoDetailIndex(todo: returnTodo, todoDetail: todoDetail)
                 let todoCount = returnTodo.toDoDetails.count
+                //MARK: - 細かな項目が設定されている場合の画面
                 if todoCount != 0 {
                     ToDoDetailView(todo: returnTodo, todoDetail: returnTodo.toDoDetails[todoDetailIndex])
                         .environmentObject(detailViewModel)
@@ -65,6 +70,7 @@ struct HomeView: View {
                         .toolbarBackground(.visible, for: .navigationBar)
                         .toolbarColorScheme(.dark)
                 } else {
+                //MARK: 細かな項目が設定されていない場合の画面
                     ZStack{
                         ToDoDetailView(todo: returnTodo, todoDetail: ToDoDetail(name: "", isChecked: false))
                             .environmentObject(detailViewModel)
@@ -74,9 +80,9 @@ struct HomeView: View {
                             .toolbarColorScheme(.dark)
                         Color.cyan
                     }
-                
                 }
             } else {
+                //MARK: - おおもとのリストが選択されていいない場合
                 ZStack{
                     Color.orange
                         .ignoresSafeArea()

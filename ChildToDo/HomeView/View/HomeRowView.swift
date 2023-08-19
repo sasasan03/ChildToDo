@@ -26,6 +26,7 @@ struct HomeRowView: View {
                 .buttonStyle(BorderlessButtonStyle())
                 NavigationLink(todo.name,value: todo)
             }
+            //MARK: - 選択された項目編集のシート
             .sheet(isPresented: $isEddit){
                 ToDoEditView(
                     todoName: todo.name,

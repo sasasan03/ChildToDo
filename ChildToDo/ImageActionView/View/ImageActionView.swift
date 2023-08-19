@@ -35,7 +35,7 @@ struct ImageActionView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        imageActoionViewModel.isCheckedToFalse(todo: todo)
+                        imageActoionViewModel.isCheckedToAllFalse(todo: todo)
                     } label: {
                         Image(systemName: "arrow.clockwise")
                     }

@@ -56,46 +56,8 @@ class HomeViewModel: ObservableObject {
            // print("ーーーーーーーーーーーーーーーーーーーーーーーーーーーーー")
         }
     }
-    //UserDefaultでデータをデバイスに保存する処理を追加していく。
-    //private let userDefaultManager = UserDefaultManager()
-    //ImageViewアニメーションを全てoffにするメソッド。
-//    func todoDetailFalse(todo: ToDo){
-//        guard let tIndex = toDos.firstIndex(where: { $0.id == todo.id }) else { return }
-//        toDos[tIndex].toDoDetails.forEach{ _ in
-//            (0..<toDos[tIndex].toDoDetails.count).forEach{
-//                toDos[tIndex].toDoDetails[$0].isChecked = false
-//            }
-//        }
-//    }
-    //🍔: Detail
-//    func isEdditTrue(){
-//        isEdditHomeRowView = true
-//    }
     
-//    func detailBoolFalse(){
-//        toDos = toDos.map{ toDo -> ToDo in
-//            var details: [ToDoDetail] = []
-//            toDo.toDoDetails.forEach{ d in
-//                var detail = ToDoDetail(name: d.name, isChecked: false)
-//                detail.id = d.id
-//                details.append(detail)
-//            }
-//            var newToDo = ToDo(name: toDo.name, toDoDetails: details)
-//            newToDo.id = toDo.id
-//            return toDo
-//        }
-//    }
-    //🍔
-    
-    //🍹ImageView
-//    func dChange(todo: ToDo, todoDetail: ToDoDetail){
-//        guard let tIndex = toDos.firstIndex(where: { $0.id == todo.id }) else { return }
-//        guard let dIndex = todo.toDoDetails.firstIndex(where: { $0.id == todoDetail.id }) else { return }
-//        toDos[tIndex].toDoDetails[dIndex].isChecked.toggle()
-//    }
-    //🍹
-    
-    //⭐️HomeViewでSidebarから渡されてきたTodoが持っているTodoDetailのIndexを取得するために使用
+    //
     func todoDetailIndex(todo: ToDo, todoDetail: ToDoDetail) -> Int {
         guard  let toDoDetailIndex = todo.toDoDetails.firstIndex(where: { $0.id == todo.id }) else { return 0 }
         return toDoDetailIndex
