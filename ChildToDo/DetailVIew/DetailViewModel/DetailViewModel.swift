@@ -38,7 +38,7 @@ class DetailViewModel: ObservableObject {
         sharedHomeViewModel.toDos[todoIndex].toDoDetails.move(fromOffsets: indexSet, toOffset: index)
     }
 
-    //MARK: toDosに有力された値を追加する
+    //MARK: toDosに入力された値を追加する
     func addTodoDetail(text: String, todo: ToDo) throws {
         if let index = toDos.firstIndex(of: todo){
             var updatedToDo = todo

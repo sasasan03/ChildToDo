@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+//MARK: テキストが入力されていない場合にエラーを返すために使用
 enum NonTextError: Error {
     case nonTodoText
     case nonTodoDetailText

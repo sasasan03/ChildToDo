@@ -19,7 +19,7 @@ struct HomeView: View {
     }
     
     var body: some View {
-        //MARK: - おおもとのリスト（細かな項目の上位階層）
+        //MARK: - おおもとのリスト（細かな項目の上位階層のリスト）
         NavigationSplitView(sidebar: {
             List(selection: $selectionTodo) {
                 ForEach(homeViewModel.toDos){ todo in
@@ -99,8 +99,6 @@ struct HomeView: View {
         .accentColor(Color.white)
     }
 }
-
-
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
