@@ -82,7 +82,7 @@ struct HomeView: View {
                     }
                 }
             } else {
-                //MARK: - おおもとのリストが選択されていいない場合
+                //MARK: - おおもとのリストが選択されていない場合
                 ZStack{
                     Color.orange
                         .ignoresSafeArea()
