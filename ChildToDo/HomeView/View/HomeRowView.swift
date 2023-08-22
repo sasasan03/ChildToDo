@@ -43,7 +43,10 @@ struct HomeRowView: View {
 
 struct HomeRowView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeRowView(todo: ToDo.init(name: "朝の会", toDoDetails: [ToDoDetail(name: "うた", isChecked: false)])
+        HomeRowView(
+            todo: ToDo(name: "朝の会",
+                       toDoDetails: [ToDoDetail(name: "あいさつ", isChecked: false)]
+                      )
         )
     }
 }

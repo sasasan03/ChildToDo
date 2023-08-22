@@ -11,6 +11,8 @@ struct ImageActionView: View {
     @EnvironmentObject var imageActoionViewModel: ImageActionViewModel
     let todo: ToDo
     
+    //TODO: 文字数に制限をいれて表示の限界を決める
+    //現状１０文字以上の文字は入力できない。
     var body: some View {
         GeometryReader { geometry in
             List(todo.toDoDetails) { todoD in
@@ -47,12 +49,14 @@ struct ImageActionView: View {
     }
 }
 
-//
-//struct ImageActionView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ImageActionView(todo: ToDo.init(name: "朝の会", toDoDetails: [ToDoDetail(name: "校長のとてもとても長い話", isCheck: false)]), todoDetail: ToDoDetail.init(name: "予定", isCheck: false))
-//    }
-//}
-//"校長のめちゃくちゃ長い話"１０文字
-// "校長のとてもとても長い話"10文字ともに１０文字以上は表示できない
 
+struct ImageActionView_Previews: PreviewProvider {
+    static var previews: some View {
+        ImageActionView(
+            todo: ToDo(
+                name: "朝の会",
+                toDoDetails: [ToDoDetail(name: "あいさつ", isChecked: true)]
+            )
+        )
+    }
+}

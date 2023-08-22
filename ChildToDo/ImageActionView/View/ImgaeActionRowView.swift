@@ -45,6 +45,6 @@ struct ImgaeActionRowView: View {
 
 struct ImgaeActionRowView_Previews: PreviewProvider {
     static var previews: some View {
-        ImgaeActionRowView(todoDetail: ToDoDetail(name: "挨拶", isChecked: false))
+        ImgaeActionRowView(todoDetail: ToDoDetail(name: "挨拶", isChecked: true))
     }
 }

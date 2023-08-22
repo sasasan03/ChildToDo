@@ -87,6 +87,20 @@ struct ToDoDetailView: View {
 
 struct ToDoDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        ToDoDetailView(todo: ToDo.init(name: "朝の会", toDoDetails: [ToDoDetail(name: "予定のかくにん", isChecked: false)]), todoDetail: ToDoDetail.init(name: "きゅうしょく", isChecked: false))
+        ToDoDetailView(
+            todo: ToDo(
+                name: "朝の会",
+                toDoDetails: [ToDoDetail(name: "あいさつ", isChecked: false)]
+            ),
+            todoDetail: ToDoDetail(name: "あさのうた", isChecked: false)
+        )
+        .environmentObject(
+            DetailViewModel(
+                sharedHomeViewModel: HomeViewModel(),
+                todo:  ToDo(name: "朝の会",
+                            toDoDetails: [ToDoDetail(name: "あいさつ", isChecked: false)]
+                           ),
+                todoDetail:  ToDoDetail(name: "あさのうた", isChecked: false))
+        )
     }
 }
