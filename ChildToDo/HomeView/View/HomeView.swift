@@ -13,7 +13,7 @@ struct HomeView: View {
     @Environment(\.dismiss) var dismiss
     @State private var selectionTodo: ToDo?
     let todoDetail: ToDoDetail
-    let todo2: ToDo
+    //let todo2: ToDo
     var detailViewModel: DetailViewModel {
         return DetailViewModel(sharedHomeViewModel: homeViewModel, todo: selectionTodo!, todoDetail: todoDetail)
     }
@@ -56,12 +56,12 @@ struct HomeView: View {
             }
             .onAppear(perform: homeViewModel.onApper)
         } , detail:{
-            //MARK: - おおもとのリスト内の細かな項目（細かなリスト）
-            //MARK: おおもとのリストが選択されている場合
+            //MARK: - TodoDetail部分（Todoの細かな詳細）
+            //MARK: Todoが選択されているとき
             if let returnTodo =  homeViewModel.returnAdress(todo: selectionTodo){
                 let todoDetailIndex = homeViewModel.todoDetailIndex(todo: returnTodo, todoDetail: todoDetail)
                 let todoCount = returnTodo.toDoDetails.count
-                //MARK: - 細かな項目が設定されている場合の画面
+            //MARK: - TodoDetailが入力されている場合の画面設定
                 if todoCount != 0 {
                     ToDoDetailView(todo: returnTodo, todoDetail: returnTodo.toDoDetails[todoDetailIndex])
                         .environmentObject(detailViewModel)
@@ -70,7 +70,7 @@ struct HomeView: View {
                         .toolbarBackground(.visible, for: .navigationBar)
                         .toolbarColorScheme(.dark)
                 } else {
-                //MARK: 細かな項目が設定されていない場合の画面
+                //MARK: TodoDetaileが空の場合の画面設定
                     ZStack{
                         ToDoDetailView(todo: returnTodo, todoDetail: ToDoDetail(name: "", isChecked: false))
                             .environmentObject(detailViewModel)
@@ -82,7 +82,7 @@ struct HomeView: View {
                     }
                 }
             } else {
-                //MARK: - おおもとのリストが選択されていない場合
+                //MARK: - Todoが選択されていない場合（🐘象が出てくる画面）
                 ZStack{
                     Color.orange
                         .ignoresSafeArea()
@@ -102,7 +102,9 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(todoDetail: ToDoDetail(name: "挨拶", isChecked: false), todo2: ToDo(name: "a", toDoDetails: [ToDoDetail(name: "a", isChecked: false)]))
+        HomeView(
+            todoDetail: ToDoDetail(name: "挨拶", isChecked: false)
+            )
             .environmentObject(HomeViewModel())
     }
 }
