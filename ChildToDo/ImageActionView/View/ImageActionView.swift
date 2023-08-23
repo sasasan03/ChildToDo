@@ -12,7 +12,7 @@ struct ImageActionView: View {
     let todo: ToDo
     
     //TODO: 文字数に制限をいれて表示の限界を決める
-    //現状１０文字以上の文字は入力できない。
+    //現状１０文字以上の文字は潰れてしまう。
     var body: some View {
         GeometryReader { geometry in
             List(todo.toDoDetails) { todoD in

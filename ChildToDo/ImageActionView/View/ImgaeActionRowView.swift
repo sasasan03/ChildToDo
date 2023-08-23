@@ -29,7 +29,7 @@ struct ImgaeActionRowView: View {
                             height: geometry.size.height
                         )
                 }
-                //MARK: -『よくできました』と『入力された項目』
+                //MARK: -『よくできました』と『入力された項目の文字』
                 Text(todoDetail.isChecked ?"よくできました" : todoDetail.name)
                     .font(.system(
                         size: geometry.size.width * 0.07,

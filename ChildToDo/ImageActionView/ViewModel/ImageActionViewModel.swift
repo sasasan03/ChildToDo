@@ -27,14 +27,14 @@ class ImageActionViewModel: ObservableObject {
         sharedDetailViewModel.toDos
     }
     
-    //MARK: セルの『👍』アニメーションと背景の管理を行なっている。
+    //MARK: セルの『👍』アニメーションとセルの背景色（赤・青）の管理を行なっている。
     func isCheckedToChange(todo: ToDo, todoDetail: ToDoDetail){
         guard let tIndex = sharedDetailViewModel.toDos.firstIndex(where: { $0.id == todo.id }) else { return }
         guard let dIndex = todo.toDoDetails.firstIndex(where: { $0.id == todoDetail.id }) else { return }
         sharedDetailViewModel.sharedHomeViewModel.toDos[tIndex].toDoDetails[dIndex].isChecked.toggle()
     }
     
-    //MARK: 画面右上の『サークル』ボタンを押すと、isCheckedのBoolを全て『false』に切り替える。
+    //MARK: 画面右上の『サークル』ボタンメソッド。isCheckedのBoolを全て『false』に切り替える。
     func isCheckedToAllFalse(todo: ToDo){
         guard let tIndex = sharedDetailViewModel.toDos.firstIndex(where: { $0.id == todo.id }) else { return }
         sharedDetailViewModel.toDos[tIndex].toDoDetails.forEach{ _ in

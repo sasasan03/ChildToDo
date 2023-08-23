@@ -32,7 +32,7 @@ class DetailViewModel: ObservableObject {
         isAddView = true
     }
     
-    //MARK: AddViewを開かせる
+    //MARK: EditViewを開かせる
     func isShowEditView(){
         isEditView = true
     }
