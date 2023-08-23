@@ -13,7 +13,6 @@ struct HomeView: View {
     @Environment(\.dismiss) var dismiss
     @State private var selectionTodo: ToDo?
     let todoDetail: ToDoDetail
-    //let todo2: ToDo
     var detailViewModel: DetailViewModel {
         return DetailViewModel(sharedHomeViewModel: homeViewModel, todo: selectionTodo!, todoDetail: todoDetail)
     }
@@ -56,8 +55,7 @@ struct HomeView: View {
             }
             .onAppear(perform: homeViewModel.onApper)
         } , detail:{
-            //MARK: - TodoDetail部分（Todoの細かな詳細）
-            //MARK: Todoが選択されているとき
+            //MARK: - TodoDetail部分（Todoの細かな詳細項目）
             if let returnTodo =  homeViewModel.returnAdress(todo: selectionTodo){
                 let todoDetailIndex = homeViewModel.todoDetailIndex(todo: returnTodo, todoDetail: todoDetail)
                 let todoCount = returnTodo.toDoDetails.count
@@ -82,7 +80,7 @@ struct HomeView: View {
                     }
                 }
             } else {
-                //MARK: - Todoが選択されていない場合（🐘象が出てくる画面）
+                //MARK: - TodoDetailが選択されていない場合（🐘象が出てくる画面）
                 ZStack{
                     Color.orange
                         .ignoresSafeArea()
@@ -104,7 +102,7 @@ struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView(
             todoDetail: ToDoDetail(name: "挨拶", isChecked: false)
-            )
-            .environmentObject(HomeViewModel())
+        )
+        .environmentObject(HomeViewModel())
     }
 }
