@@ -18,7 +18,7 @@ struct DetailRowView: View {
         NavigationStack{
             HStack{
                 Button {
-                    isEddit = true
+                    detailViewModel.isShowEditView()
                 } label: {
                     Image(systemName: "info.circle.fill")
                         .foregroundColor(.blue)
@@ -27,7 +27,7 @@ struct DetailRowView: View {
                 Text(todoDetail.name)
             }
             //MARK: - 選択された項目編集のシート
-            .sheet(isPresented: $isEddit){
+            .sheet(isPresented: $detailViewModel.isEditView){
                 ToDoEditView(
                     todoName: todoDetail.name,
                     edit: { todoDetailname in
@@ -49,6 +49,14 @@ struct DetailRowView_Previews: PreviewProvider {
                 toDoDetails: [ToDoDetail(name: "せんせいのはなし", isChecked: false)]
             ),
             todoDetail: ToDoDetail(name: "せんせいのははなし", isChecked: false)
+        )
+        .environmentObject(
+            DetailViewModel(
+                sharedHomeViewModel: HomeViewModel(),
+                todo:  ToDo(name: "朝の会",
+                            toDoDetails: [ToDoDetail(name: "あいさつ", isChecked: false)]
+                           ),
+                todoDetail:  ToDoDetail(name: "あさのうた", isChecked: false))
         )
     }
 }

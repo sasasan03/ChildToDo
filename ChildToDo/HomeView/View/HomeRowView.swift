@@ -18,7 +18,7 @@ struct HomeRowView: View {
         NavigationStack{
             HStack{
                 Button {
-                    isEddit = true
+                    homeViewModel.isShowEditView()
                 } label: {
                     Image(systemName: "info.circle.fill")
                         .foregroundColor(.blue)
@@ -27,7 +27,7 @@ struct HomeRowView: View {
                 NavigationLink(todo.name,value: todo)
             }
             //MARK: - 選択された項目編集のシート
-            .sheet(isPresented: $isEddit){
+            .sheet(isPresented: $homeViewModel.isEditView){
                 ToDoEditView(
                     todoName: todo.name,
                     edit: { todoName in
@@ -45,8 +45,8 @@ struct HomeRowView_Previews: PreviewProvider {
     static var previews: some View {
         HomeRowView(
             todo: ToDo(name: "朝の会",
-                       toDoDetails: [ToDoDetail(name: "あいさつ", isChecked: false)]
-                      )
+                       toDoDetails: [ToDoDetail(name: "あいさつ", isChecked: false)])
         )
+        .environmentObject(HomeViewModel())
     }
 }

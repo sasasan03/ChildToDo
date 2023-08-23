@@ -11,12 +11,8 @@ struct ToDoDetailView: View {
     
     let todo: ToDo
     let todoDetail: ToDoDetail
-    
     @EnvironmentObject var detailViewModel: DetailViewModel
-    
-    @State var isEdit = false
     @Environment(\.dismiss) var dismiss
-    
     var imageActionViewModel: ImageActionViewModel{
         return ImageActionViewModel(sharedDetailViewModel: detailViewModel, todo: todo, todoDetail: todoDetail)
     }
@@ -30,9 +26,7 @@ struct ToDoDetailView: View {
                                       todoDetail: todoDetail)
                     }
                     .onMove { sourceIndices, destinationIndex in
-                        print("🍔",sourceIndices,"🍟", destinationIndex)
                         detailViewModel.moveTodoDetail(indexSet: sourceIndices, index: destinationIndex, todo: todo)
-                        print("🍹",sourceIndices,"🍟", destinationIndex)
                     }
                     .onDelete(perform: { indexSet in
                         detailViewModel.deleteTodoDetail(todo: todo, todoDetail: todoDetail, offset: indexSet)
@@ -66,14 +60,14 @@ struct ToDoDetailView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
-                    isEdit = true
+                    detailViewModel.isShowAddView()
                 } label: {
                     Image(systemName: "plus")
                 }
             }
         }
         //MARK: - 新しい項目を追加するためのシート
-        .sheet(isPresented: $isEdit){
+        .sheet(isPresented: $detailViewModel.isAddView){
             ToDoAddView(
                 save: { text in
                    try detailViewModel.addTodoDetail(text: text, todo: todo)
