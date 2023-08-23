@@ -12,7 +12,8 @@ class DetailViewModel: ObservableObject {
     @Published var sharedHomeViewModel: HomeViewModel
     @Published var todo: ToDo
     @Published var todoDetail: ToDoDetail
-    @Published var isShowAddView = false
+    @Published var isAddView = false
+    @Published var isEditView = false
     
     //MARK: HomeViewModelから最新のtoDos情報を取得
     var toDos: [ToDo]{
@@ -23,7 +24,17 @@ class DetailViewModel: ObservableObject {
         self.sharedHomeViewModel = sharedHomeViewModel
         self.todo = todo
         self.todoDetail = todoDetail
-        self.isShowAddView = isShowAddView
+        self.isAddView = isShowAddView
+    }
+    
+    //MARK: AddViewを開かせる
+    func isShowAddView(){
+        isAddView = true
+    }
+    
+    //MARK: AddViewを開かせる
+    func isShowEditView(){
+        isEditView = true
     }
     
     //MARK: todoDetailの項目を削除

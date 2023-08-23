@@ -14,7 +14,6 @@ struct ToDoAddView: View {
     @State private var alert = false
     let save: (String) throws -> Void
     
-    
     var body: some View {
         GeometryReader { geometry in
             NavigationStack{

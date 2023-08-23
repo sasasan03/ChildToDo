@@ -9,11 +9,10 @@ import Foundation
 
 class HomeViewModel: ObservableObject {
     
-    @Published var isEdditHomeRowView = false
-    @Published var isAddView = false
-    @Published var isShowTodoDetailView = false
-    
     private let userDefaultManager = UserDefaultManager()
+    @Published var isAddView = false
+    @Published var isEditView = false
+    @Published var isShowTodoDetailView = false
     @Published var toDos = [
         ToDo(name: "朝の会",
              toDoDetails: [
@@ -57,6 +56,15 @@ class HomeViewModel: ObservableObject {
         }
     }
     
+    //AddViewを開かせる
+    func isShowAddView(){
+        isAddView = true
+    }
+    
+    func isShowEditView(){
+        isEditView = true
+    }
+    
     //MARK: 最上位のリスト内でどの項目を選択しているのか確認する
     func todoDetailIndex(todo: ToDo, todoDetail: ToDoDetail) -> Int {
         guard  let toDoDetailIndex = todo.toDoDetails.firstIndex(where: { $0.id == todo.id }) else { return 0 }
@@ -79,16 +87,6 @@ class HomeViewModel: ObservableObject {
             throw NonTextError.nonTodoText
         }
         self.toDos.append(ToDo(name: text, toDoDetails: []))
-        isAddView = false
-    }
-    
-    //AddViewを開かせる
-    func isShowAddView(){
-        isAddView = true
-    }
-    
-    //TrainerAddViewを閉じさせる
-    func isCloseAddView(){
         isAddView = false
     }
     
