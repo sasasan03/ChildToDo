@@ -56,11 +56,12 @@ class HomeViewModel: ObservableObject {
         }
     }
     
-    //AddViewを開かせる
+    //MARK: AddViewを開かせる
     func isShowAddView(){
         isAddView = true
     }
     
+    //MARK: EditViewを開かせる
     func isShowEditView(){
         isEditView = true
     }
