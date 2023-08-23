@@ -30,19 +30,17 @@ struct ToDoAddView: View {
                     .padding()
                     .toolbar {
                         ToolbarItem(placement: .navigationBarLeading){
-                            Button("cancel") {
+                            Button("キャンセル") {
                                 dismiss()
                             }
                         }
                         ToolbarItem(placement: .navigationBarTrailing) {
-                            Button("save") {
+                            Button("保存") {
                                 do {
                                     try save(todo)
                                     dismiss()
                                 } catch {
                                     alert = true
-                                    let error = error as? NonTextError ?? NonTextError.unKnownError
-                                    print("空っす",error.nonTextFieldType)
                                 }
                             }
                             .alert("エラー", isPresented: $alert) {
