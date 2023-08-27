@@ -33,18 +33,14 @@ class HomeViewModel: ObservableObject {
     ]
     {
         didSet {
-           // print("🍔: HomeViewModelが持つ、toDos配列(todoDetailsが持つ、isCheckのtrueの数)")
             //変更前の値を調べる。
             oldValue.forEach{ todoItem in
                 //toDoDetailsの中身から、trueのものを検出して、格納する。
                 let count = todoItem.toDoDetails.filter({$0.isChecked}).count
-                print("カウント🍹",toDos[0].name)
-               // print("\(todoItem.name)の変更前....", count)
             }
             //変更後の値を調べる。
             toDos.forEach{ todoItem  in
                 let count = todoItem.toDoDetails.filter({$0.isChecked}).count
-               // print("\(todoItem.name)の変更後....", count)
             }
             do {
                 try userDefaultManager.save(toDo: toDos)
@@ -52,7 +48,6 @@ class HomeViewModel: ObservableObject {
                 let error = error as? DataConvertError ?? DataConvertError.unknown
                 print(error.title)
             }
-           // print("ーーーーーーーーーーーーーーーーーーーーーーーーーーーーー")
         }
     }
     
@@ -115,8 +110,6 @@ class HomeViewModel: ObservableObject {
             let savedTodos = try userDefaultManager.load()
             savedTodos.forEach{ todoItem in
                 let count = todoItem.toDoDetails.filter({$0.isChecked}).count
-              //  print("🥪: HomeViewModelのonApperメソッドで書き換えられたtoDos配列(todoDetailsが持つ、isCheckのtrueの数、)", count)
-              //  print("〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜")
             }
             toDos = savedTodos
         } catch {
