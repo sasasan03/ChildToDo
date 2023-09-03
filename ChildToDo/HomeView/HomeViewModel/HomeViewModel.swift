@@ -33,15 +33,6 @@ class HomeViewModel: ObservableObject {
     ]
     {
         didSet {
-            //変更前の値を調べる。
-            oldValue.forEach{ todoItem in
-                //toDoDetailsの中身から、trueのものを検出して、格納する。
-                let count = todoItem.toDoDetails.filter({$0.isChecked}).count
-            }
-            //変更後の値を調べる。
-            toDos.forEach{ todoItem  in
-                let count = todoItem.toDoDetails.filter({$0.isChecked}).count
-            }
             do {
                 try userDefaultManager.save(toDo: toDos)
             } catch {
@@ -108,9 +99,6 @@ class HomeViewModel: ObservableObject {
     func onApper(){
         do {
             let savedTodos = try userDefaultManager.load()
-            savedTodos.forEach{ todoItem in
-                let count = todoItem.toDoDetails.filter({$0.isChecked}).count
-            }
             toDos = savedTodos
         } catch {
             let  error = error as? DataConvertError ?? DataConvertError.unknown
