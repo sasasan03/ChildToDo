@@ -32,6 +32,7 @@ class HomeViewModel: ObservableObject {
              ])
     ]
     {
+        //プロパティの更新が終わった後に保存がかかる。
         didSet {
             do {
                 try userDefaultManager.save(toDo: toDos)
