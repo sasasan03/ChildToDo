@@ -55,7 +55,7 @@ struct HomeView: View {
             }
             .onAppear(perform: homeViewModel.onApper)
         } , detail:{
-            //MARK: - TodoDetail部分（Todoの細かな詳細項目）
+            //MARK: - TodoDetailのリスト部分（Todoの細かな詳細項目）
             if let returnTodo =  homeViewModel.returnAdress(todo: selectionTodo){
                 let todoDetailIndex = homeViewModel.todoDetailIndex(todo: returnTodo, todoDetail: todoDetail)
                 let todoCount = returnTodo.toDoDetails.count
