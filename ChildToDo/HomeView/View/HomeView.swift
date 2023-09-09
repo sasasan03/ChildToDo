@@ -17,6 +17,7 @@ struct HomeView: View {
         return DetailViewModel(sharedHomeViewModel: homeViewModel, todo: selectionTodo!, todoDetail: todoDetail)
     }
     
+    
     var body: some View {
         //MARK: - おおもとのリスト（細かな項目の上位階層のリスト）
         NavigationSplitView(sidebar: {
