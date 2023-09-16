@@ -11,8 +11,11 @@ import SwiftUI
 struct ChildToDoApp: App {
     var body: some Scene {
         WindowGroup {
-            HomeView(todoDetail: ToDoDetail(name: "挨拶", isChecked: false))
-                .environmentObject(HomeViewModel())
+            HomeView(
+                viewModel: HomeViewModel(toDoModel: ToDoModel()),
+                todoDetail: ToDoDetail(name: "", isChecked: false),
+                todoModel: ToDoModel()
+            )
         }
     }
 }

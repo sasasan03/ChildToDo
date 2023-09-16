@@ -30,7 +30,6 @@ class DetailViewModel: ObservableObject {
             .assign(to: &$toDos)
     }
     
-    
     //MARK: AddViewを開かせる
     func isShowAddView(){
         isAddView = true
