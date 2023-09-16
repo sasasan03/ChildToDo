@@ -124,5 +124,20 @@ class ToDoModel: ObservableObject {
     }
     
     //MARK: - ImageActionViewModelで使用
+    //MARK: セルの『👍』アニメーションとセルの背景色（赤・青）の管理を行なっている。
+    func isCheckedToChange(todo: ToDo, todoDetail: ToDoDetail){
+        guard let tIndex = toDos.firstIndex(where: { $0.id == todo.id }) else { return }
+        guard let dIndex = todo.toDoDetails.firstIndex(where: { $0.id == todoDetail.id }) else { return }
+        toDos[tIndex].toDoDetails[dIndex].isChecked.toggle()
+    }
     
+    //MARK: 画面右上の『サークル』ボタンメソッド。isCheckedのBoolを全て『false』に切り替える。
+    func isCheckedToAllFalse(todo: ToDo){
+        guard let tIndex = toDos.firstIndex(where: { $0.id == todo.id }) else { return }
+        toDos[tIndex].toDoDetails.forEach{ _ in
+            (0..<toDos[tIndex].toDoDetails.count).forEach{
+                toDos[tIndex].toDoDetails[$0].isChecked = false
+            }
+        }
+    }
 }
