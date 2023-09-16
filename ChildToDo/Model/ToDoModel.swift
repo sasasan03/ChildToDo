@@ -40,7 +40,7 @@ class ToDoModel: ObservableObject {
         }
     }
     
-    
+    //MARK: - HomeViewModelで使用
     //MARK: ToDo項目の配置場所を変更する
     func moveTodo(indexSet: IndexSet, index: Int){
         self.toDos.move(fromOffsets: indexSet, toOffset: index)
@@ -88,6 +88,41 @@ class ToDoModel: ObservableObject {
         }
     }
     
+    //MARK: - DetailViewModelで使用
+    //MARK: todoDetailの項目を削除
+    func deleteTodoDetail(todo: ToDo, todoDetail: ToDoDetail, offset: IndexSet)  {
+        guard let todoIndex = toDos.firstIndex(where: { $0.id == todo.id }) else { return }
+        toDos[todoIndex].toDoDetails.remove(atOffsets: offset)
+    }
     
+    //MARK: todoDetailの項目を移動
+    func moveTodoDetail(indexSet: IndexSet, index: Int, todo: ToDo){
+        guard let todoIndex = toDos.firstIndex(where: { $0.id == todo.id }) else { return }
+        toDos[todoIndex].toDoDetails.move(fromOffsets: indexSet, toOffset: index)
+    }
+
+    //MARK: toDosに入力された値を追加する
+    func addTodoDetail(text: String, todo: ToDo) throws {
+        if let index = toDos.firstIndex(of: todo){
+            var updatedToDo = todo
+            guard text != "" else {
+                throw NonTextError.nonTodoDetailText
+            }
+            updatedToDo.toDoDetails.append(ToDoDetail(name: text, isChecked: false))
+            toDos[index] = updatedToDo
+        }
+    }
+    
+    //MARK: toDosのセルを選択し、新しく入力された値を上書きする
+    func todoDetailSave(newTodoDetail: ToDoDetail, todo: ToDo, newName: String) throws {
+        guard let index = toDos.firstIndex(where: { $0.id == todo.id }) else { return }
+        guard  let dIndex = todo.toDoDetails.firstIndex(where: { $0.id == newTodoDetail.id }) else { return }
+        guard newName != "" else {
+            throw NonTextError.nonTodoDetailText
+        }
+        toDos[index].toDoDetails[dIndex].name = newName
+    }
+    
+    //MARK: - ImageActionViewModelで使用
     
 }
