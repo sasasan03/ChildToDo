@@ -34,6 +34,7 @@
 		69A882962A093643009D182A /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A882952A093643009D182A /* DetailViewModel.swift */; };
 		69BD0AE52A4D9B6A00DD7041 /* AVFoundationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BD0AE42A4D9B6A00DD7041 /* AVFoundationData.swift */; };
 		69D8A2A52A7F74D5007C884C /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D8A2A42A7F74D5007C884C /* Color+.swift */; };
+		69F37A262AB587CB0081727D /* ToDoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F37A252AB587CB0081727D /* ToDoModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 		69A882952A093643009D182A /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		69BD0AE42A4D9B6A00DD7041 /* AVFoundationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVFoundationData.swift; sourceTree = "<group>"; };
 		69D8A2A42A7F74D5007C884C /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
+		69F37A252AB587CB0081727D /* ToDoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -249,6 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				69A882862A092ECC009D182A /* Model.swift */,
+				69F37A252AB587CB0081727D /* ToDoModel.swift */,
 				69A882882A092F56009D182A /* DataConvertError.swift */,
 				69A8828A2A092F6B009D182A /* NonTextError.swift */,
 				69A8828C2A092F8A009D182A /* UserDefaultManager.swift */,
@@ -461,6 +464,7 @@
 				69A8828D2A092F8A009D182A /* UserDefaultManager.swift in Sources */,
 				69A5C4EE2A0A828800C8FE70 /* DetailRowView.swift in Sources */,
 				69A882502A092B79009D182A /* ChildToDoApp.swift in Sources */,
+				69F37A262AB587CB0081727D /* ToDoModel.swift in Sources */,
 				69A882962A093643009D182A /* DetailViewModel.swift in Sources */,
 				69A8828B2A092F6B009D182A /* NonTextError.swift in Sources */,
 			);
