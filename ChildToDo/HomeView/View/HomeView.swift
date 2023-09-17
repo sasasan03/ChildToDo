@@ -74,8 +74,7 @@ struct HomeView: View {
                 let todoCount = returnTodo.toDoDetails.count
             //MARK: - TodoDetailが入力されている場合の画面設定
                 if todoCount != 0 {
-//                    ToDoDetailView(detailViewModel: detailViewModel, imageActionViewModel: imageActionViewModel, todo: returnTodo, todoDetail: todoDetail, todoModel: todoModel)
-                    ToDoDetailView(todo: todo, todoDetail: todoDetail, todoModel: todoModel)
+                    ToDoDetailView(todo: returnTodo, todoDetail: returnTodo.toDoDetails[todoDetailIndex], todoModel: todoModel)
                         .navigationTitle(selectionTodo?.name ?? "やること編集")
                         .toolbarBackground(Color.cyan,for: .navigationBar)
                         .toolbarBackground(.visible, for: .navigationBar)
@@ -83,9 +82,7 @@ struct HomeView: View {
                 } else {
                 //MARK: TodoDetaileが空の場合の画面設定
                     ZStack{
-//                        ToDoDetailView(detailViewModel: detailViewModel, imageActionViewModel: imageActionViewModel, todo: returnTodo, todoDetail: todoDetail, todoModel: todoModel)
-                        ToDoDetailView(todo: todo, todoDetail: todoDetail, todoModel: todoModel)
-//                        ToDoDetailView(todo: returnTodo, todoDetail: ToDoDetail(name: "", isChecked: false))
+                        ToDoDetailView(todo: returnTodo, todoDetail: returnTodo.toDoDetails[todoDetailIndex], todoModel: todoModel)
                             .navigationTitle(selectionTodo?.name ?? "やること編集")
                             .toolbarBackground(Color.cyan,for: .navigationBar)
                             .toolbarBackground(.visible, for: .navigationBar)
