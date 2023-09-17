@@ -9,10 +9,18 @@ import SwiftUI
 
 struct HomeRowView: View {
     
-    @EnvironmentObject var homeViewModel: HomeViewModel
+    @StateObject var homeViewModel: HomeViewModel
     @Environment(\.dismiss) var dismiss
-    let todo: ToDo
     @State var isEddit = false
+    let todoModel : ToDoModel
+    let todo: ToDo
+    
+    init(todoModel: ToDoModel, todo: ToDo) {
+        self._homeViewModel = StateObject(wrappedValue: HomeViewModel(toDoModel: todoModel))
+        self.todoModel = todoModel
+        self.todo = todo
+    }
+    
     
     var body: some View {
         NavigationStack{
@@ -41,12 +49,11 @@ struct HomeRowView: View {
     }
 }
 
-struct HomeRowView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeRowView(
-            todo: ToDo(name: "朝の会",
-                       toDoDetails: [ToDoDetail(name: "あいさつ", isChecked: false)])
-        )
-        .environmentObject(HomeViewModel())
-    }
-}
+//struct HomeRowView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        HomeRowView(
+//            homeViewModel: HomeViewModel(toDoModel: ToDoModel()),
+//            todoModel: ToDoModel(),
+//            todo: ToDo(name: "", toDoDetails: []))
+//    }
+//}

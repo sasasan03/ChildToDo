@@ -9,30 +9,39 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @StateObject var viewModel: HomeViewModel
+    @StateObject var homeViewModel: HomeViewModel
+    @StateObject var detailViewModel: DetailViewModel
+    @StateObject var imageActionViewModel: ImageActionViewModel
     @Environment(\.dismiss) var dismiss
     @State private var selectionTodo: ToDo?
     let todoDetail: ToDoDetail
     let todoModel: ToDoModel
+    let todo: ToDo
     
-    init(viewModel: HomeViewModel, selectionTodo: ToDo? = nil, todoDetail: ToDoDetail, todoModel: ToDoModel) {
-        self._viewModel = StateObject(wrappedValue: HomeViewModel(toDoModel: todoModel))
+    init(todoDetail: ToDoDetail, todoModel: ToDoModel, todo: ToDo) {
+        self._homeViewModel = StateObject(wrappedValue: HomeViewModel(toDoModel: todoModel))
+        self._detailViewModel = StateObject(wrappedValue: DetailViewModel(todo: todo, todoDetail: todoDetail, toDoModel: todoModel))
+        self._imageActionViewModel = StateObject(wrappedValue: ImageActionViewModel(todo: todo, todoDetail: todoDetail, toDoModel: todoModel))
         self.todoDetail = todoDetail
         self.todoModel = todoModel
+        self.todo = todo
     }
     
     var body: some View {
         //MARK: - おおもとのリスト（細かな項目の上位階層のリスト）
         NavigationSplitView(sidebar: {
             List(selection: $selectionTodo) {
-                ForEach(viewModel.toDos){ todo in
-                        HomeRowView(
-                            todo: todo
-                        )
+                ForEach(homeViewModel.toDos){ todo in
+                    HomeRowView(todoModel: todoModel, todo: todo)
+//                        HomeRowView(
+//                            homeViewModel: homeViewModel,
+//                            todoModel: todoModel,
+//                            todo: todo
+//                        )
                         .foregroundColor(.black)
                     }
-                    .onDelete(perform: viewModel.deleteTodo(offset:))
-                    .onMove(perform: viewModel.moveTodo(indexSet:index:))
+                    .onDelete(perform: homeViewModel.deleteTodo(offset:))
+                    .onMove(perform: homeViewModel.moveTodo(indexSet:index:))
                 }
                 .scrollContentBackground(.hidden)
                 .background(Color.purple)
@@ -44,29 +53,29 @@ struct HomeView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        viewModel.isShowAddView()
+                        homeViewModel.isShowAddView()
                     } label: {
                         Image(systemName: "plus")
                     }
                 }
             }
             //MARK: - 新しい項目を追加するためのシート
-            .sheet(isPresented: $viewModel.isAddView) {
+            .sheet(isPresented: $homeViewModel.isAddView) {
                 ToDoAddView(save: { text in
-                    try viewModel.addTodo(text: text)
+                    try homeViewModel.addTodo(text: text)
                     dismiss()
                 })
             }
             .onAppear(perform: todoModel.onApper)
         } , detail:{
             //MARK: - TodoDetailのリスト部分（Todoの細かな詳細項目）
-            if let returnTodo = viewModel.returnAdress(todo: selectionTodo){
-                let todoDetailIndex = viewModel.todoDetailIndex(todo: returnTodo, todoDetail: todoDetail)
+            if let returnTodo = homeViewModel.returnAdress(todo: selectionTodo){
+                let todoDetailIndex = homeViewModel.todoDetailIndex(todo: returnTodo, todoDetail: todoDetail)
                 let todoCount = returnTodo.toDoDetails.count
             //MARK: - TodoDetailが入力されている場合の画面設定
                 if todoCount != 0 {
-                    ToDoDetailView(todo: returnTodo, todoDetail: returnTodo.toDoDetails[todoDetailIndex])
-//                        .environmentObject(detailViewModel)
+//                    ToDoDetailView(detailViewModel: detailViewModel, imageActionViewModel: imageActionViewModel, todo: returnTodo, todoDetail: todoDetail, todoModel: todoModel)
+                    ToDoDetailView(todo: todo, todoDetail: todoDetail, todoModel: todoModel)
                         .navigationTitle(selectionTodo?.name ?? "やること編集")
                         .toolbarBackground(Color.cyan,for: .navigationBar)
                         .toolbarBackground(.visible, for: .navigationBar)
@@ -74,8 +83,9 @@ struct HomeView: View {
                 } else {
                 //MARK: TodoDetaileが空の場合の画面設定
                     ZStack{
-                        ToDoDetailView(todo: returnTodo, todoDetail: ToDoDetail(name: "", isChecked: false))
-//                            .environmentObject(detailViewModel)
+//                        ToDoDetailView(detailViewModel: detailViewModel, imageActionViewModel: imageActionViewModel, todo: returnTodo, todoDetail: todoDetail, todoModel: todoModel)
+                        ToDoDetailView(todo: todo, todoDetail: todoDetail, todoModel: todoModel)
+//                        ToDoDetailView(todo: returnTodo, todoDetail: ToDoDetail(name: "", isChecked: false))
                             .navigationTitle(selectionTodo?.name ?? "やること編集")
                             .toolbarBackground(Color.cyan,for: .navigationBar)
                             .toolbarBackground(.visible, for: .navigationBar)
@@ -102,12 +112,12 @@ struct HomeView: View {
     }
 }
 
-struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView(
-            viewModel: HomeViewModel(toDoModel: ToDoModel()),
-            todoDetail: ToDoDetail(name: "", isChecked: false),
-            todoModel: ToDoModel()
-        )
-    }
-}
+//struct HomeView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        HomeView(
+//            viewModel: HomeViewModel(toDoModel: ToDoModel()),
+//            todoDetail: ToDoDetail(name: "", isChecked: false),
+//            todoModel: ToDoModel()
+//        )
+//    }
+//}

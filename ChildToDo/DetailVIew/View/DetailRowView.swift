@@ -9,9 +9,17 @@ import SwiftUI
 
 struct DetailRowView: View {
     
-    @EnvironmentObject var detailViewModel: DetailViewModel
+    @StateObject var detailViewModel: DetailViewModel
+    let todoModel: ToDoModel
     let todo: ToDo
     let todoDetail: ToDoDetail
+    
+    init(todoModel: ToDoModel, todo: ToDo, todoDetail: ToDoDetail) {
+        self._detailViewModel = StateObject(wrappedValue: DetailViewModel(todo: todo, todoDetail: todoDetail, toDoModel:todoModel))
+        self.todoModel = todoModel
+        self.todo = todo
+        self.todoDetail = todoDetail
+    }
     
     var body: some View {
         NavigationStack{
@@ -39,22 +47,10 @@ struct DetailRowView: View {
 }
 
 
-struct DetailRowView_Previews: PreviewProvider {
-    static var previews: some View {
-        DetailRowView(
-            todo: ToDo(
-                name: "帰りの会",
-                toDoDetails: [ToDoDetail(name: "せんせいのはなし", isChecked: false)]
-            ),
-            todoDetail: ToDoDetail(name: "せんせいのははなし", isChecked: false)
-        )
-        .environmentObject(
-            DetailViewModel(
-                sharedHomeViewModel: HomeViewModel(),
-                todo:  ToDo(name: "朝の会",
-                            toDoDetails: [ToDoDetail(name: "あいさつ", isChecked: false)]
-                           ),
-                todoDetail:  ToDoDetail(name: "あさのうた", isChecked: false))
-        )
-    }
-}
+//struct DetailRowView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        DetailRowView(
+//            detailViewModel: DetailViewModel(todo: ToDo(name: "", toDoDetails: []), todoDetail: ToDoDetail(name: "", isChecked: false), toDoModel: ToDoModel()),
+//            todo: ToDo(name: "", toDoDetails: []), todoDetail: ToDoDetail(name: "", isChecked: false))
+//    }
+//}

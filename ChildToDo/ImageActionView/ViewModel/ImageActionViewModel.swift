@@ -9,7 +9,6 @@ import Foundation
 import SwiftUI
 import AVFoundation
 
-
 class ImageActionViewModel: ObservableObject {
     
     @Published var todo: ToDo

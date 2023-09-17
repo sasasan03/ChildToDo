@@ -9,8 +9,17 @@ import SwiftUI
 
 struct ImgaeActionRowView: View {
     
-    @EnvironmentObject var detailViewModel: DetailViewModel
+    @StateObject var imgaeActionViewModel: ImageActionViewModel
+    let todo: ToDo
     let todoDetail: ToDoDetail
+    let todoModel: ToDoModel
+    
+    init(todo: ToDo, todoDetail: ToDoDetail, todoModel: ToDoModel) {
+        self._imgaeActionViewModel = StateObject(wrappedValue: ImageActionViewModel(todo: todo, todoDetail: todoDetail, toDoModel: todoModel))
+        self.todo = todo
+        self.todoDetail = todoDetail
+        self.todoModel = todoModel
+    }
     
     var body: some View {
         GeometryReader { geometry in
@@ -43,8 +52,12 @@ struct ImgaeActionRowView: View {
     }
 }
 
-struct ImgaeActionRowView_Previews: PreviewProvider {
-    static var previews: some View {
-        ImgaeActionRowView(todoDetail: ToDoDetail(name: "挨拶", isChecked: true))
-    }
-}
+//struct ImgaeActionRowView_Previews: PreviewProvider {
+//    static var previews: some View {
+//       ImageActionView(
+//        imageActionViewModel: ImageActionViewModel(todo: ToDo(name: "", toDoDetails: []), todoDetail: ToDoDetail(name: "", isChecked: false), toDoModel: ToDoModel()),
+//        todo: ToDo(name: "", toDoDetails: []),
+//        todoDetail: ToDoDetail(name: "", isChecked: false), todoModel: ToDoModel()
+//       )
+//    }
+//}

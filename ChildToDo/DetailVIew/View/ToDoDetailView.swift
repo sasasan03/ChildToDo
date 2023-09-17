@@ -9,12 +9,19 @@ import SwiftUI
 
 struct ToDoDetailView: View {
     
+    @StateObject var detailViewModel: DetailViewModel
+    @StateObject var imageActionViewModel: ImageActionViewModel
+    @Environment(\.dismiss) var dismiss
     let todo: ToDo
     let todoDetail: ToDoDetail
-    @EnvironmentObject var detailViewModel: DetailViewModel
-    @Environment(\.dismiss) var dismiss
-    var imageActionViewModel: ImageActionViewModel{
-        return ImageActionViewModel(sharedDetailViewModel: detailViewModel, todo: todo, todoDetail: todoDetail)
+    let todoModel: ToDoModel
+    
+    init(todo: ToDo, todoDetail: ToDoDetail, todoModel: ToDoModel) {
+        self._detailViewModel = StateObject(wrappedValue: DetailViewModel(todo: todo, todoDetail: todoDetail, toDoModel: todoModel))
+        self._imageActionViewModel = StateObject(wrappedValue: ImageActionViewModel(todo: todo, todoDetail: todoDetail, toDoModel: todoModel))
+        self.todo = todo
+        self.todoDetail = todoDetail
+        self.todoModel = todoModel
     }
     
     var body: some View {
@@ -22,8 +29,10 @@ struct ToDoDetailView: View {
             ZStack{
                 List{
                     ForEach(todo.toDoDetails){ todoDetail in
-                        DetailRowView(todo: todo,
-                                      todoDetail: todoDetail)
+                        DetailRowView(todoModel: todoModel, todo: todo, todoDetail: todoDetail)
+//                        DetailRowView(detailViewModel: detailViewModel, todo: todo, todoDetail: todoDetail)
+//                        DetailRowView(todo: todo,
+//                                      todoDetail: todoDetail)
                     }
                     .onMove { sourceIndices, destinationIndex in
                         detailViewModel.moveTodoDetail(indexSet: sourceIndices, index: destinationIndex, todo: todo)
@@ -36,8 +45,13 @@ struct ToDoDetailView: View {
                 .scrollContentBackground(.hidden)
                 .background(Color.cyan)
                 NavigationLink {
-                    ImageActionView(todo: todo)
-                        .environmentObject(imageActionViewModel)
+                    ImageActionView(todo: todo, todoDetail: todoDetail, todoModel: todoModel)
+//                    ImageActionView(
+//                        imageActionViewModel: imageActionViewModel,
+//                        todo: todo,
+//                        todoDetail: todoDetail,
+//                        todoModel: todoModel
+//                    )
                 } label: {
                     Text("やってみよう")
                         .font(.system(
@@ -79,22 +93,13 @@ struct ToDoDetailView: View {
 }
 
 
-struct ToDoDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        ToDoDetailView(
-            todo: ToDo(
-                name: "朝の会",
-                toDoDetails: [ToDoDetail(name: "あいさつ", isChecked: false)]
-            ),
-            todoDetail: ToDoDetail(name: "あさのうた", isChecked: false)
-        )
-        .environmentObject(
-            DetailViewModel(
-                sharedHomeViewModel: HomeViewModel(),
-                todo:  ToDo(name: "朝の会",
-                            toDoDetails: [ToDoDetail(name: "あいさつ", isChecked: false)]
-                           ),
-                todoDetail:  ToDoDetail(name: "あさのうた", isChecked: false))
-        )
-    }
-}
+//struct ToDoDetailView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ToDoDetailView(
+//            detailViewModel: DetailViewModel(todo: ToDo(name: "", toDoDetails: []), todoDetail: ToDoDetail(name: "", isChecked: false), toDoModel: ToDoModel()),
+//            todo: ToDo(name: "", toDoDetails: []),
+//            todoDetail: ToDoDetail(name: "", isChecked: false),
+//            todoModel: ToDoModel()
+//        )
+//    }
+//}

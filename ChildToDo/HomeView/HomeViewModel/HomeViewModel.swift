@@ -16,10 +16,7 @@ class HomeViewModel: ObservableObject {
     
     private let toDoModel: ToDoModel
     
-    init(isAddView: Bool = false, isEditView: Bool = false, isShowTodoDetailView: Bool = false,toDoModel: ToDoModel) {
-        self.isAddView = isAddView
-        self.isEditView = isEditView
-        self.isShowTodoDetailView = isShowTodoDetailView
+    init(toDoModel: ToDoModel) {
         self.toDoModel = toDoModel
         
         toDos = [ToDo(name: "", toDoDetails: [])]
