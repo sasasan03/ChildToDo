@@ -7,7 +7,7 @@
 import Foundation
 import SwiftUI
 
-struct ImgaeActionRowView: View {
+struct ImageActionRowView: View {
     
     @StateObject var imgaeActionViewModel: ImageActionViewModel
     let todo: ToDo
@@ -52,12 +52,11 @@ struct ImgaeActionRowView: View {
     }
 }
 
-//struct ImgaeActionRowView_Previews: PreviewProvider {
-//    static var previews: some View {
-//       ImageActionView(
-//        imageActionViewModel: ImageActionViewModel(todo: ToDo(name: "", toDoDetails: []), todoDetail: ToDoDetail(name: "", isChecked: false), toDoModel: ToDoModel()),
-//        todo: ToDo(name: "", toDoDetails: []),
-//        todoDetail: ToDoDetail(name: "", isChecked: false), todoModel: ToDoModel()
-//       )
-//    }
-//}
+struct ImageActionRowView_Previews: PreviewProvider {
+    static var previews: some View {
+        ImageActionView(
+            todo: ToDo(name: "あ", toDoDetails: [ToDoDetail(name: "い", isChecked:false)]),
+            todoDetail: ToDoDetail(name: "う", isChecked: false), todoModel: ToDoModel()
+        )
+    }
+}

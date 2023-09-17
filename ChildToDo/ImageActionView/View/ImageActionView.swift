@@ -25,7 +25,7 @@ struct ImageActionView: View {
     var body: some View {
         GeometryReader { geometry in
             List(todo.toDoDetails) { todoD in
-                ImageActionView(todo: todo, todoDetail: todoD, todoModel: todoModel)
+                ImageActionRowView(todo: todo, todoDetail: todoD, todoModel: todoModel)
                     .background(todoD.isChecked ? Color.lightOrange : Color.lightBlue)
                     .cornerRadius(15)
                     .frame(height: geometry.size.height * 0.1)
@@ -59,12 +59,12 @@ struct ImageActionView: View {
 }
 
 
-//struct ImageActionView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ImageActionView(
-//            imageActionViewModel: ImageActionViewModel(todo: ToDo(name: "", toDoDetails: []), todoDetail: ToDoDetail(name: "", isChecked: false), toDoModel: ToDoModel()),
-//            todo: ToDo(name: "", toDoDetails: []),
-//            todoDetail: ToDoDetail(name: "", isChecked: false), todoModel: ToDoModel()
-//        )
-//    }
-//}
+struct ImageActionView_Previews: PreviewProvider {
+    static var previews: some View {
+        ImageActionView(
+            todo: ToDo(name: "ああ", toDoDetails: [ToDoDetail(name: "いい", isChecked: true)]),
+            todoDetail: ToDoDetail(name: "まま", isChecked: false),
+            todoModel: ToDoModel()
+        )
+    }
+}

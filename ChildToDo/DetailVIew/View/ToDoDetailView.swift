@@ -9,9 +9,9 @@ import SwiftUI
 
 struct ToDoDetailView: View {
     
+    @Environment(\.dismiss) var dismiss
     @StateObject var detailViewModel: DetailViewModel
     @StateObject var imageActionViewModel: ImageActionViewModel
-    @Environment(\.dismiss) var dismiss
     let todo: ToDo
     let todoDetail: ToDoDetail
     let todoModel: ToDoModel
@@ -30,9 +30,6 @@ struct ToDoDetailView: View {
                 List{
                     ForEach(todo.toDoDetails){ todoDetail in
                         DetailRowView(todoModel: todoModel, todo: todo, todoDetail: todoDetail)
-//                        DetailRowView(detailViewModel: detailViewModel, todo: todo, todoDetail: todoDetail)
-//                        DetailRowView(todo: todo,
-//                                      todoDetail: todoDetail)
                     }
                     .onMove { sourceIndices, destinationIndex in
                         detailViewModel.moveTodoDetail(indexSet: sourceIndices, index: destinationIndex, todo: todo)
@@ -46,12 +43,6 @@ struct ToDoDetailView: View {
                 .background(Color.cyan)
                 NavigationLink {
                     ImageActionView(todo: todo, todoDetail: todoDetail, todoModel: todoModel)
-//                    ImageActionView(
-//                        imageActionViewModel: imageActionViewModel,
-//                        todo: todo,
-//                        todoDetail: todoDetail,
-//                        todoModel: todoModel
-//                    )
                 } label: {
                     Text("やってみよう")
                         .font(.system(
@@ -93,13 +84,12 @@ struct ToDoDetailView: View {
 }
 
 
-//struct ToDoDetailView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ToDoDetailView(
-//            detailViewModel: DetailViewModel(todo: ToDo(name: "", toDoDetails: []), todoDetail: ToDoDetail(name: "", isChecked: false), toDoModel: ToDoModel()),
-//            todo: ToDo(name: "", toDoDetails: []),
-//            todoDetail: ToDoDetail(name: "", isChecked: false),
-//            todoModel: ToDoModel()
-//        )
-//    }
-//}
+struct ToDoDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        ToDoDetailView(
+            todo: ToDo(name: "う", toDoDetails: [ToDoDetail(name: "え", isChecked: true)]),
+            todoDetail: ToDoDetail(name: "お", isChecked: true),
+            todoModel: ToDoModel()
+        )
+    }
+}

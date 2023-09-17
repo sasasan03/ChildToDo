@@ -49,11 +49,11 @@ struct HomeRowView: View {
     }
 }
 
-//struct HomeRowView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        HomeRowView(
-//            homeViewModel: HomeViewModel(toDoModel: ToDoModel()),
-//            todoModel: ToDoModel(),
-//            todo: ToDo(name: "", toDoDetails: []))
-//    }
-//}
+struct HomeRowView_Previews: PreviewProvider {
+    static var previews: some View {
+       HomeRowView(
+        todoModel: ToDoModel(),
+        todo: ToDo(name: "さ", toDoDetails: [ToDoDetail(name: "し", isChecked: true)])
+       )
+    }
+}

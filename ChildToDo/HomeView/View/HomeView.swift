@@ -109,12 +109,12 @@ struct HomeView: View {
     }
 }
 
-//struct HomeView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        HomeView(
-//            viewModel: HomeViewModel(toDoModel: ToDoModel()),
-//            todoDetail: ToDoDetail(name: "", isChecked: false),
-//            todoModel: ToDoModel()
-//        )
-//    }
-//}
+struct HomeView_Previews: PreviewProvider {
+    static var previews: some View {
+        HomeView(
+            todoDetail: ToDoDetail(name: "な", isChecked: true),
+            todoModel: ToDoModel(),
+            todo: ToDo(name: "に", toDoDetails: [ToDoDetail(name: "ぬ", isChecked: true)])
+        )
+    }
+}

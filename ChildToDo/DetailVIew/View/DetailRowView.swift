@@ -47,10 +47,12 @@ struct DetailRowView: View {
 }
 
 
-//struct DetailRowView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        DetailRowView(
-//            detailViewModel: DetailViewModel(todo: ToDo(name: "", toDoDetails: []), todoDetail: ToDoDetail(name: "", isChecked: false), toDoModel: ToDoModel()),
-//            todo: ToDo(name: "", toDoDetails: []), todoDetail: ToDoDetail(name: "", isChecked: false))
-//    }
-//}
+struct DetailRowView_Previews: PreviewProvider {
+    static var previews: some View {
+        DetailRowView(
+            todoModel: ToDoModel(),
+            todo: ToDo(name: "か", toDoDetails: [ToDoDetail(name: "き", isChecked: true)]),
+            todoDetail: ToDoDetail(name: "く", isChecked: true)
+        )
+    }
+}
