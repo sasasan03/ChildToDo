@@ -8,9 +8,9 @@
 import Foundation
 
 struct ToDoDetail: Identifiable, Hashable, Codable  {
-    var id = UUID()
-    var name: String
-    var isChecked: Bool
+    var id = UUID() //下記TODOでidを変更するため。
+    var name: String //入力された名前を編集するため変数になっている。
+    var isChecked: Bool //ImageActionViewでアニメーションを管理するため変数になっている。
     
     //TODO: ImageActionRowViewの右上のリセットボタンで使用したい。全てのその配列のBoolを全てfalseに切り替える。
     func unchecked() -> ToDoDetail {
