@@ -33,11 +33,6 @@ struct HomeView: View {
             List(selection: $selectionTodo) {
                 ForEach(homeViewModel.toDos){ todo in
                     HomeRowView(todoModel: todoModel, todo: todo)
-//                        HomeRowView(
-//                            homeViewModel: homeViewModel,
-//                            todoModel: todoModel,
-//                            todo: todo
-//                        )
                         .foregroundColor(.black)
                     }
                     .onDelete(perform: homeViewModel.deleteTodo(offset:))
