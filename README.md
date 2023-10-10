@@ -15,6 +15,6 @@ __より使いやすくするために__ <br>
 <br>
 ### アーキテクチャ<br>
 #### MVVMを採用<br>
-・・ ViewModelでデータを保持したかったが、データを他のViewでも使い回す方法しか思いつかなかったため"BehaviorRelay"のような形をとってデータを保持する方法を採用。<br>
+・・・ ViewModelでデータを保持したかったが、データを他のViewでも使い回す方法しか思いつかなかったため"BehaviorRelay"のような形をとってデータを保持する方法を採用。<br>
 
 <img width="976" alt="スクリーンショット 2023-10-10 20 14 23" src="https://github.com/sasasan03/ChildToDo/assets/111943557/e8c6a0e0-e76c-47b8-89db-e7a2b33ef926">
