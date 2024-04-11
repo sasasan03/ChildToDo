@@ -138,6 +138,13 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		698C7B392BC7B85300F7CCE3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		69A5C4EF2A0A832800C8FE70 /* AddEditView */ = {
 			isa = PBXGroup;
 			children = (
@@ -163,6 +170,7 @@
 				69A8825F2A092B7A009D182A /* ChildToDoTests */,
 				69A882692A092B7A009D182A /* ChildToDoUITests */,
 				69A8824D2A092B79009D182A /* Products */,
+				698C7B392BC7B85300F7CCE3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};

@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ToDoDetailView: View {
-    
     @Environment(\.dismiss) var dismiss
     @StateObject var detailViewModel: DetailViewModel
     @StateObject var imageActionViewModel: ImageActionViewModel

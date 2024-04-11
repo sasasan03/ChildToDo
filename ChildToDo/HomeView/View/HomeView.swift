@@ -28,23 +28,23 @@ struct HomeView: View {
     }
     
     var body: some View {
-        //MARK: - おおもとのリスト（細かな項目の上位階層のリスト）
+        // やることリスト(題名)
         NavigationSplitView(sidebar: {
             List(selection: $selectionTodo) {
                 ForEach(homeViewModel.toDos){ todo in
                     HomeRowView(todoModel: todoModel, todo: todo)
                         .foregroundColor(.black)
-                    }
-                    .onDelete(perform: homeViewModel.deleteTodo(offset:))
-                    .onMove(perform: homeViewModel.moveTodo(indexSet:index:))
                 }
-                .scrollContentBackground(.hidden)
-                .background(Color.purple)
-                .navigationTitle("やることリスト")
-                .toolbarBackground(Color.purple, for: .navigationBar)
-                .toolbarBackground(Color.purple,for: .navigationBar)
-                .toolbarBackground(.visible, for: .navigationBar)
-                .toolbarColorScheme(.dark)
+                .onDelete(perform: homeViewModel.deleteTodo(offset:))
+                .onMove(perform: homeViewModel.moveTodo(indexSet:index:))
+            }
+            .scrollContentBackground(.hidden)
+            .background(Color.purple)
+            .navigationTitle("やることリスト")
+            .toolbarBackground(Color.purple, for: .navigationBar)
+            .toolbarBackground(Color.purple,for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
+            .toolbarColorScheme(.dark)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
@@ -54,7 +54,7 @@ struct HomeView: View {
                     }
                 }
             }
-            //MARK: - 新しい項目を追加するためのシート
+            // 新しいやることリストを追加（題名追加）
             .sheet(isPresented: $homeViewModel.isAddView) {
                 ToDoAddView(save: { text in
                     try homeViewModel.addTodo(text: text)
@@ -62,12 +62,14 @@ struct HomeView: View {
                 })
             }
             .onAppear(perform: todoModel.onApper)
-        } , detail:{
-            //MARK: - TodoDetailのリスト部分（Todoの細かな詳細項目）
-            if let returnTodo = homeViewModel.returnAdress(todo: selectionTodo){
+        } ,
+                            detail:{
+            // やることリストの内容（リストの中に含まれるTODO）
+            // タップして題名を選ぶ
+            if let returnTodo = homeViewModel.returnAdress(todo: selectionTodo) {
                 let todoDetailIndex = homeViewModel.todoDetailIndex(todo: returnTodo, todoDetail: todoDetail)
                 let todoCount = returnTodo.toDoDetails.count
-            //MARK: - TodoDetailが入力されている場合の画面設定
+                // TODOが設定されている場合に表示される（todoのcountが１以上）
                 if todoCount != 0 {
                     ToDoDetailView(todo: returnTodo, todoDetail: returnTodo.toDoDetails[todoDetailIndex], todoModel: todoModel)
                         .navigationTitle(selectionTodo?.name ?? "やること編集")
@@ -75,10 +77,13 @@ struct HomeView: View {
                         .toolbarBackground(.visible, for: .navigationBar)
                         .toolbarColorScheme(.dark)
                 } else {
-                //MARK: TodoDetaileが空の場合の画面設定
+                    // TODOが設定されていない場合に表示される（todoのcountが0）
                     ZStack{
-                        ToDoDetailView(todo: returnTodo, todoDetail: returnTodo.toDoDetails[todoDetailIndex], todoModel: todoModel)
-                            .navigationTitle(selectionTodo?.name ?? "やること編集")
+                        ToDoDetailView(
+                            todo: returnTodo,
+                            todoDetail: todoDetail,
+                            todoModel: todoModel
+                        ).navigationTitle(selectionTodo?.name ?? "やること編集")
                             .toolbarBackground(Color.cyan,for: .navigationBar)
                             .toolbarBackground(.visible, for: .navigationBar)
                             .toolbarColorScheme(.dark)
@@ -86,7 +91,7 @@ struct HomeView: View {
                     }
                 }
             } else {
-                //MARK: - TodoDetailが選択されていない場合（🐘象が出てくる画面）
+                //Todoを選んでいない（🐘象が出てくる画面）
                 ZStack{
                     Color.orange
                         .ignoresSafeArea()
@@ -107,7 +112,7 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView(
-            todoDetail: ToDoDetail(name: "な", isChecked: true),
+            todoDetail: ToDoDetail(name: "服の着替え", isChecked: true),
             todoModel: ToDoModel(),
             todo: ToDo(name: "に", toDoDetails: [ToDoDetail(name: "ぬ", isChecked: true)])
         )
