@@ -69,7 +69,7 @@ struct HomeView: View {
             if let returnTodo = homeViewModel.returnAdress(todo: selectionTodo) {
                 let todoDetailIndex = homeViewModel.todoDetailIndex(todo: returnTodo, todoDetail: todoDetail)
                 let todoCount = returnTodo.toDoDetails.count
-                // TODOが設定されている場合に表示される（todoのcountが１以上）
+                // 題名のTODOが設定されている場合に表示される（todoのcountが１以上）
                 if todoCount != 0 {
                     ToDoDetailView(todo: returnTodo, todoDetail: returnTodo.toDoDetails[todoDetailIndex], todoModel: todoModel)
                         .navigationTitle(selectionTodo?.name ?? "やること編集")
@@ -77,7 +77,7 @@ struct HomeView: View {
                         .toolbarBackground(.visible, for: .navigationBar)
                         .toolbarColorScheme(.dark)
                 } else {
-                    // TODOが設定されていない場合に表示される（todoのcountが0）
+                    // 題名のTODOが設定されていない場合に表示される（todoのcountが0）
                     ZStack{
                         ToDoDetailView(
                             todo: returnTodo,
@@ -91,7 +91,7 @@ struct HomeView: View {
                     }
                 }
             } else {
-                //Todoを選んでいない（🐘象が出てくる画面）
+                //Todoを選んでいない初期画面（🐘象が出てくる画面）
                 ZStack{
                     Color.orange
                         .ignoresSafeArea()
