@@ -7,8 +7,7 @@
 
 import Foundation
 
-//TODO: Manageerの名前を変更する
-class UserDefaultManager {
+class ToDoUserDefaultsManager {
     private let userDefault = UserDefaults.standard
     private var key = "key"
     
@@ -71,5 +70,3 @@ class UserDefaultManager {
         }
     }
 }
-    
-

@@ -66,11 +66,8 @@ struct HomeView: View {
                             detail:{
             // 題名のTODOの詳細リスト
             // 題名をタップしたときにそのアドレスを返す。
-            let _ = print("#", selectionTodo == nil)
             if let returnTodo = homeViewModel.returnAdress(todo: selectionTodo) {
-                let _ = print("##", selectionTodo == nil)
                 let todoDetailIndex = homeViewModel.todoDetailIndex(todo: returnTodo, todoDetail: todoDetail)
-                let _ = print("###", selectionTodo == nil)
                 let todoCount = returnTodo.toDoDetails.count
                 // 題名のTODOが設定されている場合に表示される（todoのcountが１以上）
                 if todoCount != 0 {
