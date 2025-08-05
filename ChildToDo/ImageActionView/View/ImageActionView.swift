@@ -29,12 +29,12 @@ struct ImageActionView: View {
                     .background(todoD.isChecked ? Color.lightOrange : Color.lightBlue)
                     .cornerRadius(15)
                     .frame(height: geometry.size.height * 0.1)
-                    .rotationEffect(Angle(degrees
-                                          : todoD.isChecked
-                                          ? 360 : 0
-                                         )
+                    .rotationEffect(.degrees(todoD.isChecked ? 360 : 0))
+                    .scaleEffect(todoD.isChecked ? 1.1 : 1.0)
+                    .animation(
+                        .spring(response: 0.6, dampingFraction: 0.5, blendDuration: 0),
+                        value: todoD.isChecked
                     )
-                    .animation(.default,value:todoD.isChecked)
                     .onTapGesture(count: 2) {
                         if !todoD.isChecked {
                             crappingHandsSound()
